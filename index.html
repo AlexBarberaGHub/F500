@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore ODF F500</title>
+    <link rel="apple-touch-icon" href="https://www.fibercop.it/wp-content/uploads/2021/02/cropped-favicon-fibercop-180x180.png">
+    <link rel="icon" href="https://www.fibercop.it/wp-content/uploads/2021/02/cropped-favicon-fibercop-32x32.png">
+    
+    <style>
+        :root {
+            /* Colore blu scuro FiberCop dall'immagine */
+            --fc-blue-bg: #002D72; 
+            --fc-blue-text: #0047bb;
+            --fc-dark-blue: #002d72;
+            --fc-gray: #f8fafc;
+        }
+        
+        body { 
+            font-family: 'Helvetica Neue', Arial, sans-serif; 
+            background-color: var(--fc-blue-bg); 
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; margin: 0; 
+        }
+
+        .card { 
+            background: white; width: 92%; max-width: 380px; 
+            padding: 0; border-radius: 8px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: white;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* INTESTAZIONE PERSONALIZZATA */
+        .logo-box { text-align: center; }
+        .logo-text { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 36px; font-weight: 900; color: var(--fc-blue-text); margin: 0; }
+        .by-alex { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; color: #64748b; margin: 0; }
+
+        .content { padding: 25px; }
+        
+        .section-tag {
+            font-size: 11px; font-weight: 800; color: #94a3b8;
+            text-transform: uppercase; margin-bottom: 12px;
+            display: block; letter-spacing: 1px;
+            border-left: 3px solid var(--fc-blue-text); padding-left: 10px;
+        }
+
+        .input-row { display: flex; gap: 15px; margin-bottom: 25px; }
+        .input-group { flex: 1; }
+        label { display: block; font-size: 12px; color: #1e293b; margin-bottom: 6px; font-weight: 700; }
+        
+        select { 
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
+            border-radius: 6px; font-size: 16px; background: #fff;
+            color: #1e293b; outline: none; transition: 0.2s;
+        }
+        select:focus { border-color: var(--fc-blue-text); }
+        
+        button { 
+            width: 100%; padding: 18px; background-color: var(--fc-blue-text); 
+            color: white; border: none; border-radius: 6px; 
+            font-size: 16px; font-weight: bold; cursor: pointer;
+            text-transform: uppercase; transition: 0.3s;
+        }
+        button:hover { background-color: var(--fc-dark-blue); }
+
+        #result-box { 
+            margin-top: 25px; padding: 20px; 
+            background: #f8fafc; border-radius: 8px; 
+            text-align: center; display: none;
+            border: 1px solid #e2e8f0;
+        }
+        .res-label { font-size: 12px; color: #64748b; font-weight: bold; text-transform: uppercase; }
+        .res-value { 
+            font-size: 38px; font-weight: 900; color: var(--fc-blue-text); 
+            display: block; margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <div class="logo-box">
+            <h1 class="logo-text">F500</h1>
+            <p class="by-alex">By Alex</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <span class="section-tag">Permuta Origine</span>
+        <div class="input-row">
+            <div class="input-group">
+                <label>Fila</label>
+                <select id="fO">
+                    <option>1</option><option>3</option><option>5</option><option>7</option>
+                    <option>9</option><option>11</option><option>13</option><option>15</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Livello</label>
+                <select id="lO">
+                    <option value="1">A</option><option value="2">B</option><option value="3">C</option>
+                    <option value="4">D</option><option value="5">E</option><option value="6">F</option><option value="7">G</option>
+                </select>
+            </div>
+        </div>
+
+        <span class="section-tag">Permuta Destinazione</span>
+        <div class="input-row">
+            <div class="input-group">
+                <label>Fila</label>
+                <select id="fD">
+                    <option>1</option><option>3</option><option>5</option><option>7</option>
+                    <option>9</option><option>11</option><option>13</option><option>15</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Livello</label>
+                <select id="lD">
+                    <option value="1">A</option><option value="2">B</option><option value="3">C</option>
+                    <option value="4">D</option><option value="5">E</option><option value="6">F</option><option value="7">G</option>
+                </select>
+            </div>
+        </div>
+
+        <button onclick="calcola()">Calcola Percorso</button>
+
+        <div id="result-box">
+            <span class="res-label">Lunghezza Stimata</span>
+            <span class="res-value" id="valore"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calcola() {
+        const filaO = parseInt(document.getElementById('fO').value);
+        const livO = parseInt(document.getElementById('lO').value);
+        const filaD = parseInt(document.getElementById('fD').value);
+        const livD = parseInt(document.getElementById('lD').value);
+
+        // Calcolo tecnico ODF (Verticale + Orizzontale + Slack)
+        const vDist = Math.abs(livO - livD) * 0.28;
+        const hDist = Math.abs(filaO - filaD) * 0.06 + 0.65;
+        const slack = 1.55; 
+
+        const totale = vDist + hDist + slack;
+
+        document.getElementById('valore').innerText = totale.toFixed(2) + " m";
+        document.getElementById('result-box').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
