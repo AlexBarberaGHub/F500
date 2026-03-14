@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calcolatore ODF F500</title>
-    <link rel="apple-touch-icon" href="https://www.fibercop.it/wp-content/uploads/2021/02/cropped-favicon-fibercop-180x180.png">
-    <link rel="icon" href="https://www.fibercop.it/wp-content/uploads/2021/02/cropped-favicon-fibercop-32x32.png">
+    <title>F500 - Calcolatore ODF</title>
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="F500">
     
+    <link rel="icon" sizes="192x192" href="https://www.fibercop.it/wp-content/uploads/2021/02/cropped-favicon-fibercop-192x192.png">
+    <link rel="apple-touch-icon" href="https://www.fibercop.it/wp-content/uploads/2021/02/cropped-favicon-fibercop-180x180.png">
+
     <style>
         :root {
-            /* Colore blu scuro FiberCop dall'immagine */
             --fc-blue-bg: #002D72; 
             --fc-blue-text: #0047bb;
-            --fc-dark-blue: #002d72;
             --fc-gray: #f8fafc;
         }
         
@@ -39,10 +41,9 @@
             border-bottom: 1px solid #eee;
         }
 
-        /* INTESTAZIONE PERSONALIZZATA */
         .logo-box { text-align: center; }
-        .logo-text { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 36px; font-weight: 900; color: var(--fc-blue-text); margin: 0; }
-        .by-alex { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 14px; color: #64748b; margin: 0; }
+        .logo-text { font-size: 36px; font-weight: 900; color: var(--fc-blue-text); margin: 0; }
+        .by-alex { font-size: 14px; color: #64748b; margin: 0; }
 
         .content { padding: 25px; }
         
@@ -60,17 +61,15 @@
         select { 
             width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
             border-radius: 6px; font-size: 16px; background: #fff;
-            color: #1e293b; outline: none; transition: 0.2s;
+            outline: none;
         }
-        select:focus { border-color: var(--fc-blue-text); }
-        
+
         button { 
             width: 100%; padding: 18px; background-color: var(--fc-blue-text); 
             color: white; border: none; border-radius: 6px; 
             font-size: 16px; font-weight: bold; cursor: pointer;
-            text-transform: uppercase; transition: 0.3s;
+            text-transform: uppercase;
         }
-        button:hover { background-color: var(--fc-dark-blue); }
 
         #result-box { 
             margin-top: 25px; padding: 20px; 
@@ -79,10 +78,7 @@
             border: 1px solid #e2e8f0;
         }
         .res-label { font-size: 12px; color: #64748b; font-weight: bold; text-transform: uppercase; }
-        .res-value { 
-            font-size: 38px; font-weight: 900; color: var(--fc-blue-text); 
-            display: block; margin-top: 5px;
-        }
+        .res-value { font-size: 38px; font-weight: 900; color: var(--fc-blue-text); display: block; }
     </style>
 </head>
 <body>
@@ -148,7 +144,6 @@
         const filaD = parseInt(document.getElementById('fD').value);
         const livD = parseInt(document.getElementById('lD').value);
 
-        // Calcolo tecnico ODF (Verticale + Orizzontale + Slack)
         const vDist = Math.abs(livO - livD) * 0.28;
         const hDist = Math.abs(filaO - filaD) * 0.06 + 0.65;
         const slack = 1.55; 
