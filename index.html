@@ -14,7 +14,7 @@
     <style>
         :root {
             --fc-blue-dark: #002D72; 
-            --fc-blue-light: #0047bb;
+            --fc-blue-light: #0047bb; /* Il blu delle fibre ottiche */
             --fc-orange: #e67e22;
             --header-bg-blue: #e0f0f9; 
         }
@@ -65,17 +65,17 @@
             top: 50%;
             transform: translateY(-50%);
             height: 4px;
-            background-color: var(--fc-blue-dark);
+            /* MODIFICA: Ora usa il blu della fibra ottica */
+            background-color: var(--fc-blue-light);
             z-index: 1;
             border-radius: 2px;
+            box-shadow: 0 0 5px rgba(0, 71, 187, 0.3); /* Leggero bagliore */
         }
 
-        /* MODIFICA: Accorciati e riposizionati per accomodare i connettori più grandi */
         .cable-left { left: 45px; width: 75px; }
         .cable-right { right: 45px; width: 75px; }
 
         .sc-apc-icon {
-            /* MODIFICA: Larghezza aumentata da 50px a 58px */
             width: 58px; height: auto;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
             position: relative; 
