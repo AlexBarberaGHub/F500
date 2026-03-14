@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F500 - Calcolatore ODF</title>
+    <title>F500 - ODF Tool</title>
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="F500">
     
-    <link rel="icon" sizes="192x192" href="icona.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icona.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icona.png" purpose="maskable">
     <link rel="apple-touch-icon" href="icona.png">
 
     <style>
         :root {
+            /* Blu istituzionale FiberCop */
             --fc-blue-bg: #002D72; 
             --fc-blue-text: #0047bb;
             --fc-dark-blue: #001f4d;
@@ -64,7 +67,12 @@
             width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
             border-radius: 8px; font-size: 16px; background: #fff;
             color: #1e293b; outline: none; transition: 0.2s;
+            /* Rimuove lo stile di default di sistema su alcuni Android */
             -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230047bb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
         }
         select:focus { border-color: var(--fc-blue-text); }
         
@@ -73,12 +81,13 @@
             color: white; border: none; border-radius: 8px; 
             font-size: 16px; font-weight: bold; cursor: pointer;
             text-transform: uppercase; transition: 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 71, 187, 0.2);
         }
-        button:hover { background-color: var(--fc-dark-blue); }
+        button:active { transform: scale(0.98); background-color: var(--fc-dark-blue); }
 
         #result-box { 
             margin-top: 25px; padding: 20px; 
-            background: #f8fafc; border-radius: 10px; 
+            background: var(--fc-gray); border-radius: 10px; 
             text-align: center; display: none;
             border: 1px solid #e2e8f0;
         }
@@ -136,7 +145,7 @@
             </div>
         </div>
 
-        <button onclick="calcola()">Calcola Percorso</button>
+        <button onclick="calcola()">Calcola Metratura</button>
 
         <div id="result-box">
             <span class="res-label">Lunghezza Stimata</span>
@@ -152,7 +161,7 @@
         const filaD = parseInt(document.getElementById('fD').value);
         const livD = parseInt(document.getElementById('lD').value);
 
-        // Calcolo tecnico ODF 
+        // Calcolo tecnico ODF basato su standard FiberCop
         const vDist = Math.abs(livO - livD) * 0.28;
         const hDist = Math.abs(filaO - filaD) * 0.06 + 0.65;
         const slack = 1.55; 
@@ -161,6 +170,9 @@
 
         document.getElementById('valore').innerText = totale.toFixed(2) + " m";
         document.getElementById('result-box').style.display = 'block';
+        
+        // Effetto scorrimento automatico verso il basso se il risultato è fuori vista
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
 </script>
 
