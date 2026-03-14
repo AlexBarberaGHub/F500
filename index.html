@@ -34,24 +34,20 @@
         }
 
         .header { 
-            padding: 25px 10px; text-align: center; 
+            padding: 25px 10px 35px; text-align: center; 
             border-bottom: 1px solid rgba(0,0,0,0.1); 
             background-color: var(--header-bg-blue);
             position: relative; 
             overflow: hidden;
         }
 
-        /* MODIFICA: Opacità aumentata allo 0.35 (meno trasparenza) */
         .header-dc-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop");
             background-size: cover;
             background-position: center;
-            opacity: 0.35; /* Immagine più visibile */
+            opacity: 0.35; 
             z-index: 0;
             -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
@@ -59,52 +55,93 @@
 
         .logo-wrapper {
             display: flex; align-items: center; justify-content: center;
-            gap: 20px; position: relative;
+            position: relative;
             z-index: 2; 
+            height: 60px;
         }
 
-        .fiber-cable {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            left: 75px; right: 75px; height: 4px; 
-            background-color: var(--fc-blue-dark); z-index: 1; 
+        .cable-left, .cable-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 4px;
+            background-color: var(--fc-blue-dark);
+            z-index: 1;
+            border-radius: 2px;
         }
+
+        .cable-left { left: 35px; width: 85px; }
+        .cable-right { right: 35px; width: 85px; }
 
         .sc-apc-icon {
             width: 50px; height: auto;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-            position: relative; z-index: 3; 
+            position: relative; 
+            z-index: 3; 
         }
+
+        .icon-left { position: absolute; left: 0; }
+        .icon-right { position: absolute; right: 0; }
 
         .logo-text { 
             font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); 
             margin: 0; letter-spacing: -1.5px; line-height: 1;
             position: relative; z-index: 3; 
-            background-color: rgba(224, 240, 249, 0.85); 
-            padding: 2px 10px;
-            border-radius: 8px;
-            text-shadow: 0 1px 1px rgba(255,255,255,1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 0 15px; 
+            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
         
         .by-alex { 
-            font-size: 13px; color: #1e293b; margin-top: 15px; 
+            font-size: 13px; color: #1e293b; margin-top: 8px; 
             font-weight: 800; letter-spacing: 1px; 
             position: relative; z-index: 2;
             text-shadow: 0 0 5px white;
         }
 
+        /* MODIFICA: Colore impostato su var(--fc-blue-dark) */
+        .subtitle {
+            font-size: 16px;
+            color: var(--fc-blue-dark);
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 4px white;
+            margin-top: 12px; 
+        }
+
         .content { padding: 15px 20px; } 
-        /* ... resto del CSS invariato ... */
-        .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 12px 0 8px; display: flex; align-items: center; gap: 8px; }
+
+        .label-section { 
+            font-size: 11px; font-weight: 800; color: #94a3b8; 
+            text-transform: uppercase; margin: 12px 0 8px; 
+            display: flex; align-items: center; gap: 8px; 
+        }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
+
         .input-row { display: flex; gap: 12px; margin-bottom: 12px; }
-        label { display: block; font-size: 12px; color: #475569; margin-bottom: 5px; font-weight: bold; }
-        select { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 18px; font-weight: 600; outline: none; background: #fff; -webkit-appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; }
+        
+        label { 
+            display: block; 
+            font-size: 14px; 
+            color: #334155; 
+            margin-bottom: 6px; 
+            font-weight: 700; 
+        }
+        
+        select { 
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
+            border-radius: 10px; font-size: 18px; font-weight: 600; 
+            outline: none; background: #fff; -webkit-appearance: none; 
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); 
+            background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; 
+        }
+
         .btn-container { display: flex; gap: 10px; margin-top: 15px; }
         button { flex: 1; padding: 16px 5px; border: none; border-radius: 10px; font-size: 14px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: white; transition: 0.2s; }
         .btn-norma { background-color: var(--fc-blue-light); }
         .btn-corto { background-color: var(--fc-orange); }
         button:active { transform: scale(0.96); opacity: 0.8; }
+        
         #result-box { margin-top: 15px; padding: 15px; border-radius: 14px; text-align: center; display: none; }
         .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569; }
         .res-value { font-size: 42px; font-weight: 900; display: block; margin: 4px 0; }
@@ -117,24 +154,30 @@
     <div class="header">
         <div class="header-dc-bg"></div>
         <div class="logo-wrapper">
-            <div class="fiber-cable"></div>
-            <svg class="sc-apc-icon" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+            <div class="cable-left"></div>
+            
+            <svg class="sc-apc-icon icon-left" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
                 <rect x="30" y="10" width="45" height="30" rx="3" fill="#28a745"/>
                 <rect x="50" y="10" width="15" height="6" fill="#1e7e34"/>
                 <rect x="20" y="15" width="10" height="20" fill="#218838"/>
                 <rect x="8" y="20" width="12" height="10" rx="1" fill="#f8f9fa"/>
                 <path d="M8 20 L3 25 L8 30 Z" fill="#f8f9fa"/>
             </svg>
+
             <h1 class="logo-text">F500</h1>
-            <svg class="sc-apc-icon" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
+
+            <svg class="sc-apc-icon icon-right" viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg">
                 <rect x="5" y="10" width="45" height="30" rx="3" fill="#28a745"/>
                 <rect x="15" y="10" width="15" height="6" fill="#1e7e34"/>
                 <rect x="50" y="15" width="10" height="20" fill="#218838"/>
                 <rect x="60" y="20" width="12" height="10" rx="1" fill="#f8f9fa"/>
                 <path d="M72 20 L77 25 L72 30 Z" fill="#f8f9fa"/>
             </svg>
+
+            <div class="cable-right"></div>
         </div>
         <p class="by-alex">By Alex</p>
+        <p class="subtitle">Calcolo lunghezza bretelle ottiche</p>
     </div>
 
     <div class="content">
