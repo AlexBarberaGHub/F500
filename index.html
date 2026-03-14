@@ -2,176 +2,174 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F500 - ODF Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>F500 - ODF Expert</title>
 
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="F500">
     
-    <link rel="icon" type="image/png" sizes="192x192" href="icona.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="icona.png">
+    <link rel="icon" type="image/png" href="icona.png">
     <link rel="apple-touch-icon" href="icona.png">
 
     <style>
         :root {
-            /* Blu istituzionale FiberCop */
-            --fc-blue-bg: #002D72; 
-            --fc-blue-text: #0047bb;
-            --fc-dark-blue: #001f4d;
-            --fc-gray: #f8fafc;
+            --fc-blue-dark: #002D72; 
+            --fc-blue-light: #0047bb;
+            --fc-orange: #e67e22;
         }
         
         body { 
-            font-family: 'Helvetica Neue', Arial, sans-serif; 
-            background-color: var(--fc-blue-bg); 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
+            background-color: var(--fc-blue-dark); 
             display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; margin: 0; 
         }
 
         .card { 
-            background: white; width: 92%; max-width: 380px; 
-            padding: 0; border-radius: 12px; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            background: white; width: 90%; max-width: 400px; 
+            border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             overflow: hidden;
         }
 
-        .header {
-            background-color: white;
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-        }
+        .header { padding: 25px; text-align: center; border-bottom: 1px solid #eee; }
+        .logo-text { font-size: 38px; font-weight: 900; color: var(--fc-blue-light); margin: 0; }
+        .by-alex { font-size: 13px; color: #64748b; margin: 0; font-weight: 600; letter-spacing: 0.5px; }
 
-        .logo-box { text-align: center; }
-        .logo-text { font-size: 38px; font-weight: 900; color: var(--fc-blue-text); margin: 0; letter-spacing: -1px; }
-        .by-alex { font-size: 14px; color: #64748b; margin: 0; font-weight: 500; }
-
-        .content { padding: 25px; }
+        .content { padding: 20px; }
         
-        .section-tag {
-            font-size: 11px; font-weight: 800; color: #94a3b8;
-            text-transform: uppercase; margin-bottom: 12px;
-            display: block; letter-spacing: 1px;
-            border-left: 3px solid var(--fc-blue-text); padding-left: 10px;
+        .label-section {
+            font-size: 10px; font-weight: 800; color: #94a3b8;
+            text-transform: uppercase; margin: 15px 0 10px;
+            display: flex; align-items: center; gap: 8px;
         }
+        .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
 
-        .input-row { display: flex; gap: 15px; margin-bottom: 25px; }
+        .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
         .input-group { flex: 1; }
-        label { display: block; font-size: 12px; color: #1e293b; margin-bottom: 6px; font-weight: 700; }
+        
+        label { display: block; font-size: 11px; color: #475569; margin-bottom: 5px; font-weight: bold; }
         
         select { 
             width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
-            border-radius: 8px; font-size: 16px; background: #fff;
-            color: #1e293b; outline: none; transition: 0.2s;
+            border-radius: 8px; font-size: 16px; outline: none; background: #fff;
             -webkit-appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230047bb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 16px;
         }
-        select:focus { border-color: var(--fc-blue-text); }
-        
+
+        .btn-container { display: flex; gap: 10px; margin-top: 15px; }
+
         button { 
-            width: 100%; padding: 18px; background-color: var(--fc-blue-text); 
-            color: white; border: none; border-radius: 8px; 
-            font-size: 16px; font-weight: bold; cursor: pointer;
-            text-transform: uppercase; transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 71, 187, 0.2);
+            flex: 1; padding: 18px 5px; border: none; border-radius: 8px; 
+            font-size: 13px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; transition: 0.3s; color: white;
         }
-        button:active { transform: scale(0.98); background-color: var(--fc-dark-blue); }
+
+        .btn-norma { background-color: var(--fc-blue-light); }
+        .btn-corto { background-color: var(--fc-orange); }
+        
+        button:active { transform: scale(0.95); opacity: 0.8; }
 
         #result-box { 
-            margin-top: 25px; padding: 20px; 
-            background: var(--fc-gray); border-radius: 10px; 
-            text-align: center; display: none;
-            border: 1px solid #e2e8f0;
+            margin-top: 20px; padding: 20px; 
+            border-radius: 12px; text-align: center; display: none;
+            animation: slideIn 0.3s ease-out;
         }
-        .res-label { font-size: 12px; color: #64748b; font-weight: bold; text-transform: uppercase; }
-        .res-value { 
-            font-size: 42px; font-weight: 900; color: var(--fc-blue-text); 
-            display: block; margin-top: 5px;
-        }
+
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        .res-value { font-size: 42px; font-weight: 900; display: block; margin: 5px 0; }
+        .res-desc { font-size: 11px; line-height: 1.4; font-weight: 500; }
     </style>
 </head>
 <body>
 
 <div class="card">
     <div class="header">
-        <div class="logo-box">
-            <h1 class="logo-text">F500</h1>
-            <p class="by-alex">By Alex</p>
-        </div>
+        <h1 class="logo-text">F500</h1>
+        <p class="by-alex">By Alex</p>
     </div>
 
     <div class="content">
-        <span class="section-tag">Permuta Origine</span>
+        <div class="label-section">Posizione Origine</div>
         <div class="input-row">
             <div class="input-group">
-                <label>Fila</label>
-                <select id="fO">
-                    <option>1</option><option>3</option><option>5</option><option>7</option>
-                    <option>9</option><option>11</option><option>13</option><option>15</option>
-                </select>
+                <label>Montante</label>
+                <select id="fO"><option>1</option><option>3</option><option>5</option><option>7</option><option>9</option><option>11</option><option>13</option><option>15</option></select>
             </div>
             <div class="input-group">
                 <label>Livello</label>
-                <select id="lO">
-                    <option value="1">A</option><option value="2">B</option><option value="3">C</option>
-                    <option value="4">D</option><option value="5">E</option><option value="6">F</option><option value="7">G</option>
-                </select>
+                <select id="lO"><option value="7">A</option><option value="6">B</option><option value="5">C</option><option value="4">D</option><option value="3">E</option><option value="2">F</option><option value="1">G</option></select>
             </div>
         </div>
 
-        <span class="section-tag">Permuta Destinazione</span>
+        <div class="label-section">Posizione Destinazione</div>
         <div class="input-row">
             <div class="input-group">
-                <label>Fila</label>
-                <select id="fD">
-                    <option>1</option><option>3</option><option>5</option><option>7</option>
-                    <option>9</option><option>11</option><option>13</option><option>15</option>
-                </select>
+                <label>Montante</label>
+                <select id="fD"><option>1</option><option>3</option><option>5</option><option>7</option><option>9</option><option>11</option><option>13</option><option>15</option></select>
             </div>
             <div class="input-group">
                 <label>Livello</label>
-                <select id="lD">
-                    <option value="1">A</option><option value="2">B</option><option value="3">C</option>
-                    <option value="4">D</option><option value="5">E</option><option value="6">F</option><option value="7">G</option>
-                </select>
+                <select id="lD"><option value="7">A</option><option value="6">B</option><option value="5">C</option><option value="4">D</option><option value="3">E</option><option value="2">F</option><option value="1">G</option></select>
             </div>
         </div>
 
-        <button onclick="calcola()">Calcola Metratura</button>
+        <div class="btn-container">
+            <button class="btn-norma" onclick="calcola('norma')">A Norma</button>
+            <button class="btn-corto" onclick="calcola('corto')">Percorso Corto</button>
+        </div>
 
         <div id="result-box">
-            <span class="res-label">Lunghezza Stimata</span>
+            <span class="res-label" id="res-title"></span>
             <span class="res-value" id="valore"></span>
+            <p class="res-desc" id="res-desc"></p>
         </div>
     </div>
 </div>
 
 <script>
-    function calcola() {
-        const filaO = parseInt(document.getElementById('fO').value);
-        const livO = parseInt(document.getElementById('lO').value);
-        const filaD = parseInt(document.getElementById('fD').value);
-        const livD = parseInt(document.getElementById('lD').value);
-
-        // Calcolo tecnico ODF basato su standard FiberCop
-        const vDist = Math.abs(livO - livD) * 0.28;
-        const hDist = Math.abs(filaO - filaD) * 0.06 + 0.65;
-        const slack = 1.55; 
-
-        const totale = vDist + hDist + slack;
-
-        document.getElementById('valore').innerText = totale.toFixed(2) + " m";
-        document.getElementById('result-box').style.display = 'block';
+    function calcola(tipo) {
+        const fO = parseInt(document.getElementById('fO').value);
+        const lO = parseInt(document.getElementById('lO').value);
+        const fD = parseInt(document.getElementById('fD').value);
+        const lD = parseInt(document.getElementById('lD').value);
         
-        // Effetto scorrimento automatico verso il basso se il risultato è fuori vista
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        const box = document.getElementById('result-box');
+        const vVal = document.getElementById('valore');
+        const vTitle = document.getElementById('res-title');
+        const vDesc = document.getElementById('res-desc');
+
+        let totale = 0;
+
+        if (tipo === 'norma') {
+            const altezzaCielo = 8; 
+            const risalita = (altezzaCielo - lO) * 0.30;
+            const orizzontale = Math.abs(fO - fD) * 0.10 + 0.85;
+            const discesa = (altezzaCielo - lD) * 0.30;
+            const slack = 1.60;
+            totale = risalita + orizzontale + discesa + slack;
+
+            box.style.backgroundColor = "#eef4ff";
+            box.style.border = "1px solid #0047bb";
+            vVal.style.color = "#0047bb";
+            vTitle.innerText = "Bretella a Norma (Cielo)";
+            vDesc.innerText = "Percorso via montante superiore. Obbligatorio per standard tecnici.";
+        } else {
+            const vDist = Math.abs(lO - lD) * 0.28;
+            const hDist = Math.abs(fO - fD) * 0.08 + 0.60;
+            const slack = 1.40;
+            totale = vDist + hDist + slack;
+
+            box.style.backgroundColor = "#fff4eb";
+            box.style.border = "1px solid #e67e22";
+            vVal.style.color = "#e67e22";
+            vTitle.innerText = "Percorso Corto (Diretto)";
+            vDesc.innerText = "Distanza minima ottimizzata. Da usare con cautela.";
+        }
+
+        vVal.innerText = totale.toFixed(2) + " m";
+        box.style.display = 'block';
     }
 </script>
 
