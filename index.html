@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>F500 - ODF Expert</title>
 
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23002D72'/%3E%3Ctext x='50%25' y='65%25' font-family='sans-serif' font-weight='900' font-size='40' fill='white' text-anchor='middle'%3EF500%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23002D72'/%3E%3Ctext x='50%25' y='65%25' font-family='sans-serif' font-weight='900' font-size='40' fill='white' text-anchor='middle'%3EF500%3C/text%3E%3C/svg%3E">
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <style>
         :root {
             --fc-blue-dark: #002D72; 
@@ -16,135 +22,79 @@
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
             background-color: var(--fc-blue-dark); 
-            display: flex; 
-            justify-content: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            overflow-x: hidden; 
+            display: flex; justify-content: center; 
+            min-height: 100vh; margin: 0; overflow-x: hidden; 
         }
 
         .card { 
-            background: white; 
-            width: 94%; 
-            max-width: 400px; 
-            border-radius: 16px; 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-            overflow: hidden;
-            display: flex; 
-            flex-direction: column;
-            margin-top: 30px; 
-            margin-bottom: 30px;
-            align-self: flex-start;
+            background: white; width: 94%; max-width: 400px; 
+            border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            overflow: hidden; display: flex; flex-direction: column;
+            margin-top: 30px; margin-bottom: 30px; align-self: flex-start;
         }
 
         .header { 
-            padding: 25px 10px; 
-            text-align: center; 
+            padding: 25px 10px; text-align: center; 
             border-bottom: 1px solid rgba(0,0,0,0.1); 
             background-color: var(--header-bg-blue);
         }
 
         .logo-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px; 
-            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            gap: 20px; position: relative;
         }
 
         .fiber-cable {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            left: 75px; 
-            right: 75px;
-            height: 4px; 
-            background-color: var(--fc-blue-dark);
-            z-index: 1; 
+            position: absolute; top: 50%; transform: translateY(-50%);
+            left: 75px; right: 75px; height: 4px; 
+            background-color: var(--fc-blue-dark); z-index: 1; 
         }
 
         .sc-apc-icon {
-            width: 50px; 
-            height: auto;
+            width: 50px; height: auto;
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
-            position: relative;
-            z-index: 3; 
+            position: relative; z-index: 3; 
         }
 
         .logo-text { 
-            font-size: 38px;
-            font-weight: 900; 
-            color: var(--fc-blue-dark); 
-            margin: 0; 
-            letter-spacing: -1.5px;
-            line-height: 1;
-            position: relative;
-            z-index: 3; 
-            background-color: var(--header-bg-blue); 
-            padding: 0 8px;
+            font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); 
+            margin: 0; letter-spacing: -1.5px; line-height: 1;
+            position: relative; z-index: 3; 
+            background-color: var(--header-bg-blue); padding: 0 8px;
         }
         
         .by-alex { 
-            font-size: 13px;
-            color: #475569;
-            margin-top: 15px; 
-            font-weight: 700; 
-            letter-spacing: 1px; 
+            font-size: 13px; color: #475569; margin-top: 15px; 
+            font-weight: 700; letter-spacing: 1px; 
         }
 
         .content { padding: 15px 20px; } 
         
         .label-section {
-            font-size: 11px; 
-            font-weight: 800; 
-            color: #94a3b8;
-            text-transform: uppercase; 
-            margin: 12px 0 8px;
-            display: flex; 
-            align-items: center; 
-            gap: 8px;
+            font-size: 11px; font-weight: 800; color: #94a3b8;
+            text-transform: uppercase; margin: 12px 0 8px;
+            display: flex; align-items: center; gap: 8px;
         }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
 
         .input-row { display: flex; gap: 12px; margin-bottom: 12px; }
         
-        label { 
-            display: block; 
-            font-size: 12px; 
-            color: #475569; 
-            margin-bottom: 5px; 
-            font-weight: bold; 
-        }
+        label { display: block; font-size: 12px; color: #475569; margin-bottom: 5px; font-weight: bold; }
         
         select { 
-            width: 100%; 
-            padding: 12px; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 10px; 
-            font-size: 18px; 
-            font-weight: 600;
-            outline: none; 
-            background: #fff;
-            -webkit-appearance: none;
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
+            border-radius: 10px; font-size: 18px; font-weight: 600;
+            outline: none; background: #fff; -webkit-appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 14px;
+            background-repeat: no-repeat; background-position: right 10px center; background-size: 14px;
         }
 
         .btn-container { display: flex; gap: 10px; margin-top: 15px; }
 
         button { 
-            flex: 1; 
-            padding: 16px 5px; 
-            border: none; 
-            border-radius: 10px; 
-            font-size: 14px; 
-            font-weight: 800; 
-            cursor: pointer;
-            text-transform: uppercase; 
-            color: white; 
-            transition: 0.2s;
+            flex: 1; padding: 16px 5px; border: none; border-radius: 10px; 
+            font-size: 14px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; color: white; transition: 0.2s;
         }
 
         .btn-norma { background-color: var(--fc-blue-light); }
@@ -152,17 +102,17 @@
         button:active { transform: scale(0.96); opacity: 0.8; }
 
         #result-box { 
-            margin-top: 15px; 
-            padding: 15px; 
-            border-radius: 14px; 
-            text-align: center; 
-            display: none;
+            margin-top: 15px; padding: 15px; border-radius: 14px; 
+            text-align: center; display: none;
         }
 
         .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569; }
         .res-value { font-size: 42px; font-weight: 900; display: block; margin: 4px 0; }
-        .res-desc { font-size: 12px; line-height: 1.4; font-weight: 500; color: #334155; text-align: left; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; margin-top: 10px;}
-        .res-desc b { color: var(--fc-blue-dark); }
+        .res-desc { 
+            font-size: 12px; line-height: 1.4; font-weight: 500; color: #334155; 
+            text-align: left; background: rgba(255,255,255,0.6); padding: 10px; 
+            border-radius: 8px; margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -264,13 +214,13 @@
             box.style.backgroundColor = "#eef4ff";
             vTitle.innerText = "Norma (Via Cielo)";
             vVal.style.color = "var(--fc-blue-light)";
-            vDesc.innerHTML = "<b>Procedura:</b> Sali verticalmente fino alla guida superiore (cielo), attraversa orizzontalmente fino al montante di destinazione e scendi fino al livello corretto. Gestisci l'eccedenza nelle asole dedicate.";
+            vDesc.innerHTML = "<b>Procedura:</b> Sali verticalmente fino alla guida superiore (cielo), attraversa orizzontalmente fino al montante di destinazione e scendi fino al livello corretto.";
         } else {
             totale = (Math.abs(lO - lD) * 0.28) + (Math.abs(fO - fD) * 0.08 + 0.60) + 1.40;
             box.style.backgroundColor = "#fff4eb";
             vTitle.innerText = "Percorso Corto";
             vVal.style.color = "var(--fc-orange)";
-            vDesc.innerHTML = "<b>Procedura:</b> Passaggio diretto tramite i pettini di permutazione laterali. Ideale per collegamenti tra moduli adiacenti o vicini per minimizzare l'ingombro dei cavi.";
+            vDesc.innerHTML = "<b>Procedura:</b> Passaggio diretto tramite i pettini di permutazione laterali. Ideale per minimizzare l'ingombro dei cavi tra moduli vicini.";
         }
         vVal.innerText = totale.toFixed(2) + " m";
         box.style.display = 'block';
