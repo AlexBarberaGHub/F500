@@ -199,7 +199,7 @@
                     <option value="13">A</option><option value="12">B</option><option value="11">C</option>
                     <option value="10">D</option><option value="9">E</option><option value="8">F</option>
                     <option value="7">G</option><option value="6">H</option><option value="5">I</option>
-                    <option value="4">J</option><option value="3">K</option><option value="2">L</option><option value="1">M</option>
+                    <option value="4">J</option><option value="3">K</option><option value="2">L</option><option value="1">M</option><option value="0">N</option>
                 </select>
             </div>
         </div>
@@ -220,7 +220,7 @@
                     <option value="13">A</option><option value="12">B</option><option value="11">C</option>
                     <option value="10">D</option><option value="9">E</option><option value="8">F</option>
                     <option value="7">G</option><option value="6">H</option><option value="5">I</option>
-                    <option value="4">J</option><option value="3">K</option><option value="2">L</option><option value="1">M</option>
+                    <option value="4">J</option><option value="3">K</option><option value="2">L</option><option value="1">M</option><option value="0">N</option>
                 </select>
             </div>
         </div>
@@ -254,7 +254,6 @@
         // --- CALCOLO PER BLOCO 144 FIBRE ---
         if (tipo === 'norma') {
             const altezzaCielo = 14; 
-            // Formule Fibernet 144f integrate (Passo 0.35m, Scorta 1.85m)
             totale = ((altezzaCielo - lO) * 0.35) + (Math.abs(fO - fD) * 0.12 + 0.90) + ((altezzaCielo - lD) * 0.35) + 1.85;
             
             box.style.backgroundColor = "#eef4ff";
@@ -262,7 +261,6 @@
             vVal.style.color = "var(--fc-blue-light)";
             vDesc.innerHTML = "<b>Procedura:</b> Sali verticalmente fino alla guida superiore (cielo), attraversa orizzontalmente fino al montante di destinazione e scendi fino al livello corretto.";
         } else {
-            // Formule Fibernet 144f integrate (Passo 0.32m, Scorta 1.50m)
             totale = (Math.abs(lO - lD) * 0.32) + (Math.abs(fO - fD) * 0.10 + 0.70) + 1.50;
             
             box.style.backgroundColor = "#fff4eb";
