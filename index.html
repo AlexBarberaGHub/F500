@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>F500 - ODF Fiber</title>
 
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#002D72">
+
     <link rel="apple-touch-icon" href="icona.png">
     <link rel="icon" type="image/png" href="icona.png">
     
@@ -239,6 +242,13 @@
 </div>
 
 <script>
+    // Registrazione Service Worker per rendere l'app installabile
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+
     function calcola(tipo) {
         const fO = parseInt(document.getElementById('fO').value);
         const lO = parseInt(document.getElementById('lO').value);
@@ -251,22 +261,19 @@
 
         let totale = 0;
         
-        // --- CALCOLO PER BLOCO 144 FIBRE ---
         if (tipo === 'norma') {
             const altezzaCielo = 14; 
             totale = ((altezzaCielo - lO) * 0.35) + (Math.abs(fO - fD) * 0.12 + 0.90) + ((altezzaCielo - lD) * 0.35) + 1.85;
-            
             box.style.backgroundColor = "#eef4ff";
             vTitle.innerText = "Norma (Via Cielo)";
             vVal.style.color = "var(--fc-blue-light)";
-            vDesc.innerHTML = "<b>Procedura:</b> Sali verticalmente fino alla guida superiore (cielo), attraversa orizzontalmente fino al montante di destinazione e scendi fino al livello corretto.";
+            vDesc.innerHTML = "<b>Procedura:</b> Sali fino al cielo, attraversa e scendi.";
         } else {
             totale = (Math.abs(lO - lD) * 0.32) + (Math.abs(fO - fD) * 0.10 + 0.70) + 1.50;
-            
             box.style.backgroundColor = "#fff4eb";
             vTitle.innerText = "Percorso Corto";
             vVal.style.color = "var(--fc-orange)";
-            vDesc.innerHTML = "<b>Procedura:</b> Passaggio diretto tramite i pettini di permutazione laterali. Ideale per minimizzare l'ingombro dei cavi tra moduli vicini.";
+            vDesc.innerHTML = "<b>Procedura:</b> Passaggio diretto tramite pettini laterali.";
         }
         
         vVal.innerText = totale.toFixed(2) + " m";
