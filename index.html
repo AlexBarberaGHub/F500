@@ -199,8 +199,12 @@
         const letteraO = getLettera(vO);
         const letteraD = getLettera(vD);
 
+        // Calcolo orizzontale
         const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85; 
-        const distVerticale = (Math.abs(vO - vD) * 0.32) + (vD * 0.32 * 2);
+        
+        // Calcolo verticale aggiornato: discesa dal livello partenza al fondo + risalita dal fondo al livello arrivo
+        // vO * 0.32 (discesa a terra) + vD * 0.32 (risalita)
+        const distVerticale = (vO * 0.32) + (vD * 0.32);
         
         const riserva = 1.60;
         const totalereale = distOrizzontale + distVerticale + riserva;
