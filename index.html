@@ -7,7 +7,6 @@
 
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#002D72">
-
     <link rel="apple-touch-icon" href="icona.png">
     <link rel="icon" type="image/png" href="icona.png">
     
@@ -18,7 +17,6 @@
         :root {
             --fc-blue-dark: #002D72; 
             --fc-blue-light: #0047bb;
-            --fc-orange: #e67e22;
             --header-bg-blue: #e0f0f9; 
         }
         
@@ -40,115 +38,63 @@
             padding: 25px 10px 35px; text-align: center; 
             border-bottom: 1px solid rgba(0,0,0,0.1); 
             background-color: var(--header-bg-blue);
-            position: relative; 
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
 
         .header-dc-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop");
-            background-size: cover;
-            background-position: center;
-            opacity: 0.35; 
-            z-index: 0;
+            background-size: cover; background-position: center; opacity: 0.35; z-index: 0;
             -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
         }
 
         .logo-wrapper {
             display: flex; align-items: center; justify-content: center;
-            position: relative;
-            z-index: 2; 
-            height: 60px;
+            position: relative; z-index: 2; height: 60px;
         }
 
         .cable-left, .cable-right {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 4px;
-            background-color: var(--fc-blue-light);
-            z-index: 1;
-            border-radius: 2px;
-            box-shadow: 0 0 5px rgba(0, 71, 187, 0.3);
+            position: absolute; top: 50%; transform: translateY(-50%);
+            height: 4px; background-color: var(--fc-blue-light);
+            z-index: 1; border-radius: 2px;
         }
-
         .cable-left { left: 45px; width: 75px; }
         .cable-right { right: 45px; width: 75px; }
 
         .sc-apc-icon {
             width: 58px; height: auto;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-            position: relative; 
-            z-index: 3; 
+            position: relative; z-index: 3; 
         }
-
         .icon-left { position: absolute; left: 0; }
         .icon-right { position: absolute; right: 0; }
 
-        .logo-text { 
-            font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); 
-            margin: 0; letter-spacing: -1.5px; line-height: 1;
-            position: relative; z-index: 3; 
-            padding: 0 15px; 
-            text-shadow: 0 1px 2px rgba(255,255,255,0.8);
-        }
-        
-        .by-alex { 
-            font-size: 13px; color: #1e293b; margin-top: 2px; 
-            font-weight: 800; letter-spacing: 1px; 
-            position: relative; z-index: 2;
-            text-shadow: 0 0 5px white;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: var(--fc-blue-dark);
-            font-weight: 700;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 0 4px white;
-            margin-top: 12px; 
-        }
+        .logo-text { font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); margin: 0; letter-spacing: -1.5px; position: relative; z-index: 3; padding: 0 15px; }
+        .by-alex { font-size: 13px; color: #1e293b; margin-top: 2px; font-weight: 800; position: relative; z-index: 2; }
+        .subtitle { font-size: 15px; color: var(--fc-blue-dark); font-weight: 700; position: relative; z-index: 2; margin-top: 12px; }
 
         .content { padding: 15px 20px; } 
-
-        .label-section { 
-            font-size: 11px; font-weight: 800; color: #94a3b8; 
-            text-transform: uppercase; margin: 12px 0 8px; 
-            display: flex; align-items: center; gap: 8px; 
-        }
+        .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 12px 0 8px; display: flex; align-items: center; gap: 8px; }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
 
         .input-row { display: flex; gap: 12px; margin-bottom: 12px; }
-        
-        label { 
-            display: block; 
-            font-size: 14px; 
-            color: #334155; 
-            margin-bottom: 6px; 
-            font-weight: 700; 
-        }
+        label { display: block; font-size: 14px; color: #334155; margin-bottom: 6px; font-weight: 700; }
         
         select { 
             width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
-            border-radius: 10px; font-size: 18px; font-weight: 600; 
-            outline: none; background: #fff; -webkit-appearance: none; 
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); 
-            background-repeat: no-repeat; background-position: right 10px center; background-size: 14px; 
+            border-radius: 10px; font-size: 18px; font-weight: 600; outline: none;
+            background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 10px center;
+            background-size: 14px; -webkit-appearance: none;
         }
 
-        .btn-container { display: flex; gap: 10px; margin-top: 15px; }
-        button { flex: 1; padding: 16px 5px; border: none; border-radius: 10px; font-size: 14px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: white; transition: 0.2s; }
-        .btn-norma { background-color: var(--fc-blue-light); }
-        .btn-corto { background-color: var(--fc-orange); }
-        button:active { transform: scale(0.96); opacity: 0.8; }
+        .btn-container { margin-top: 15px; }
+        button { width: 100%; padding: 18px; border: none; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: white; background-color: var(--fc-blue-light); transition: 0.2s; }
+        button:active { transform: scale(0.96); opacity: 0.9; }
         
-        #result-box { margin-top: 15px; padding: 15px; border-radius: 14px; text-align: center; display: none; }
-        .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #475569; }
-        .res-value { font-size: 42px; font-weight: 900; display: block; margin: 4px 0; }
-        .res-desc { font-size: 12px; line-height: 1.4; font-weight: 500; color: #334155; text-align: left; background: rgba(255,255,255,0.6); padding: 10px; border-radius: 8px; margin-top: 10px; }
+        #result-box { margin-top: 15px; padding: 20px; border-radius: 14px; text-align: center; display: none; background-color: #f8fafc; border: 2px solid #e2e8f0; }
+        .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #64748b; }
+        .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
+        .res-desc { font-size: 13px; line-height: 1.4; font-weight: 500; color: #475569; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -158,7 +104,6 @@
         <div class="header-dc-bg"></div>
         <div class="logo-wrapper">
             <div class="cable-left"></div>
-            
             <svg class="sc-apc-icon icon-left" viewBox="0 0 130 55" xmlns="http://www.w3.org/2000/svg">
                 <rect x="55" y="11" width="44" height="33" rx="3.3" fill="#28a745"/>
                 <rect x="77" y="11" width="16.5" height="6.6" fill="#1e7e34"/>
@@ -167,9 +112,7 @@
                 <path d="M30.8 22 L25.3 27.5 L30.8 33 Z" fill="#f8f9fa"/>
                 <path d="M99 16.5 L129.8 24.2 L129.8 30.8 L99 38.5 Z" fill="#1e7e34" stroke="#ced4da" stroke-width="0.55"/>
             </svg>
-
             <h1 class="logo-text">F500</h1>
-
             <svg class="sc-apc-icon icon-right" viewBox="0 0 130 55" xmlns="http://www.w3.org/2000/svg">
                 <rect x="31" y="11" width="44" height="33" rx="3.3" fill="#28a745"/>
                 <rect x="44" y="11" width="16.5" height="6.6" fill="#1e7e34"/>
@@ -178,106 +121,69 @@
                 <path d="M101.2 22 L106.7 27.5 L101.2 33 Z" fill="#f8f9fa"/>
                 <path d="M31 16.5 L0.2 24.2 L0.2 30.8 L31 38.5 Z" fill="#1e7e34" stroke="#ced4da" stroke-width="0.55"/>
             </svg>
-
             <div class="cable-right"></div>
         </div>
         <p class="by-alex">By AlexB</p>
-        <p class="subtitle">Calcolo lunghezze fibre ottiche ODF</p>
+        <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF Prysmian FLEX</p>
     </div>
 
     <div class="content">
-        <div class="label-section">Origine</div>
+        <div class="label-section">Partenza</div>
         <div class="input-row">
             <div style="flex:1">
                 <label>Montante</label>
-                <select id="fO">
-                    <option>1</option><option>3</option><option>5</option><option>7</option>
-                    <option>9</option><option>11</option><option>13</option><option>15</option>
-                    <option>17</option><option>19</option><option>21</option>
-                </select>
+                <select id="mO"><script>for(let i=1;i<=12;i++) document.write(`<option value="${i}">M${i}</option>`)</script></select>
             </div>
             <div style="flex:1">
                 <label>Livello</label>
-                <select id="lO">
-                    <option value="13">A</option><option value="12">B</option><option value="11">C</option>
-                    <option value="10">D</option><option value="9">E</option><option value="8">F</option>
-                    <option value="7">G</option><option value="6">H</option><option value="5">I</option>
-                    <option value="4">J</option><option value="3">K</option><option value="2">L</option><option value="1">M</option><option value="0">N</option>
-                </select>
+                <select id="lO"><script>for(let i=1;i<=6;i++) document.write(`<option value="${i}">L${i}</option>`)</script></select>
             </div>
         </div>
 
-        <div class="label-section">Destinazione</div>
+        <div class="label-section">Arrivo</div>
         <div class="input-row">
             <div style="flex:1">
                 <label>Montante</label>
-                <select id="fD">
-                    <option>1</option><option>3</option><option>5</option><option>7</option>
-                    <option>9</option><option>11</option><option>13</option><option>15</option>
-                    <option>17</option><option>19</option><option>21</option>
-                </select>
+                <select id="mD"><script>for(let i=1;i<=12;i++) document.write(`<option value="${i}">M${i}</option>`)</script></select>
             </div>
             <div style="flex:1">
                 <label>Livello</label>
-                <select id="lD">
-                    <option value="13">A</option><option value="12">B</option><option value="11">C</option>
-                    <option value="10">D</option><option value="9">E</option><option value="8">F</option>
-                    <option value="7">G</option><option value="6">H</option><option value="5">I</option>
-                    <option value="4">J</option><option value="3">K</option><option value="2">L</option><option value="1">M</option><option value="0">N</option>
-                </select>
+                <select id="lD"><script>for(let i=1;i<=6;i++) document.write(`<option value="${i}">L${i}</option>`)</script></select>
             </div>
         </div>
 
         <div class="btn-container">
-            <button class="btn-norma" onclick="calcola('norma')">A Norma</button>
-            <button class="btn-corto" onclick="calcola('corto')">Corto</button>
+            <button onclick="calcolaReale()">Calcola Misura Reale</button>
         </div>
 
         <div id="result-box">
-            <span class="res-label" id="res-title"></span>
+            <span class="res-label">Lunghezza necessaria</span>
             <span class="res-value" id="valore"></span>
-            <div class="res-desc" id="res-desc"></div>
+            <div class="res-desc">Misura netta calcolata per il percorso scelto, inclusa la scorta per i connettori.</div>
         </div>
     </div>
 </div>
 
 <script>
-    // Registrazione Service Worker per rendere l'app installabile
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js');
-      });
+      window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js'); });
     }
 
-    function calcola(tipo) {
-        const fO = parseInt(document.getElementById('fO').value);
+    function calcolaReale() {
+        const mO = parseInt(document.getElementById('mO').value);
         const lO = parseInt(document.getElementById('lO').value);
-        const fD = parseInt(document.getElementById('fD').value);
+        const mD = parseInt(document.getElementById('mD').value);
         const lD = parseInt(document.getElementById('lD').value);
-        const box = document.getElementById('result-box');
-        const vVal = document.getElementById('valore');
-        const vTitle = document.getElementById('res-title');
-        const vDesc = document.getElementById('res-desc');
+        
+        // Calcolo geometrico reale:
+        const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85;
+        const distVerticale = Math.abs(lO - lD) * 0.32;
+        const riserva = 1.60;
 
-        let totale = 0;
-        
-        if (tipo === 'norma') {
-            const altezzaCielo = 14; 
-            totale = ((altezzaCielo - lO) * 0.35) + (Math.abs(fO - fD) * 0.12 + 0.90) + ((altezzaCielo - lD) * 0.35) + 1.85;
-            box.style.backgroundColor = "#eef4ff";
-            vTitle.innerText = "Norma (Via Cielo)";
-            vVal.style.color = "var(--fc-blue-light)";
-            vDesc.innerHTML = "<b>Procedura:</b> Sali fino al cielo, attraversa e scendi.";
-        } else {
-            totale = (Math.abs(lO - lD) * 0.32) + (Math.abs(fO - fD) * 0.10 + 0.70) + 1.50;
-            box.style.backgroundColor = "#fff4eb";
-            vTitle.innerText = "Percorso Corto";
-            vVal.style.color = "var(--fc-orange)";
-            vDesc.innerHTML = "<b>Procedura:</b> Passaggio diretto tramite pettini laterali.";
-        }
-        
-        vVal.innerText = totale.toFixed(2) + " m";
-        box.style.display = 'block';
+        const totalereale = distOrizzontale + distVerticale + riserva;
+
+        document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
+        document.getElementById('result-box').style.display = 'block';
     }
 </script>
 
