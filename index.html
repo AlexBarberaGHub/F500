@@ -31,12 +31,12 @@
             background: white; width: 94%; max-width: 400px; 
             border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);
             overflow: hidden; display: flex; flex-direction: column;
-            margin-top: 8px; /* Margine minimo ripristinato */
+            margin-top: 8px; 
             margin-bottom: 20px; align-self: flex-start;
         }
 
         .header { 
-            padding: 20px 10px 0px; /* Ridotto leggermente il padding superiore */
+            padding: 20px 10px 0px; 
             text-align: center; 
             border-bottom: 1px solid rgba(0,0,0,0.1); 
             background-color: var(--header-bg-blue);
@@ -74,22 +74,11 @@
         .logo-text { font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); margin: 0; letter-spacing: -1.5px; position: relative; z-index: 3; padding: 0 15px; }
         
         .by-alex { 
-            font-size: 13px; 
-            color: #1e293b; 
-            margin-top: -6px; 
-            font-weight: 800; 
-            position: relative; 
-            z-index: 2; 
+            font-size: 13px; color: #1e293b; margin-top: -6px; font-weight: 800; position: relative; z-index: 2; 
         }
         
         .subtitle { 
-            font-size: 14px; 
-            color: var(--fc-blue-dark); 
-            font-weight: 700; 
-            position: relative; 
-            z-index: 2; 
-            margin-top: 10px; 
-            margin-bottom: 5px; 
+            font-size: 14px; color: var(--fc-blue-dark); font-weight: 700; position: relative; z-index: 2; margin-top: 10px; margin-bottom: 5px; 
         }
 
         .content { padding: 15px 20px; } 
@@ -220,14 +209,14 @@
         htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>${mO}-${letteraO}</b>.</span>`;
         
         if (d !== 0) {
-            htmlPercorso += `<span class="path-step">2. Vai ${direzione} fino al montante <b>${mD}</b>.</span>`;
-            htmlPercorso += `<span class="path-step">3. In <b>${mD}</b>, <b>SCENDI</b> alla base.</span>`;
+            htmlPercorso += `<span class="path-step">2. Vai ${direzione} fino al <b>vano centrale di raccolta</b> del montante <b>${mD}</b>.</span>`;
+            htmlPercorso += `<span class="path-step">3. In <b>${mD}</b>, <b>SCENDI</b> alla base tramite il vano centrale.</span>`;
         } else {
-            htmlPercorso += `<span class="path-step">2. Nello stesso montante, <b>SCENDI</b> alla base.</span>`;
+            htmlPercorso += `<span class="path-step">2. Nello stesso montante, <b>SCENDI</b> alla base tramite il <b>vano centrale di raccolta</b>.</span>`;
         }
 
         htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
-        htmlPercorso += `<div class="path-note">Eventuale ricchezza nel vano di raccolta del montante <b>${mD}</b>.</div>`;
+        htmlPercorso += `<div class="path-note">Eventuale ricchezza smaltiscila all'interno del <b>vano centrale di raccolta</b> del montante <b>${mD}</b>.</div>`;
         
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
