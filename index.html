@@ -31,11 +31,13 @@
             background: white; width: 94%; max-width: 400px; 
             border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);
             overflow: hidden; display: flex; flex-direction: column;
-            margin-top: 30px; margin-bottom: 30px; align-self: flex-start;
+            margin-top: 8px; /* Margine minimo ripristinato */
+            margin-bottom: 20px; align-self: flex-start;
         }
 
         .header { 
-            padding: 25px 10px 35px; text-align: center; 
+            padding: 20px 10px 0px; /* Ridotto leggermente il padding superiore */
+            text-align: center; 
             border-bottom: 1px solid rgba(0,0,0,0.1); 
             background-color: var(--header-bg-blue);
             position: relative; overflow: hidden;
@@ -70,15 +72,32 @@
         .icon-right { position: absolute; right: 0; }
 
         .logo-text { font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); margin: 0; letter-spacing: -1.5px; position: relative; z-index: 3; padding: 0 15px; }
-        .by-alex { font-size: 13px; color: #1e293b; margin-top: 2px; font-weight: 800; position: relative; z-index: 2; }
-        .subtitle { font-size: 15px; color: var(--fc-blue-dark); font-weight: 700; position: relative; z-index: 2; margin-top: 12px; }
+        
+        .by-alex { 
+            font-size: 13px; 
+            color: #1e293b; 
+            margin-top: -6px; 
+            font-weight: 800; 
+            position: relative; 
+            z-index: 2; 
+        }
+        
+        .subtitle { 
+            font-size: 14px; 
+            color: var(--fc-blue-dark); 
+            font-weight: 700; 
+            position: relative; 
+            z-index: 2; 
+            margin-top: 10px; 
+            margin-bottom: 5px; 
+        }
 
         .content { padding: 15px 20px; } 
-        .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 12px 0 8px; display: flex; align-items: center; gap: 8px; }
+        .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 10px 0 6px; display: flex; align-items: center; gap: 8px; }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
 
-        .input-row { display: flex; gap: 12px; margin-bottom: 12px; }
-        label { display: block; font-size: 14px; color: #334155; margin-bottom: 6px; font-weight: 700; }
+        .input-row { display: flex; gap: 12px; margin-bottom: 10px; }
+        label { display: block; font-size: 14px; color: #334155; margin-bottom: 4px; font-weight: 700; }
         
         select { 
             width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
@@ -87,16 +106,16 @@
             background-size: 14px; -webkit-appearance: none;
         }
 
-        .btn-container { margin-top: 15px; }
+        .btn-container { margin-top: 10px; }
         button { width: 100%; padding: 18px; border: none; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: white; background-color: var(--fc-blue-light); transition: 0.2s; }
         button:active { transform: scale(0.96); opacity: 0.9; }
         
-        #result-box { margin-top: 15px; padding: 20px; border-radius: 14px; text-align: center; display: none; background-color: #f8fafc; border: 2px solid #e2e8f0; }
+        #result-box { margin-top: 15px; padding: 15px; border-radius: 14px; text-align: center; display: none; background-color: #f8fafc; border: 2px solid #e2e8f0; }
         .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #64748b; }
-        .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
-        .res-desc { font-size: 13px; line-height: 1.4; font-weight: 500; color: #475569; margin-top: 15px; text-align: left; padding: 12px; background: #fff; border-radius: 8px; border-left: 4px solid var(--fc-blue-light); }
+        .res-value { font-size: 42px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
+        .res-desc { font-size: 13px; line-height: 1.4; font-weight: 500; color: #475569; margin-top: 10px; text-align: left; padding: 12px; background: #fff; border-radius: 8px; border-left: 4px solid var(--fc-blue-light); }
         .path-step { display: block; margin-bottom: 4px; }
-        .path-note { margin-top: 10px; font-style: italic; color: var(--fc-blue-light); font-weight: 600; }
+        .path-note { margin-top: 8px; font-style: italic; color: var(--fc-blue-light); font-weight: 600; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -126,7 +145,7 @@
             <div class="cable-right"></div>
         </div>
         <p class="by-alex">By AlexB</p>
-        <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF Prysmian FLEX</p>
+        <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF Prysmian</p>
     </div>
 
     <div class="content">
@@ -139,12 +158,8 @@
             <div style="flex:1">
                 <label>Livello</label>
                 <select id="lO">
-                    <option value="6">A</option>
-                    <option value="5">B</option>
-                    <option value="4">C</option>
-                    <option value="3">D</option>
-                    <option value="2">E</option>
-                    <option value="1">F</option>
+                    <option value="6">A</option><option value="5">B</option><option value="4">C</option>
+                    <option value="3">D</option><option value="2">E</option><option value="1">F</option>
                 </select>
             </div>
         </div>
@@ -158,12 +173,8 @@
             <div style="flex:1">
                 <label>Livello</label>
                 <select id="lD">
-                    <option value="6">A</option>
-                    <option value="5">B</option>
-                    <option value="4">C</option>
-                    <option value="3">D</option>
-                    <option value="2">E</option>
-                    <option value="1">F</option>
+                    <option value="6">A</option><option value="5">B</option><option value="4">C</option>
+                    <option value="3">D</option><option value="2">E</option><option value="1">F</option>
                 </select>
             </div>
         </div>
@@ -181,10 +192,6 @@
 </div>
 
 <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js'); });
-    }
-
     function getLettera(valore) {
         const mapping = { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" };
         return mapping[valore];
@@ -199,13 +206,8 @@
         const letteraO = getLettera(vO);
         const letteraD = getLettera(vD);
 
-        // Calcolo orizzontale
         const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85; 
-        
-        // Calcolo verticale aggiornato: discesa dal livello partenza al fondo + risalita dal fondo al livello arrivo
-        // vO * 0.32 (discesa a terra) + vD * 0.32 (risalita)
         const distVerticale = (vO * 0.32) + (vD * 0.32);
-        
         const riserva = 1.60;
         const totalereale = distOrizzontale + distVerticale + riserva;
 
@@ -218,14 +220,14 @@
         htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>${mO}-${letteraO}</b>.</span>`;
         
         if (d !== 0) {
-            htmlPercorso += `<span class="path-step">2. Attraversa orizzontalmente ${direzione} fino al montante <b>${mD}</b>.</span>`;
-            htmlPercorso += `<span class="path-step">3. Raggiunto il montante <b>${mD}</b>, <b>SCENDI</b> fino alla base.</span>`;
+            htmlPercorso += `<span class="path-step">2. Vai ${direzione} fino al montante <b>${mD}</b>.</span>`;
+            htmlPercorso += `<span class="path-step">3. In <b>${mD}</b>, <b>SCENDI</b> alla base.</span>`;
         } else {
-            htmlPercorso += `<span class="path-step">2. Nello stesso montante, <b>SCENDI</b> fino alla base.</span>`;
+            htmlPercorso += `<span class="path-step">2. Nello stesso montante, <b>SCENDI</b> alla base.</span>`;
         }
 
-        htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> fino al cassetto <b>${letteraD}</b>.</span>`;
-        htmlPercorso += `<div class="path-note">Eventuale ricchezza smaltiscila nel vano centrale di raccolta del montante <b>${mD}</b>.</div>`;
+        htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
+        htmlPercorso += `<div class="path-note">Eventuale ricchezza nel vano di raccolta del montante <b>${mD}</b>.</div>`;
         
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
