@@ -96,6 +96,7 @@
         .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
         .res-desc { font-size: 13px; line-height: 1.4; font-weight: 500; color: #475569; margin-top: 15px; text-align: left; padding: 12px; background: #fff; border-radius: 8px; border-left: 4px solid var(--fc-blue-light); }
         .path-step { display: block; margin-bottom: 4px; }
+        .path-note { margin-top: 10px; font-style: italic; color: var(--fc-blue-light); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -133,11 +134,18 @@
         <div class="input-row">
             <div style="flex:1">
                 <label>Montante</label>
-                <select id="mO"><script>for(let i=1;i<=12;i++) document.write(`<option value="${i}">M${i}</option>`)</script></select>
+                <select id="mO"><script>for(let i=1;i<=11;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
             </div>
             <div style="flex:1">
                 <label>Livello</label>
-                <select id="lO"><script>for(let i=1;i<=6;i++) document.write(`<option value="${i}">L${i}</option>`)</script></select>
+                <select id="lO">
+                    <option value="6">A</option>
+                    <option value="5">B</option>
+                    <option value="4">C</option>
+                    <option value="3">D</option>
+                    <option value="2">E</option>
+                    <option value="1">F</option>
+                </select>
             </div>
         </div>
 
@@ -145,11 +153,18 @@
         <div class="input-row">
             <div style="flex:1">
                 <label>Montante</label>
-                <select id="mD"><script>for(let i=1;i<=12;i++) document.write(`<option value="${i}">M${i}</option>`)</script></select>
+                <select id="mD"><script>for(let i=1;i<=11;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
             </div>
             <div style="flex:1">
                 <label>Livello</label>
-                <select id="lD"><script>for(let i=1;i<=6;i++) document.write(`<option value="${i}">L${i}</option>`)</script></select>
+                <select id="lD">
+                    <option value="6">A</option>
+                    <option value="5">B</option>
+                    <option value="4">C</option>
+                    <option value="3">D</option>
+                    <option value="2">E</option>
+                    <option value="1">F</option>
+                </select>
             </div>
         </div>
 
@@ -170,36 +185,43 @@
       window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js'); });
     }
 
+    function getLettera(valore) {
+        const mapping = { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" };
+        return mapping[valore];
+    }
+
     function calcolaReale() {
         const mO = parseInt(document.getElementById('mO').value);
-        const lO = parseInt(document.getElementById('lO').value);
+        const vO = parseInt(document.getElementById('lO').value);
         const mD = parseInt(document.getElementById('mD').value);
-        const lD = parseInt(document.getElementById('lD').value);
+        const vD = parseInt(document.getElementById('lD').value);
         
-        // Misura reale calcolata
-        const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85;
-        const distVerticale = Math.abs(lO - lD) * 0.32;
+        const letteraO = getLettera(vO);
+        const letteraD = getLettera(vD);
+
+        const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85; 
+        const distVerticale = (Math.abs(vO - vD) * 0.32) + (vD * 0.32 * 2);
+        
         const riserva = 1.60;
         const totalereale = distOrizzontale + distVerticale + riserva;
 
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
 
-        // Generazione descrizione percorso
         const d = mD - mO; 
         let direzione = d > 0 ? "verso DESTRA" : d < 0 ? "verso SINISTRA" : "stesso montante";
-        let livelloMossa = lD > lO ? "SALI" : lD < lO ? "SCENDI" : "Resta allo stesso livello";
 
         let htmlPercorso = `<b>Indicazioni percorso:</b><br><br>`;
-        htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>M${mO}-L${lO}</b>.</span>`;
+        htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>${mO}-${letteraO}</b>.</span>`;
         
         if (d !== 0) {
-            htmlPercorso += `<span class="path-step">2. Attraversa orizzontalmente ${direzione} verso il montante <b>M${mD}</b> tramite i pettini centrali.</span>`;
-            htmlPercorso += `<span class="path-step">3. <b>${livelloMossa}</b> verticalmente lungo le guide del montante <b>M${mD}</b>.</span>`;
+            htmlPercorso += `<span class="path-step">2. Attraversa orizzontalmente ${direzione} fino al montante <b>${mD}</b>.</span>`;
+            htmlPercorso += `<span class="path-step">3. Raggiunto il montante <b>${mD}</b>, <b>SCENDI</b> fino alla base.</span>`;
         } else {
-            htmlPercorso += `<span class="path-step">2. <b>${livelloMossa}</b> verticalmente all'interno del montante <b>M${mO}</b>.</span>`;
+            htmlPercorso += `<span class="path-step">2. Nello stesso montante, <b>SCENDI</b> fino alla base.</span>`;
         }
 
-        htmlPercorso += `<span class="path-step">4. Entra nel cassetto di destinazione <b>L${lD}</b>.</span>`;
+        htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> fino al cassetto <b>${letteraD}</b>.</span>`;
+        htmlPercorso += `<div class="path-note">Eventuale ricchezza smaltiscila nel vano centrale di raccolta del montante <b>${mD}</b>.</div>`;
         
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
