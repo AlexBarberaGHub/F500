@@ -94,7 +94,8 @@
         #result-box { margin-top: 15px; padding: 20px; border-radius: 14px; text-align: center; display: none; background-color: #f8fafc; border: 2px solid #e2e8f0; }
         .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #64748b; }
         .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
-        .res-desc { font-size: 13px; line-height: 1.4; font-weight: 500; color: #475569; margin-top: 10px; }
+        .res-desc { font-size: 13px; line-height: 1.4; font-weight: 500; color: #475569; margin-top: 15px; text-align: left; padding: 12px; background: #fff; border-radius: 8px; border-left: 4px solid var(--fc-blue-light); }
+        .path-step { display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -153,13 +154,13 @@
         </div>
 
         <div class="btn-container">
-            <button onclick="calcolaReale()">Calcola Misura Reale</button>
+            <button onclick="calcolaReale()">Calcola Percorso</button>
         </div>
 
         <div id="result-box">
-            <span class="res-label">Lunghezza necessaria</span>
+            <span class="res-label">Lunghezza Netta Necessaria</span>
             <span class="res-value" id="valore"></span>
-            <div class="res-desc">Misura netta calcolata per il percorso scelto, inclusa la scorta per i connettori.</div>
+            <div class="res-desc" id="res-desc"></div>
         </div>
     </div>
 </div>
@@ -175,14 +176,32 @@
         const mD = parseInt(document.getElementById('mD').value);
         const lD = parseInt(document.getElementById('lD').value);
         
-        // Calcolo geometrico reale:
+        // Misura reale calcolata
         const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85;
         const distVerticale = Math.abs(lO - lD) * 0.32;
         const riserva = 1.60;
-
         const totalereale = distOrizzontale + distVerticale + riserva;
 
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
+
+        // Generazione descrizione percorso
+        const d = mD - mO; 
+        let direzione = d > 0 ? "verso DESTRA" : d < 0 ? "verso SINISTRA" : "stesso montante";
+        let livelloMossa = lD > lO ? "SALI" : lD < lO ? "SCENDI" : "Resta allo stesso livello";
+
+        let htmlPercorso = `<b>Indicazioni percorso:</b><br><br>`;
+        htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>M${mO}-L${lO}</b>.</span>`;
+        
+        if (d !== 0) {
+            htmlPercorso += `<span class="path-step">2. Attraversa orizzontalmente ${direzione} verso il montante <b>M${mD}</b> tramite i pettini centrali.</span>`;
+            htmlPercorso += `<span class="path-step">3. <b>${livelloMossa}</b> verticalmente lungo le guide del montante <b>M${mD}</b>.</span>`;
+        } else {
+            htmlPercorso += `<span class="path-step">2. <b>${livelloMossa}</b> verticalmente all'interno del montante <b>M${mO}</b>.</span>`;
+        }
+
+        htmlPercorso += `<span class="path-step">4. Entra nel cassetto di destinazione <b>L${lD}</b>.</span>`;
+        
+        document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
     }
 </script>
