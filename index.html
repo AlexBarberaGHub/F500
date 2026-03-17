@@ -82,7 +82,7 @@
         }
 
         .subtitle { 
-            font-size: 17px; /* Carattere aumentato */
+            font-size: 17px; 
             color: var(--fc-blue-dark); 
             font-weight: 700; 
             margin: 0;
@@ -96,6 +96,7 @@
             text-align: right;
             margin-top: 8px; 
             display: block;
+            line-height: 1.3;
         }
 
         .content { padding: 15px 20px; } 
@@ -172,7 +173,10 @@
         </div>
         <div class="subtitle-container">
             <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF</p>
-            <span class="signature">by Alessandro Barbera</span>
+            <div class="signature">
+                by Alessandro Barbera<br>
+                FOL/SIO.Field Force Palermo Ovest
+            </div>
         </div>
     </div>
 
@@ -181,13 +185,16 @@
         <div class="input-row">
             <div style="flex:1">
                 <label>Montante</label>
-                <select id="mO"><script>for(let i=1;i<=11;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
+                <select id="mO"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
             </div>
             <div style="flex:1">
                 <label>Livello</label>
                 <select id="lO">
-                    <option value="6">A</option><option value="5">B</option><option value="4">C</option>
-                    <option value="3">D</option><option value="2">E</option><option value="1">F</option>
+                    <option value="14">A</option><option value="13">B</option><option value="12">C</option>
+                    <option value="11">D</option><option value="10">E</option><option value="9">F</option>
+                    <option value="8">G</option><option value="7">H</option><option value="6">I</option>
+                    <option value="5">J</option><option value="4">K</option><option value="3">L</option>
+                    <option value="2">M</option><option value="1">N</option>
                 </select>
             </div>
         </div>
@@ -196,13 +203,16 @@
         <div class="input-row">
             <div style="flex:1">
                 <label>Montante</label>
-                <select id="mD"><script>for(let i=1;i<=11;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
+                <select id="mD"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
             </div>
             <div style="flex:1">
                 <label>Livello</label>
                 <select id="lD">
-                    <option value="6">A</option><option value="5">B</option><option value="4">C</option>
-                    <option value="3">D</option><option value="2">E</option><option value="1">F</option>
+                    <option value="14">A</option><option value="13">B</option><option value="12">C</option>
+                    <option value="11">D</option><option value="10">E</option><option value="9">F</option>
+                    <option value="8">G</option><option value="7">H</option><option value="6">I</option>
+                    <option value="5">J</option><option value="4">K</option><option value="3">L</option>
+                    <option value="2">M</option><option value="1">N</option>
                 </select>
             </div>
         </div>
@@ -221,7 +231,11 @@
 
 <script>
     function getLettera(valore) {
-        const mapping = { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" };
+        const mapping = { 
+            "14": "A", "13": "B", "12": "C", "11": "D", "10": "E", "9": "F", 
+            "8": "G", "7": "H", "6": "I", "5": "J", "4": "K", "3": "L", 
+            "2": "M", "1": "N" 
+        };
         return mapping[valore];
     }
 
@@ -256,7 +270,7 @@
 
         htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
         
-        htmlPercorso += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso nella parte centrale del montante, all'interno del <b>canale di raccolta</b>, fino agli <b>anelli di parcheggio</b>.</div>`;
+        htmlPercorso += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, fino agli <b>anelli di parcheggio.</b></div>`;
         
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
