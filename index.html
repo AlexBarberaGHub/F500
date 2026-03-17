@@ -143,18 +143,6 @@
             font-weight: 600; 
             font-size: 14px; 
         }
-
-        /* Stile per il contatore */
-        .visitor-counter {
-            margin-top: 25px;
-            padding-top: 15px;
-            border-top: 1px solid #f1f5f9;
-            text-align: center;
-            font-size: 12px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        #visits { color: var(--fc-blue-light); font-weight: 800; }
     </style>
 </head>
 <body>
@@ -232,31 +220,10 @@
             <span class="res-value" id="valore"></span>
             <div class="res-desc" id="res-desc"></div>
         </div>
-
-        <div class="visitor-counter">
-            Visualizzazioni totali: <span id="visits">...</span>
-        </div>
     </div>
 </div>
 
 <script>
-    // Funzione per il contatore di visite
-    function updateCounter() {
-        // Nota: Questo utilizza un servizio esterno gratuito (CountAPI)
-        // La chiave "f500_odf_counter" è univoca per la tua app.
-        fetch('https://api.countapi.xyz/hit/f500_odf_barbera/visits')
-            .then(res => res.json())
-            .then(res => {
-                document.getElementById('visits').innerText = res.value;
-            })
-            .catch(() => {
-                document.getElementById('visits').innerText = "n/d";
-            });
-    }
-    
-    // Avvia il contatore al caricamento
-    updateCounter();
-
     function getLettera(valore) {
         const mapping = { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" };
         return mapping[valore];
