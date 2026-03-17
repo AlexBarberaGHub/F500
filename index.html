@@ -216,7 +216,9 @@
         }
 
         htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
-        htmlPercorso += `<div class="path-note">Eventuale ricchezza smaltiscila all'interno del <b>vano centrale di raccolta</b> del montante <b>${mD}</b>.</div>`;
+        
+        // Dicitura inserita alla fine nel blocco blu (path-note)
+        htmlPercorso += `<div class="path-note">Recupera la fibra in eccesso rimasta alla base e, prendendola dalla parte mediale, inseriscila dal basso nel vassoio di raccolta del vano centrale del montante ${mD}.</div>`;
         
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
