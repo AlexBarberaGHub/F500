@@ -143,6 +143,16 @@
             font-weight: 600; 
             font-size: 14px; 
         }
+
+        .pro-tip {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f0fdf4;
+            border: 1px dashed #22c55e;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #166534;
+        }
     </style>
 </head>
 <body>
@@ -237,7 +247,6 @@
         
         let mO, vO, mD, vD, titolo;
 
-        // Se i livelli sono diversi, confronta e parti dal più basso (F=1 è il minimo)
         if (inputVO !== inputVD) {
             if (inputVO < inputVD) {
                 mO = inputMO; vO = inputVO; mD = inputMD; vD = inputVD;
@@ -246,7 +255,6 @@
             }
             titolo = "Indicazioni percorso (dal cassetto più basso):";
         } else {
-            // Se i livelli sono uguali, mantieni l'ordine inserito
             mO = inputMO; vO = inputVO; mD = inputMD; vD = inputVD;
             titolo = "Indicazioni percorso:";
         }
@@ -254,7 +262,6 @@
         const letteraO = getLettera(vO);
         const letteraD = getLettera(vD);
 
-        // Calcolo metrico (rimane basato sui valori reali della formula)
         const distOrizzontale = (Math.abs(inputMD - inputMO) * 0.12) + 0.85; 
         const distVerticale = (inputVO * 0.32) + (inputVD * 0.32);
         const riserva = 1.60;
@@ -279,6 +286,8 @@
         
         htmlPercorso += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, fino agli <b>anelli di parcheggio.</b></div>`;
         
+        htmlPercorso += `<div class="pro-tip"><b>💡 Suggerimento tecnico:</b> Pratica due piccoli fori sulla busta della fibra. Fai uscire un connettore dal primo foro, poggia il sacchetto a terra e sfila comodamente la fibra dal secondo foro per evitare grovigli.</div>`;
+
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
     }
