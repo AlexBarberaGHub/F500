@@ -103,7 +103,6 @@
         .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #64748b; }
         .res-value { font-size: 42px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
         
-        /* Font ingrandito per la descrizione */
         .res-desc { 
             font-size: 15px; 
             line-height: 1.5; 
@@ -119,7 +118,6 @@
         
         .path-step { display: block; margin-bottom: 6px; }
         
-        /* Font ingrandito per la nota finale in blu */
         .path-note { 
             margin-top: 10px; 
             font-style: italic; 
@@ -239,7 +237,8 @@
 
         htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
         
-        htmlPercorso += `<div class="path-note">L'eventuale fibra in eccesso, recuperala prendendola dalla parte mediale, e inseriscila dal basso nella parte centrale del montante, all'interno del <b>canale di raccolta</b>.</div>`;
+        // Frase finale con "canale di raccolta" e "anelli di parcheggio" in grassetto
+        htmlPercorso += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso nella parte centrale del montante, all'interno del <b>canale di raccolta</b>, fino agli <b>anelli di parcheggio</b>.</div>`;
         
         document.getElementById('res-desc').innerHTML = htmlPercorso;
         document.getElementById('result-box').style.display = 'block';
