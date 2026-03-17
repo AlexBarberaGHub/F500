@@ -230,16 +230,33 @@
     }
 
     function calcolaReale() {
-        const mO = parseInt(document.getElementById('mO').value);
-        const vO = parseInt(document.getElementById('lO').value);
-        const mD = parseInt(document.getElementById('mD').value);
-        const vD = parseInt(document.getElementById('lD').value);
+        const inputMO = parseInt(document.getElementById('mO').value);
+        const inputVO = parseInt(document.getElementById('lO').value);
+        const inputMD = parseInt(document.getElementById('mD').value);
+        const inputVD = parseInt(document.getElementById('lD').value);
         
+        let mO, vO, mD, vD, titolo;
+
+        // Se i livelli sono diversi, confronta e parti dal più basso (F=1 è il minimo)
+        if (inputVO !== inputVD) {
+            if (inputVO < inputVD) {
+                mO = inputMO; vO = inputVO; mD = inputMD; vD = inputVD;
+            } else {
+                mO = inputMD; vO = inputVD; mD = inputMO; vD = inputVO;
+            }
+            titolo = "Indicazioni percorso (dal cassetto più basso):";
+        } else {
+            // Se i livelli sono uguali, mantieni l'ordine inserito
+            mO = inputMO; vO = inputVO; mD = inputMD; vD = inputVD;
+            titolo = "Indicazioni percorso:";
+        }
+
         const letteraO = getLettera(vO);
         const letteraD = getLettera(vD);
 
-        const distOrizzontale = (Math.abs(mD - mO) * 0.12) + 0.85; 
-        const distVerticale = (vO * 0.32) + (vD * 0.32);
+        // Calcolo metrico (rimane basato sui valori reali della formula)
+        const distOrizzontale = (Math.abs(inputMD - inputMO) * 0.12) + 0.85; 
+        const distVerticale = (inputVO * 0.32) + (inputVD * 0.32);
         const riserva = 1.60;
         const totalereale = distOrizzontale + distVerticale + riserva;
 
@@ -248,17 +265,17 @@
         const d = mD - mO; 
         let direzione = d > 0 ? "verso DESTRA" : d < 0 ? "verso SINISTRA" : "stesso montante";
 
-        let htmlPercorso = `<b>Indicazioni percorso:</b><br><br>`;
+        let htmlPercorso = `<b>${titolo}</b><br><br>`;
         htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>${mO}-${letteraO}</b>.</span>`;
         
-        if (d !== 0) {
+        if (mO !== mD) {
             htmlPercorso += `<span class="path-step">2. Vai ${direzione} fino al montante <b>${mD}</b>.</span>`;
-            htmlPercorso += `<span class="path-step">3. In <b>${mD}</b>, <b>SCENDI</b> alla base.</span>`;
+            htmlPercorso += `<span class="path-step">3. In <b>${mD}</b>, scendi alla base.</span>`;
         } else {
-            htmlPercorso += `<span class="path-step">2. Nello stesso montante, <b>SCENDI</b> alla base.</span>`;
+            htmlPercorso += `<span class="path-step">2. Nello stesso montante, scendi alla base.</span>`;
         }
 
-        htmlPercorso += `<span class="path-step">4. Dalla base, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
+        htmlPercorso += `<span class="path-step">4. Dalla base del montante <b>${mD}</b>, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
         
         htmlPercorso += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, fino agli <b>anelli di parcheggio.</b></div>`;
         
