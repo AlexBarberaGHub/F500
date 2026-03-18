@@ -5,229 +5,161 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>F500 - ODF Fiber</title>
 
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#002D72">
-    <link rel="apple-touch-icon" href="icona.png">
-    <link rel="icon" type="image/png" href="icona.png">
-    
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
     <style>
         :root {
             --fc-blue-dark: #002D72; 
             --fc-blue-light: #0047bb;
-            --header-bg-blue: #e0f0f9; 
+            --fiber-blue: #007FFF; 
+            --cassetto-green: #22c55e;
+            --sc-boot-green: #15803d; 
+            --anim-duration: 0.8s;
         }
         
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
             background-color: var(--fc-blue-dark); 
             display: flex; justify-content: center; 
-            min-height: 100vh; margin: 0; overflow-x: hidden; 
+            min-height: 100vh; margin: 0; 
+            overflow-x: hidden; 
         }
 
         .card { 
             background: white; width: 94%; max-width: 400px; 
-            border-radius: 16px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
             overflow: hidden; display: flex; flex-direction: column;
-            margin-top: 8px; 
             margin-bottom: 20px; align-self: flex-start;
         }
 
         .header { 
-            padding: 20px 10px 0px; 
-            text-align: center; 
-            border-bottom: 1px solid rgba(0,0,0,0.1); 
-            background-color: var(--header-bg-blue);
-            position: relative; overflow: hidden;
+            position: relative; height: 190px; 
+            background: linear-gradient(rgba(0, 45, 114, 0.85), rgba(0, 45, 114, 0.95)), 
+                        url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: white; padding: 10px 20px; box-sizing: border-box;
         }
 
-        .header-dc-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop");
-            background-size: cover; background-position: center; opacity: 0.35; z-index: 0;
-            -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+        .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -5px; }
+        .logo-container-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
+
+        @keyframes neon-glitch {
+            0%, 15%, 25%, 50%, 75%, 100% { opacity: 1; filter: brightness(1.2); box-shadow: 0 0 10px var(--fiber-blue), 0 0 20px var(--fiber-blue); }
+            10%, 20%, 55%, 80% { opacity: 0.2; filter: brightness(0.4); box-shadow: none; }
         }
 
-        .logo-wrapper {
-            display: flex; align-items: center; justify-content: center;
-            position: relative; z-index: 2; height: 60px;
+        .fiber-illustration-left, .fiber-illustration-right { 
+            display: flex; align-items: center; 
+            animation: neon-glitch 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
         }
 
-        .cable-left, .cable-right {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            height: 4px; background-color: var(--fc-blue-light);
-            z-index: 1; border-radius: 2px;
-        }
-        .cable-left { left: 45px; width: 75px; }
-        .cable-right { right: 45px; width: 75px; }
+        .connector { display: flex; align-items: center; }
+        .ferrule { width: 25px; height: 12px; background: var(--cassetto-green); border-radius: 2px; position: relative; }
+        .ferrule::after { content: ""; position: absolute; top: 3px; width: 8px; height: 6px; background: #f8fafc; border-radius: 1px; }
+        .connector.left .ferrule::after { left: -6px; }
+        .connector.right .ferrule::after { right: -6px; }
+        .boot { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
+        .fiber-line-art { width: 50px; height: 4px; background: var(--fiber-blue); }
 
-        .sc-apc-icon {
-            width: 58px; height: auto;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-            position: relative; z-index: 3; 
-        }
-        .icon-left { position: absolute; left: 0; }
-        .icon-right { position: absolute; right: 0; }
+        .logo-text { font-size: 52px; font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1; }
+        .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; }
+        .signature { position: absolute; bottom: 10px; right: 15px; font-size: 10px; opacity: 0.9; text-align: right; }
 
-        .logo-text { font-size: 38px; font-weight: 900; color: var(--fc-blue-dark); margin: 0; letter-spacing: -1.5px; position: relative; z-index: 3; padding: 0 15px; }
+        .content { padding: 20px; } 
         
-        .subtitle-container {
-            position: relative;
-            z-index: 2;
-            margin-top: 10px;
-            margin-bottom: 25px; 
-            padding: 0 20px;
-        }
-
-        .subtitle { 
-            font-size: 17px; 
-            color: var(--fc-blue-dark); 
-            font-weight: 700; 
-            margin: 0;
-            text-align: center;
-        }
-
-        .signature {
-            font-size: 10px;
-            color: #64748b; 
-            font-weight: 600;
-            text-align: right;
-            margin-top: 8px; 
-            display: block;
-            line-height: 1.3;
-        }
-
-        .content { padding: 15px 20px; } 
-        .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin: 10px 0 6px; display: flex; align-items: center; gap: 8px; }
+        .section-container { margin-bottom: 20px; }
+        
+        .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
+        
+        .input-row { display: flex; gap: 10px; }
+        .field { flex: 1; }
+        label { display: block; font-size: 12px; color: #475569; margin-bottom: 4px; font-weight: 700; }
+        select { width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; font-weight: 700; background: #f8fafc; color: var(--fc-blue-dark); -webkit-appearance: none; outline: none; }
 
-        .input-row { display: flex; gap: 12px; margin-bottom: 10px; }
-        label { display: block; font-size: 14px; color: #334155; margin-bottom: 4px; font-weight: 700; }
-        
-        select { 
-            width: 100%; padding: 12px; border: 2px solid #e2e8f0; 
-            border-radius: 10px; font-size: 18px; font-weight: 600; outline: none;
-            background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 10px center;
-            background-size: 14px; -webkit-appearance: none;
+        .btn-container { position: relative; overflow: hidden; border-radius: 12px; margin-top: 5px; }
+        button { 
+            width: 100%; padding: 18px; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; 
+            cursor: pointer; text-transform: uppercase; color: white; background-color: var(--fc-blue-light); 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.1s; position: relative; overflow: hidden;
         }
+        button:active { transform: scale(0.96); }
+        .ripple { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none; }
+        @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
 
-        .btn-container { margin-top: 10px; }
-        button { width: 100%; padding: 18px; border: none; border-radius: 10px; font-size: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: white; background-color: var(--fc-blue-light); transition: 0.2s; }
-        button:active { transform: scale(0.96); opacity: 0.9; }
-        
-        #result-box { margin-top: 15px; padding: 15px; border-radius: 14px; text-align: center; display: none; background-color: #f8fafc; border: 2px solid #e2e8f0; }
-        .res-label { font-size: 11px; font-weight: bold; text-transform: uppercase; color: #64748b; }
-        .res-value { font-size: 42px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; }
-        
-        .res-desc { 
-            font-size: 15px; 
-            line-height: 1.5; 
-            font-weight: 500; 
-            color: #475569; 
-            margin-top: 10px; 
-            text-align: left; 
-            padding: 12px; 
-            background: #fff; 
-            border-radius: 8px; 
-            border-left: 4px solid var(--fc-blue-light); 
-        }
-        
-        .path-step { display: block; margin-bottom: 6px; }
-        
-        .path-note { 
-            margin-top: 10px; 
-            font-style: italic; 
-            color: var(--fc-blue-light); 
-            font-weight: 600; 
-            font-size: 14px; 
-        }
+        #result-box { margin-top: 20px; padding: 15px; border-radius: 16px; background-color: #f8fafc; border: 2px solid #e2e8f0; position: relative; display: none; }
+        #result-box::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background-color: var(--fc-blue-light); border-radius: 16px 0 0 16px; }
 
-        .pro-tip {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #f0fdf4;
-            border: 1px dashed #22c55e;
-            border-radius: 10px;
-            font-size: 13px;
-            color: #166534;
-            line-height: 1.4;
+        .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; text-align: center; }
+        .res-desc { margin-top: 15px; text-align: left; background: #fff; border-radius: 12px; padding: 15px; }
+
+        .path-step { display: flex; position: relative; padding-bottom: 25px; align-items: center; }
+        .path-step:not(:last-child)::after { content: ""; position: absolute; left: 19px; top: 38px; bottom: 0; width: 2px; background: #e2e8f0; }
+        .step-icon-container { width: 40px; flex-shrink: 0; z-index: 1; }
+        .step-content { padding-left: 15px; font-size: 15px; color: #334155; line-height: 1.4; flex: 1; }
+        .step-content b { color: var(--fc-blue-dark); background: #f1f5f9; padding: 2px 4px; border-radius: 4px; }
+        .step-label { font-weight: 800; color: var(--fc-blue-light); text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 2px; }
+
+        .path-note { margin-top: 10px; font-style: italic; color: var(--fc-blue-light); font-weight: 700; font-size: 14px; line-height: 1.5; padding-bottom: 15px; }
+        
+        .pro-tip-box { margin-top: 10px; padding: 15px; background-color: #f0fdf4; border: 1.5px dashed var(--cassetto-green); border-radius: 14px; }
+        .pro-tip-box ul { padding-left: 0; list-style: none; margin: 0; }
+        .pro-tip-box li { position: relative; padding-left: 20px; margin-bottom: 15px; font-size: 14px; color: #166534; line-height: 1.5; }
+        .pro-tip-box li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
+
+        .cassetto-graphic { 
+            width: 32px; height: 20px; border-radius: 4px; border: 2px solid var(--cassetto-green); 
+            display: flex; flex-direction: column; justify-content: space-evenly; padding: 2px; box-sizing: border-box;
         }
+        .cassetto-row { display: flex; justify-content: space-between; }
+        .cassetto-dot { width: 3px; height: 3px; background: var(--cassetto-green); border-radius: 50%; }
+
+        .anim-icon { width: 40px; height: 40px; fill: none; stroke: var(--fiber-blue); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+        .draw-path { stroke-dasharray: 150; stroke-dashoffset: 150; }
+        .active .draw-path { animation: flowPath var(--anim-duration) ease-out forwards; }
+        .arrow-head { fill: var(--fiber-blue); opacity: 0; transform: scale(0); transition: all 0.3s; }
+        .active .arrow-head { opacity: 1; transform: scale(0.7); transition-delay: 0.6s; }
+        @keyframes flowPath { to { stroke-dashoffset: 0; } }
     </style>
 </head>
 <body>
 
 <div class="card">
     <div class="header">
-        <div class="header-dc-bg"></div>
-        <div class="logo-wrapper">
-            <div class="cable-left"></div>
-            <svg class="sc-apc-icon icon-left" viewBox="0 0 130 55" xmlns="http://www.w3.org/2000/svg">
-                <rect x="55" y="11" width="44" height="33" rx="3.3" fill="#28a745"/>
-                <rect x="77" y="11" width="16.5" height="6.6" fill="#1e7e34"/>
-                <rect x="44" y="16.5" width="11" height="22" fill="#218838"/>
-                <rect x="30.8" y="22" width="13.2" height="11" rx="1.1" fill="#f8f9fa"/>
-                <path d="M30.8 22 L25.3 27.5 L30.8 33 Z" fill="#f8f9fa"/>
-                <path d="M99 16.5 L129.8 24.2 L129.8 30.8 L99 38.5 Z" fill="#1e7e34" stroke="#ced4da" stroke-width="0.55"/>
-            </svg>
-            <h1 class="logo-text">F500</h1>
-            <svg class="sc-apc-icon icon-right" viewBox="0 0 130 55" xmlns="http://www.w3.org/2000/svg">
-                <rect x="31" y="11" width="44" height="33" rx="3.3" fill="#28a745"/>
-                <rect x="44" y="11" width="16.5" height="6.6" fill="#1e7e34"/>
-                <rect x="77" y="16.5" width="11" height="22" fill="#218838"/>
-                <rect x="88" y="22" width="13.2" height="11" rx="1.1" fill="#f8f9fa"/>
-                <path d="M101.2 22 L106.7 27.5 L101.2 33 Z" fill="#f8f9fa"/>
-                <path d="M31 16.5 L0.2 24.2 L0.2 30.8 L31 38.5 Z" fill="#1e7e34" stroke="#ced4da" stroke-width="0.55"/>
-            </svg>
-            <div class="cable-right"></div>
-        </div>
-        <div class="subtitle-container">
-            <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF</p>
-            <div class="signature">
-                by Alessandro Barbera<br>
-                FOL/SIO.Field Force Palermo Ovest
+        <div class="header-main-content">
+            <div class="logo-container-wrapper">
+                <div class="fiber-illustration-left connector left"><div class="ferrule"></div><div class="boot"></div><div class="fiber-line-art"></div></div>
+                <h1 class="logo-text">F500</h1>
+                <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
+            <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF</p>
         </div>
+        <div class="signature">by Alessandro Barbera<br>FOL/SIO.Field Force Palermo Ovest</div>
     </div>
 
     <div class="content">
-        <div class="label-section">Partenza</div>
-        <div class="input-row">
-            <div style="flex:1">
-                <label>Montante</label>
-                <select id="mO"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
-            </div>
-            <div style="flex:1">
-                <label>Livello</label>
-                <select id="lO">
-                    <option value="6">A</option><option value="5">B</option><option value="4">C</option>
-                    <option value="3">D</option><option value="2">E</option><option value="1">F</option>
-                </select>
+        <div class="section-container">
+            <div class="label-section">Partenza</div>
+            <div class="input-row">
+                <div class="field"><label>Montante</label><select id="mO"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
+                <div class="field"><label>Livello</label><select id="lO"><option value="6">A</option><option value="5">B</option><option value="4">C</option><option value="3">D</option><option value="2">E</option><option value="1">F</option></select></div>
             </div>
         </div>
 
-        <div class="label-section">Arrivo</div>
-        <div class="input-row">
-            <div style="flex:1">
-                <label>Montante</label>
-                <select id="mD"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select>
-            </div>
-            <div style="flex:1">
-                <label>Livello</label>
-                <select id="lD">
-                    <option value="6">A</option><option value="5">B</option><option value="4">C</option>
-                    <option value="3">D</option><option value="2">E</option><option value="1">F</option>
-                </select>
+        <div class="section-container">
+            <div class="label-section">Arrivo</div>
+            <div class="input-row">
+                <div class="field"><label>Montante</label><select id="mD"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
+                <div class="field"><label>Livello</label><select id="lD"><option value="6">A</option><option value="5">B</option><option value="4">C</option><option value="3">D</option><option value="2">E</option><option value="1">F</option></select></div>
             </div>
         </div>
-
+        
         <div class="btn-container">
-            <button onclick="calcolaReale()">Calcola Percorso</button>
+            <button onclick="calcolaReale(event)">Calcola Percorso</button>
         </div>
 
         <div id="result-box">
-            <span class="res-label">Lunghezza Netta Necessaria</span>
+            <span style="font-size:12px; font-weight:800; color:#64748b; text-transform:uppercase; display:block; text-align:center;">Lunghezza Netta Necessaria</span>
             <span class="res-value" id="valore"></span>
             <div class="res-desc" id="res-desc"></div>
         </div>
@@ -235,67 +167,93 @@
 </div>
 
 <script>
-    function getLettera(valore) {
-        const mapping = { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" };
-        return mapping[valore];
+    function getLettera(valore) { return { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" }[valore]; }
+    
+    const iconPathCassetto = `<div class="cassetto-graphic">
+        <div class="cassetto-row"><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div></div>
+        <div class="cassetto-row"><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div></div>
+    </div>`;
+
+    const icons = {
+        cassetto: iconPathCassetto,
+        turnRight: `<svg class="anim-icon" viewBox="0 0 40 40"><path class="draw-path" d="M10,35 Q10,15 30,15" /><path class="arrow-head" d="M25,5 L37,15 L25,25 Z" style="stroke:none; transform-origin: 30px 15px;"/></svg>`,
+        turnLeft: `<svg class="anim-icon" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
+        down: `<svg class="anim-icon" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
+        uTurn: `<svg class="anim-icon" viewBox="0 0 40 40" style="stroke-width: 5.5;"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`
+    };
+
+    let loopCounter = 0;
+    let animTimer = null;
+
+    function runAnimationSequence() {
+        const paths = document.querySelectorAll('.anim-icon');
+        paths.forEach(p => p.classList.remove('active'));
+        void document.body.offsetWidth;
+        let delay = 0;
+        paths.forEach((path) => {
+            setTimeout(() => { path.classList.add('active'); }, delay);
+            delay += 900; 
+        });
+        loopCounter++;
+        if (loopCounter < 2) { animTimer = setTimeout(runAnimationSequence, delay + 1200); }
     }
 
-    function calcolaReale() {
-        const inputMO = parseInt(document.getElementById('mO').value);
-        const inputVO = parseInt(document.getElementById('lO').value);
-        const inputMD = parseInt(document.getElementById('mD').value);
-        const inputVD = parseInt(document.getElementById('lD').value);
+    function calcolaReale(event) {
+        const btn = event.currentTarget;
+        const circle = document.createElement("span");
+        const diameter = Math.max(btn.clientWidth, btn.clientHeight);
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${event.clientX - btn.getBoundingClientRect().left - diameter/2}px`;
+        circle.style.top = `${event.clientY - btn.getBoundingClientRect().top - diameter/2}px`;
+        circle.classList.add("ripple");
+        btn.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+
+        if (animTimer) clearTimeout(animTimer);
+        loopCounter = 0;
         
-        let mO, vO, mD, vD, titolo;
-
-        if (inputVO !== inputVD) {
-            if (inputVO < inputVD) {
-                mO = inputMO; vO = inputVO; mD = inputMD; vD = inputVD;
-            } else {
-                mO = inputMD; vO = inputVD; mD = inputMO; vD = inputVO;
-            }
-            titolo = "Indicazioni percorso (dal cassetto più basso):";
-        } else {
-            mO = inputMO; vO = inputVO; mD = inputMD; vD = inputVD;
-            titolo = "Indicazioni percorso:";
-        }
-
-        const letteraO = getLettera(vO);
-        const letteraD = getLettera(vD);
-
-        const distOrizzontale = (Math.abs(inputMD - inputMO) * 0.12) + 0.85; 
-        const distVerticale = (inputVO * 0.32) + (inputVD * 0.32);
-        const riserva = 1.60;
-        const totalereale = distOrizzontale + distVerticale + riserva;
-
+        let m1 = parseInt(document.getElementById('mO').value);
+        let l1 = parseInt(document.getElementById('lO').value);
+        let m2 = parseInt(document.getElementById('mD').value);
+        let l2 = parseInt(document.getElementById('lD').value);
+        
+        const coincidenza = (m1 === m2 && l1 === l2);
+        let pL = (l1 < l2 || (l1 === l2 && m1 <= m2)) ? {m1, l1, m2, l2} : {m1: m2, l1: l2, m2: m1, l2: l1};
+        let iMO = pL.m1, iVO = pL.l1, iMD = pL.m2, iVD = pL.l2;
+        
+        const totalereale = (Math.abs(iMD - iMO) * 0.12) + 0.85 + (iVO * 0.32) + (iVD * 0.32) + 1.60;
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
-
-        const d = mD - mO; 
-        let direzione = d > 0 ? "verso DESTRA" : d < 0 ? "verso SINISTRA" : "stesso montante";
-
-        let htmlPercorso = `<b>${titolo}</b><br><br>`;
-        htmlPercorso += `<span class="path-step">1. Esci dal cassetto <b>${mO}-${letteraO}</b>.</span>`;
         
-        if (mO !== mD) {
-            htmlPercorso += `<span class="path-step">2. Vai ${direzione} fino al montante <b>${mD}</b>.</span>`;
-            htmlPercorso += `<span class="path-step">3. In <b>${mD}</b>, scendi alla base.</span>`;
+        let titoloMsg = coincidenza ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
+        let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
+        
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal cassetto <b>${iMO}-${getLettera(iVO)}</b>.</div></div>`;
+        
+        if (iMO !== iMD) {
+            html += `<div class="path-step"><div class="step-icon-container">${iMD > iMO ? icons.turnRight : icons.turnLeft}</div><div class="step-content">Vai verso <b>${iMD > iMO ? 'DESTRA' : 'SINISTRA'}</b> al montante <b>${iMD}</b>.</div></div>`;
+            html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content">In <b>${iMD}</b>, scendi alla base.</div></div>`;
         } else {
-            htmlPercorso += `<span class="path-step">2. Nello stesso montante, scendi alla base.</span>`;
+            html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content">Nello stesso montante, scendi alla base.</div></div>`;
         }
-
-        htmlPercorso += `<span class="path-step">4. Dalla base del montante <b>${mD}</b>, <b>RISALI</b> al cassetto <b>${letteraD}</b>.</span>`;
         
-        htmlPercorso += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio.</b></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content">Dalla base del montante <b>${iMD}</b>, <b>RISALI</b> verso la destinazione.</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel cassetto <b>${iMD}-${getLettera(iVD)}</b>.</div></div>`;
         
-        htmlPercorso += `<div class="pro-tip"><b>💡 Suggerimenti tecnici:</b><br><br>
-        • 💡 <b>PULIZIA:</b> Prima del collegamento, pulisci accuratamente le ferule dei cassetti ottici. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.<br><br>
-        • 💡 Etichettare correttamente le due estremità della fibra.<br><br>
-        • 💡 Pratica due fori sulla busta della fibra (faccia superiore e inferiore). Fai uscire dal foro <b>inferiore</b> il connettore del <b>lato più esterno della matassina</b> per bloccarlo, quindi sfila comodamente l'altro capo (più <b>interno</b>) dal foro <b>superiore</b>: la fibra scorrerà perfettamente senza grovigli.</div>`;
-
-        document.getElementById('res-desc').innerHTML = htmlPercorso;
+        html += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio</b>.</div>`;
+        
+        html += `<div class="pro-tip-box">
+            <div style="font-size:14px; font-weight:800; color:#166534; margin-bottom:10px;">💡 Suggerimenti tecnici:</div>
+            <ul>
+                <li>💡 <b>PULIZIA:</b> Prima del collegamento, pulisci accuratamente le ferule dei cassetti ottici. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li>
+                <li>💡 Etichettare correttamente le due estremità della fibra.</li>
+                <li>💡 <b>Pratica due fori sulla busta della fibra</b> (faccia superiore e inferiore). Fai uscire dal foro <b>inferiore</b> il connettore del <b>lato più esterno della matassina</b> per bloccarlo, quindi sfila comodamente l'altro capo (più <b>interno</b>) dal foro <b>superiore</b>: con un po' di fortuna la fibra scorrerà senza annodarsi 😁</li>
+            </ul>
+        </div>`;
+        
+        document.getElementById('res-desc').innerHTML = html;
         document.getElementById('result-box').style.display = 'block';
+        setTimeout(runAnimationSequence, 100);
     }
 </script>
-
 </body>
 </html>
