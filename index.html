@@ -12,7 +12,7 @@
             --fiber-blue: #007FFF; 
             --cassetto-green: #22c55e;
             --sc-boot-green: #15803d; 
-            --anim-duration: 0.3s; /* ULTERIORMENTE VELOCIZZATO */
+            --anim-duration: 0.3s; 
         }
         
         body { 
@@ -215,7 +215,7 @@
         let delay = 0;
         paths.forEach((path) => {
             setTimeout(() => { path.classList.add('active'); }, delay);
-            delay += 400; /* VELOCIZZATO: ritardo tra icone ridotto a 400ms */
+            delay += 400; 
         });
         loopCounter++;
         if (loopCounter < 2) { animTimer = setTimeout(runAnimationSequence, delay + 500); }
@@ -288,14 +288,14 @@
         let m2 = parseInt(document.getElementById('mD').value);
         let l2 = parseInt(document.getElementById('lD').value);
         
-        const coincidenza = (m1 === m2 && l1 === l2);
+        const coincidenzaLivelli = (l1 === l2);
         let pL = (l1 < l2 || (l1 === l2 && m1 <= m2)) ? {m1, l1, m2, l2} : {m1: m2, l1: l2, m2: m1, l2: l1};
         let iMO = pL.m1, iVO = pL.l1, iMD = pL.m2, iVD = pL.l2;
         
         const totalereale = (Math.abs(iMD - iMO) * 0.12) + 0.85 + (iVO * 0.32) + (iVD * 0.32) + 1.60;
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
         
-        let titoloMsg = coincidenza ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
+        let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal cassetto <b>${iMO}-${getLettera(iVO)}</b>.</div></div>`;
