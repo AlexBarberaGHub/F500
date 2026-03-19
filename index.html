@@ -323,18 +323,12 @@
         }, glitchDuration); 
     }
 
-    // LOGICA OFFSET SEMPRE ADDITIVA (Distanza assoluta dal centro 50x50cm)
     function calcolaOffsetPorta(valorePorta) {
-        let index = Math.floor((valorePorta - 1) / 2); // Coppia (0-71)
-        
-        let colonna = index % 12; // 0-11
-        let riga = Math.floor(index / 12); // 0-5
-        
-        // Calcolo distanza dal centro (5.5 per colonna, 2.5 per riga)
-        // Ogni colonna pesa ~4.1cm, ogni riga ~8.3cm
+        let index = Math.floor((valorePorta - 1) / 2); 
+        let colonna = index % 12; 
+        let riga = Math.floor(index / 12); 
         let distH = Math.abs(colonna - 5.5) * 0.041; 
         let distV = Math.abs(riga - 2.5) * 0.083;
-        
         return distH + distV;
     }
 
@@ -376,7 +370,6 @@
 
         const coincidenzaLivelli = (lO === lD);
         
-        // Offset additivi basati sulla distanza dal centro del modulo
         let offsetO = calcolaOffsetPorta(valPO);
         let offsetD = calcolaOffsetPorta(valPD);
 
@@ -410,7 +403,7 @@
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel cassetto <b>${iMD}-${getLettera(iVD)}</b> (Porte <b>${iPD}</b>).</div></div>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio</b>.</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
 
         html += `<div style="padding: 15px; background: #e0f2fe; border-radius: 12px; margin: 10px 0 20px 0; font-weight: 700; color: #0369a1; text-align: center; border: 1px solid #bae6fd;">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
         
