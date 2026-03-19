@@ -92,6 +92,13 @@
             40% { opacity: 0.3; filter: brightness(0.5); box-shadow: none; }
             100% { opacity: 1; filter: brightness(1.2); box-shadow: 0 0 10px var(--fiber-blue), 0 0 20px var(--fiber-blue); }
         }
+        /* Animazione respiro ogni 5 secondi */
+        @keyframes fiber-breath {
+            0%, 100% { filter: brightness(1); box-shadow: 0 0 5px var(--fiber-blue); }
+            50% { filter: brightness(1.8); box-shadow: 0 0 20px var(--fiber-blue), 0 0 35px var(--fiber-blue); }
+        }
+        .fiber-breathing { animation: fiber-breath 5s ease-in-out infinite !important; }
+
         .fiber-illustration-left, .fiber-illustration-right { display: flex; align-items: center; }
         .neon-init { animation: neon-glitch 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
         .neon-click { animation: neon-single-pulse 1.2s ease-in-out forwards; }
@@ -240,6 +247,7 @@
     let clickCount = 0;
     let apocalypseCount = 0;
     let clickTimer = null;
+    let breathTimer = null;
 
     function getLettera(valore) { return { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" }[valore]; }
     
@@ -303,6 +311,15 @@
         clearTimeout(clickTimer);
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
         if (clickCount >= 5) { triggerDestruction(); return; }
+
+        // Gestione respiro fibre ogni 5 secondi
+        const fibers = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
+        fibers.forEach(f => f.classList.remove('fiber-breathing'));
+        if(breathTimer) clearTimeout(breathTimer);
+        breathTimer = setTimeout(() => {
+            fibers.forEach(f => f.classList.add('fiber-breathing'));
+        }, 10000);
+
         const neonElements = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
         neonElements.forEach(el => {
             el.classList.remove('neon-init', 'neon-click');
