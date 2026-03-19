@@ -81,7 +81,7 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             color: white; padding: 10px 20px; box-sizing: border-box;
         }
-        .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -5px; }
+        .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -15px; }
         .logo-container-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
         @keyframes neon-glitch {
             0%, 15%, 25%, 50%, 75%, 100% { opacity: 1; filter: brightness(1.2); box-shadow: 0 0 10px var(--fiber-blue), 0 0 20px var(--fiber-blue); }
@@ -104,7 +104,20 @@
         .fiber-line-art { width: 50px; height: 4px; background: var(--fiber-blue); }
         .logo-text { font-size: 52px; font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1; }
         .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; }
-        .signature { position: absolute; bottom: 10px; right: 15px; font-size: 10px; opacity: 0.9; text-align: right; }
+        
+        /* RIPRISTINATA RIGA SEPARATRICE PRECEDENTE */
+        .header-separator { 
+            width: 90%; 
+            height: 1px; 
+            background: rgba(255,255,255,0.2); 
+            margin: 18px auto 4px; 
+        }
+
+        .signature { position: absolute; bottom: 8px; left: 15px; right: 15px; font-size: 10px; color: white; line-height: 1.2; }
+        .sig-row { display: flex; justify-content: space-between; align-items: flex-end; }
+        .sig-brand { font-size: 13px; font-weight: 800; letter-spacing: 0.2px; text-align: left; }
+        .sig-details { text-align: right; opacity: 0.9; }
+
         .content { padding: 20px; } 
         .section-container { margin-bottom: 20px; }
         .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
@@ -129,7 +142,6 @@
         .step-content b { color: var(--fc-blue-dark); background: #f1f5f9; padding: 2px 4px; border-radius: 4px; }
         .step-label { font-weight: 800; color: var(--fc-blue-light); text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 2px; }
         
-        /* MODIFICHE RICHIESTE: Aumento font-size per Note e Pro-Tip */
         .path-note { margin-top: 10px; font-style: italic; color: #0047bb; font-weight: 700; font-size: 16px; line-height: 1.6; padding-bottom: 15px; }
         .pro-tip-box { margin-top: 10px; padding: 15px; background-color: #f0fdf4; border: 1.5px dashed var(--cassetto-green); border-radius: 14px; }
         .pro-tip-box ul { padding-left: 0; list-style: none; margin: 0; }
@@ -159,8 +171,18 @@
                 <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
             <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF</p>
+            <div class="header-separator"></div>
         </div>
-        <div class="signature">by Alessandro Barbera<br>FOL/SIO.Field Force Palermo Ovest</div>
+        
+        <div class="signature">
+            <div class="sig-row">
+                <div class="sig-brand">FiberCop</div>
+                <div class="sig-details">
+                    by Alessandro Barbera<br>
+                    FOL/SIO.Field Force Palermo Ovest
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="content">
@@ -228,24 +250,16 @@
     function triggerDestruction() {
         const card = document.getElementById('mainCard');
         apocalypseCount++;
-        
         let glitchDuration = apocalypseCount === 1 ? 3500 : 7000;
         let exitDuration = apocalypseCount === 1 ? 1400 : 2500;
-        
         let effects1 = ['destroyed-bh', 'destroyed-sh', 'destroyed-li'];
         let effects2 = ['destroyed-vortex', 'destroyed-pixel'];
-        
-        let randomEffect = apocalypseCount === 1 
-            ? effects1[Math.floor(Math.random() * effects1.length)]
-            : effects2[Math.floor(Math.random() * effects2.length)];
-
+        let randomEffect = apocalypseCount === 1 ? effects1[Math.floor(Math.random() * effects1.length)] : effects2[Math.floor(Math.random() * effects2.length)];
         document.body.classList.add('no-scroll');
         card.classList.add('glitch-active');
-        
         setTimeout(() => {
             card.classList.remove('glitch-active');
             card.classList.add(randomEffect);
-            
             setTimeout(() => {
                 card.classList.remove(randomEffect);
                 document.body.classList.remove('no-scroll');
@@ -264,16 +278,13 @@
         clickCount++;
         clearTimeout(clickTimer);
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
-        
         if (clickCount >= 5) { triggerDestruction(); return; }
-
         const neonElements = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
         neonElements.forEach(el => {
             el.classList.remove('neon-init', 'neon-click');
             void el.offsetWidth; 
             el.classList.add('neon-click');
         });
-
         const btn = event.currentTarget;
         const circle = document.createElement("span");
         const diameter = Math.max(btn.clientWidth, btn.clientHeight);
@@ -283,41 +294,30 @@
         circle.classList.add("ripple");
         btn.appendChild(circle);
         setTimeout(() => circle.remove(), 600);
-
         if (animTimer) clearTimeout(animTimer);
         loopCounter = 0;
-        
         let m1 = parseInt(document.getElementById('mO').value);
         let l1 = parseInt(document.getElementById('lO').value);
         let m2 = parseInt(document.getElementById('mD').value);
         let l2 = parseInt(document.getElementById('lD').value);
-        
         const coincidenzaLivelli = (l1 === l2);
         let pL = (l1 < l2 || (l1 === l2 && m1 <= m2)) ? {m1, l1, m2, l2} : {m1: m2, l1: l2, m2: m1, l2: l1};
         let iMO = pL.m1, iVO = pL.l1, iMD = pL.m2, iVD = pL.l2;
-        
         const totalereale = (Math.abs(iMD - iMO) * 0.12) + 0.85 + (iVO * 0.32) + (iVD * 0.32) + 1.60;
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
-        
         let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
-        
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal cassetto <b>${iMO}-${getLettera(iVO)}</b>.</div></div>`;
-        
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${iMD > iMO ? icons.turnRight : icons.turnLeft}</div><div class="step-content">Vai verso <b>${iMD > iMO ? 'DESTRA' : 'SINISTRA'}</b> al montante <b>${iMD}</b>.</div></div>`;
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content">In <b>${iMD}</b>, scendi alla base.</div></div>`;
         } else {
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content">Nello stesso montante, scendi alla base.</div></div>`;
         }
-        
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content">Dalla base del montante <b>${iMD}</b>, <b>RISALI</b> verso la destinazione.</div></div>`;
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel cassetto <b>${iMD}-${getLettera(iVD)}</b>.</div></div>`;
-        
         html += `<div class="path-note">Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio</b>.</div>`;
-        
         html += `<div class="pro-tip-box"><div class="pro-tip-title">💡 Suggerimenti tecnici:</div><ul><li>💡 <b>PULIZIA:</b> Prima del collegamento, pulisci accuratamente le ferule dei cassetti ottici. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li><li>💡 Etichettare correttamente le due estremità della fibra.</li><li>💡 <b>Pratica due fori sulla busta della fibra</b> (faccia superiore e inferiore). Fai uscire dal foro <b>inferiore</b> il connettore del <b>lato più esterno della matassina</b> per bloccarlo, quindi sfila comodamente l'altro capo (più <b>interno</b>) dal foro <b>superiore</b>: con un po' di fortuna la fibra scorrerà senza annodarsi 😁</li></ul></div>`;
-        
         document.getElementById('res-desc').innerHTML = html;
         document.getElementById('result-box').style.display = 'block';
         setTimeout(runAnimationSequence, 100);
