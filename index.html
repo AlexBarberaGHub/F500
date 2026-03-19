@@ -96,7 +96,7 @@
         .fiber-breathing { animation: fiber-breath 5s ease-in-out infinite !important; }
 
         .fiber-illustration-left, .fiber-illustration-right { display: flex; align-items: center; }
-        .neon-click { animation: fiber-breath 5s ease-in-out infinite !important; } /* Sincronizzata con iniziale */
+        .neon-click { animation: fiber-breath 5s ease-in-out infinite !important; } 
         .connector { display: flex; align-items: center; }
         .ferrule { width: 25px; height: 12px; background: var(--cassetto-green); border-radius: 2px; position: relative; }
         .ferrule::after { content: ""; position: absolute; top: 3px; width: 8px; height: 6px; background: #f8fafc; border-radius: 1px; }
@@ -125,7 +125,6 @@
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
         .input-row { display: flex; gap: 10px; }
         
-        /* UNIFORMATA DIMENSIONE CAMPI */
         .field { flex: 1; }
         label { display: block; font-size: 12px; color: #475569; margin-bottom: 4px; font-weight: 700; text-align: center; }
         select { width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 16px; font-weight: 700; background: #f8fafc; color: var(--fc-blue-dark); -webkit-appearance: none; outline: none; text-align: center; text-align-last: center; }
@@ -324,17 +323,31 @@
         }, glitchDuration); 
     }
 
+    // LOGICA OFFSET SEMPRE ADDITIVA (Distanza assoluta dal centro 50x50cm)
+    function calcolaOffsetPorta(valorePorta) {
+        let index = Math.floor((valorePorta - 1) / 2); // Coppia (0-71)
+        
+        let colonna = index % 12; // 0-11
+        let riga = Math.floor(index / 12); // 0-5
+        
+        // Calcolo distanza dal centro (5.5 per colonna, 2.5 per riga)
+        // Ogni colonna pesa ~4.1cm, ogni riga ~8.3cm
+        let distH = Math.abs(colonna - 5.5) * 0.041; 
+        let distV = Math.abs(riga - 2.5) * 0.083;
+        
+        return distH + distV;
+    }
+
     function calcolaReale(event) {
         clickCount++;
         clearTimeout(clickTimer);
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
         if (clickCount >= 5) { triggerDestruction(); return; }
 
-        // SINCRONIZZAZIONE ANIMAZIONE FIBRA IN ALTO
         const fibers = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
         fibers.forEach(f => {
             f.style.animation = 'none';
-            void f.offsetWidth; // Trigger reflow
+            void f.offsetWidth;
             f.style.animation = 'fiber-breath 5s ease-in-out infinite';
         });
 
@@ -351,24 +364,30 @@
         if (animTimer) clearTimeout(animTimer);
         loopCounter = 0;
         
+        let valPO = parseInt(document.getElementById('pO').value);
         let mO = parseInt(document.getElementById('mO').value);
         let lO = parseInt(document.getElementById('lO').value);
-        let pO = document.getElementById('pO').options[document.getElementById('pO').selectedIndex].text;
+        let pOtxt = document.getElementById('pO').options[document.getElementById('pO').selectedIndex].text;
         
+        let valPD = parseInt(document.getElementById('pD').value);
         let mD = parseInt(document.getElementById('mD').value);
         let lD = parseInt(document.getElementById('lD').value);
-        let pD = document.getElementById('pD').options[document.getElementById('pD').selectedIndex].text;
+        let pDtxt = document.getElementById('pD').options[document.getElementById('pD').selectedIndex].text;
 
         const coincidenzaLivelli = (lO === lD);
         
+        // Offset additivi basati sulla distanza dal centro del modulo
+        let offsetO = calcolaOffsetPorta(valPO);
+        let offsetD = calcolaOffsetPorta(valPD);
+
+        const totalereale = (Math.abs(mD - mO) * 0.12) + 0.85 + (lO * 0.32) + (lD * 0.32) + 1.60 + offsetO + offsetD;
+        document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
+        
         let pL = (lO < lD || (lO === lD && mO <= mD)) ? 
-                 {m1: mO, l1: lO, p1: pO, m2: mD, l2: lD, p2: pD} : 
-                 {m1: mD, l1: lD, p1: pD, m2: mO, l2: lO, p2: pO};
+                 {m1: mO, l1: lO, p1: pOtxt, m2: mD, l2: lD, p2: pDtxt} : 
+                 {m1: mD, l1: lD, p1: pDtxt, m2: mO, l2: lO, p2: pOtxt};
         
         let iMO = pL.m1, iVO = pL.l1, iPO = pL.p1, iMD = pL.m2, iVD = pL.l2, iPD = pL.p2;
-        
-        const totalereale = (Math.abs(mD - mO) * 0.12) + 0.85 + (lO * 0.32) + (lD * 0.32) + 1.60;
-        document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
         
         const snake = document.querySelector('.snake-body');
         snake.style.animation = 'none';
