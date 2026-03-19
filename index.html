@@ -35,7 +35,7 @@
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        /* --- ANIMAZIONI CATASTROFE (INVARIATE) --- */
+        /* --- ANIMAZIONI CATASTROFE --- */
         @keyframes catastrophic-glitch {
             0% { transform: translate(0); clip-path: inset(0 0 0 0); }
             10% { transform: translate(-20px, 15px); filter: invert(1) contrast(2); }
@@ -150,14 +150,11 @@
         .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; text-align: center; }
         .res-desc { margin-top: 15px; text-align: left; background: #fff; border-radius: 12px; padding: 15px; }
         
-        /* Gestione linee di percorso */
         .path-step { display: flex; position: relative; padding-bottom: 25px; align-items: flex-start; }
-        .path-step:not(:last-child)::after { content: ""; position: absolute; left: 19px; top: 38px; bottom: 0; width: 2px; background: #e2e8f0; }
-        
-        /* Eccezione per l'ultimo punto: non mostriamo la linea grigia di base perché viene sostituita dall'asola */
-        .path-step.scorta-step::after { display: none; }
+        .path-step::after { content: ""; position: absolute; left: 19px; top: 38px; bottom: 0; width: 2px; background: #e2e8f0; }
+        .path-step:last-child::after { display: none; }
 
-        .step-icon-container { width: 40px; flex-shrink: 0; z-index: 1; display: flex; justify-content: center; }
+        .step-icon-container { width: 40px; flex-shrink: 0; z-index: 1; display: flex; justify-content: center; position: relative; }
         .step-content { padding-left: 15px; font-size: 15px; color: #334155; line-height: 1.4; flex: 1; }
         .step-content b { color: var(--fc-blue-dark); background: #f1f5f9; padding: 2px 4px; border-radius: 4px; }
         .step-label { font-weight: 800; color: var(--fc-blue-light); text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 2px; }
@@ -168,14 +165,13 @@
         .pro-tip-box li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
         .pro-tip-title { font-size: 18px; font-weight: 800; color: #166534; margin-bottom: 10px; }
 
-        .cassetto-graphic { width: 32px; height: 20px; border-radius: 4px; border: 2px solid var(--cassetto-green); display: flex; flex-direction: column; justify-content: space-evenly; padding: 2px; box-sizing: border-box; }
+        .cassetto-graphic { width: 32px; height: 20px; border-radius: 4px; border: 2px solid var(--cassetto-green); display: flex; flex-direction: column; justify-content: space-evenly; padding: 2px; box-sizing: border-box; background: white; }
         .cassetto-row { display: flex; justify-content: space-between; }
         .cassetto-dot { width: 3px; height: 3px; background: var(--cassetto-green); border-radius: 50%; }
         
         .anim-icon { width: 40px; fill: none; stroke: var(--fiber-blue); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-        .standard-icon { height: 40px; }
+        .standard-icon { height: 40px; background: white; }
         
-        /* SVG Asola Allungata centrata sulla linea */
         .loop-verticale-svg { height: 160px; margin-top: -10px; } 
 
         .draw-path { stroke-dasharray: 600; stroke-dashoffset: 600; }
@@ -255,8 +251,8 @@
         turnLeft: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
         down: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
         uTurn: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40" style="stroke-width: 5.5;"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`,
-        // SVG ASOLA ALLUNGATA CHE SOSTITUISCE LA LINEA GRIGIA
-        loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 40 160"><path class="draw-path" d="M20,10 V145 A8,8 0 0,0 28,153 A8,8 0 0,0 36,145 V10 A8,8 0 0,0 28,2 A8,8 0 0,0 20,10" /><path class="arrow-head" d="M10,20 L20,5 L30,20 Z" style="stroke:none; transform-origin: 20px 10px;"/></svg>`
+        // Centratura perfetta sulla coordinata X=20
+        loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 40 160"><path class="draw-path" d="M12,10 V145 A8,8 0 0,0 20,153 A8,8 0 0,0 28,145 V10 A8,8 0 0,0 20,2 A8,8 0 0,0 12,10" /><path class="arrow-head" d="M10,20 L20,5 L30,20 Z" style="stroke:none; transform-origin: 20px 10px;"/></svg>`
     };
 
     let loopCounter = 0;
@@ -345,8 +341,7 @@
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content">Dalla base del montante <b>${iMD}</b>, <b>RISALI</b> verso la destinazione.</div></div>`;
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel cassetto <b>${iMD}-${getLettera(iVD)}</b>.</div></div>`;
         
-        // PUNTO AGGIORNATO: SCORTA CON LOOP ALLUNGATO CHE SOSTITUISCE LA LINEA
-        html += `<div class="path-step scorta-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio</b>.</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante, recuperala prendendola dalla parte mediale e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante, salendo fino agli <b>anelli di parcheggio</b>.</div></div>`;
         
         html += `<div class="pro-tip-box"><div class="pro-tip-title">💡 Suggerimenti tecnici:</div><ul><li>💡 <b>PULIZIA:</b> Prima del collegamento, pulisci accuratamente le ferule dei cassetti ottici. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li><li>💡 Etichettare correttamente le due estremità della fibra.</li><li>💡 <b>Pratica due fori sulla busta della fibra</b> (faccia superiore e inferiore). Fai uscire dal foro <b>inferiore</b> il connettore del <b>lato più esterno della matassina</b> per bloccarlo, quindi sfila comodamente l'altro capo (più <b>interno</b>) dal foro <b>superiore</b>: con un po' di fortuna la fibra scorrerà senza annodarsi 😁</li></ul></div>`;
         
