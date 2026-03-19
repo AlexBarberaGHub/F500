@@ -83,10 +83,7 @@
         }
         .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -15px; }
         .logo-container-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
-        @keyframes neon-glitch {
-            0%, 15%, 25%, 50%, 75%, 100% { opacity: 1; filter: brightness(1.2); box-shadow: 0 0 10px var(--fiber-blue), 0 0 20px var(--fiber-blue); }
-            10%, 20%, 55%, 80% { opacity: 0.2; filter: brightness(0.4); box-shadow: none; }
-        }
+        
         @keyframes neon-single-pulse {
             0% { opacity: 1; filter: brightness(1.2); }
             40% { opacity: 0.3; filter: brightness(0.5); box-shadow: none; }
@@ -100,7 +97,6 @@
         .fiber-breathing { animation: fiber-breath 5s ease-in-out infinite !important; }
 
         .fiber-illustration-left, .fiber-illustration-right { display: flex; align-items: center; }
-        .neon-init { animation: neon-glitch 3s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards; }
         .neon-click { animation: neon-single-pulse 1.2s ease-in-out forwards; }
         .connector { display: flex; align-items: center; }
         .ferrule { width: 25px; height: 12px; background: var(--cassetto-green); border-radius: 2px; position: relative; }
@@ -155,7 +151,13 @@
 
         #result-box::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background-color: var(--fc-blue-light); border-radius: 16px 0 0 16px; }
         .res-value { font-size: 48px; font-weight: 900; color: var(--fc-blue-dark); display: block; margin: 5px 0; text-align: center; }
-        .res-desc { margin-top: 15px; text-align: left; background: #fff; border-radius: 12px; padding: 15px; }
+        .res-desc { margin-top: 5px; text-align: left; background: #fff; border-radius: 12px; padding: 15px; }
+        
+        /* --- GRAFICA SERPENTE (Esecuzione singola) --- */
+        .snake-container { display: flex; justify-content: center; margin: 0; height: 35px; align-items: center; overflow: visible; }
+        .fiber-snake { width: 280px; height: 30px; }
+        .snake-body { stroke: var(--fiber-blue); stroke-width: 4; fill: none; stroke-linecap: round; stroke-dasharray: 400; stroke-dashoffset: 400; animation: snake-crawl 2s forwards ease-out; }
+        @keyframes snake-crawl { 0% { stroke-dashoffset: 400; } 100% { stroke-dashoffset: 0; } }
         
         .path-step { display: flex; position: relative; padding-bottom: 25px; align-items: flex-start; }
         .path-step::after { content: ""; position: absolute; left: 19px; top: 38px; bottom: 0; width: 2px; background: #e2e8f0; }
@@ -238,6 +240,21 @@
         <div id="result-box">
             <span style="font-size:12px; font-weight:800; color:#64748b; text-transform:uppercase; display:block; text-align:center;">Lunghezza Netta Necessaria</span>
             <span class="res-value" id="valore"></span>
+            
+            <div class="snake-container">
+                <svg class="fiber-snake" viewBox="0 0 280 30">
+                    <rect x="0" y="9" width="20" height="12" rx="2" fill="var(--cassetto-green)" />
+                    <rect x="2" y="12" width="6" height="6" rx="1" fill="#f8fafc" />
+                    <rect x="20" y="11" width="10" height="8" rx="1" fill="var(--sc-boot-green)" />
+                    
+                    <path class="snake-body" d="M30,15 Q70,0 110,15 T190,15 T250,15" />
+                    
+                    <rect x="250" y="11" width="10" height="8" rx="1" fill="var(--sc-boot-green)" />
+                    <rect x="260" y="9" width="20" height="12" rx="2" fill="var(--cassetto-green)" />
+                    <rect x="272" y="12" width="6" height="6" rx="1" fill="#f8fafc" />
+                </svg>
+            </div>
+
             <div class="res-desc" id="res-desc"></div>
         </div>
     </div>
@@ -259,7 +276,6 @@
         turnLeft: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
         down: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
         uTurn: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40" style="stroke-width: 5.5;"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`,
-        // Centratura perfetta sulla coordinata X=20
         loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 40 160"><path class="draw-path" d="M12,10 V145 A8,8 0 0,0 20,153 A8,8 0 0,0 28,145 V10 A8,8 0 0,0 20,2 A8,8 0 0,0 12,10" /><path class="arrow-head" d="M10,20 L20,5 L30,20 Z" style="stroke:none; transform-origin: 20px 10px;"/></svg>`
     };
 
@@ -312,7 +328,6 @@
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
         if (clickCount >= 5) { triggerDestruction(); return; }
 
-        // Gestione respiro fibre ogni 5 secondi
         const fibers = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
         fibers.forEach(f => f.classList.remove('fiber-breathing'));
         if(breathTimer) clearTimeout(breathTimer);
@@ -322,7 +337,7 @@
 
         const neonElements = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
         neonElements.forEach(el => {
-            el.classList.remove('neon-init', 'neon-click');
+            el.classList.remove('neon-click');
             void el.offsetWidth; 
             el.classList.add('neon-click');
         });
@@ -346,6 +361,13 @@
         let iMO = pL.m1, iVO = pL.l1, iMD = pL.m2, iVD = pL.l2;
         const totalereale = (Math.abs(iMD - iMO) * 0.12) + 0.85 + (iVO * 0.32) + (iVD * 0.32) + 1.60;
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
+        
+        // Reset animazione serpente al click
+        const snake = document.querySelector('.snake-body');
+        snake.style.animation = 'none';
+        void snake.offsetWidth;
+        snake.style.animation = 'snake-crawl 2s forwards ease-out';
+
         let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal cassetto <b>${iMO}-${getLettera(iVO)}</b>.</div></div>`;
