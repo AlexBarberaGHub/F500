@@ -257,7 +257,7 @@
                 <h1 class="logo-text">F500</h1>
                 <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
-            <p class="subtitle">Istruzioni e calcolo bretelle ottiche ODF-144</p>
+            <p class="subtitle">Calcolo e istruzioni bretelle ottiche ODF-144</p>
             <div class="header-separator"></div>
         </div>
         
@@ -458,9 +458,18 @@
         let dettO = getDettaglioCassetto(valPO);
         let dettD = getDettaglioCassetto(valPD);
 
-        let pL = (lO < lD || (lO === lD && mO <= mD)) ? 
+        // LOGICA MODIFICATA: Forza l'inizio dal cassetto più alto (valore numerico lO/lD più alto)
+        let pL;
+        if (lO > lD) {
+            pL = {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD, tipo: "normale"};
+        } else if (lD > lO) {
+            pL = {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO, tipo: "invertito"};
+        } else {
+            // Se sono allo stesso livello, usa l'ordine di montante (o l'input originale)
+            pL = (mO <= mD) ? 
                  {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD, tipo: "normale"} : 
                  {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO, tipo: "invertito"};
+        }
         
         let iMO = pL.m1, iVO = pL.l1, iPO = pL.p1, iDO = pL.d1, iMD = pL.m2, iVD = pL.l2, iPD = pL.p2, iDD = pL.d2;
         
@@ -469,13 +478,9 @@
         void snake.offsetWidth;
         snake.style.animation = 'snake-crawl 2s forwards ease-out';
 
-        let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
-        let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
+        let html = `<b style="display:block; margin-bottom:15px; color:#334155;">Indicazioni percorso (dal cassetto più alto):</b>`;
         
-        let azioneStart = (pL.tipo === "normale") ? "Esci dal" : "Entra nel";
-        let azioneEnd = (pL.tipo === "normale") ? "Entra nel" : "Esci dal";
-
-        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>${azioneStart} blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza (Alto):</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
         
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${iMD > iMO ? icons.turnRight : icons.turnLeft}</div><div class="step-content"><b>VOLTA</b> verso <b>${iMD > iMO ? 'DESTRA' : 'SINISTRA'}</b> al montante <b>${iMD}</b>.</div></div>`;
@@ -486,7 +491,7 @@
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>${azioneEnd} blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo (Basso):</span>Entra nel blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
 
