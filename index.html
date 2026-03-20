@@ -25,17 +25,16 @@
 
         body.no-scroll { overflow: hidden; }
 
-        /* RIPRISTINATA LARGHEZZA INTERA E RIMOZIONE MARGINI */
         .card { 
             background: white; 
-            width: 100%; /* Torna a coprire tutta la larghezza */
+            width: 100%; 
             max-width: 400px; 
-            border-radius: 0; /* Rimossi i bordi arrotondati per effetto card */
+            border-radius: 0; 
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             overflow: hidden; 
             display: flex; 
             flex-direction: column;
-            margin: 0; /* Rimossi margini laterali */
+            margin: 0; 
             align-self: flex-start;
             position: relative;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -330,7 +329,10 @@
         const selects = document.querySelectorAll('select');
         selects.forEach(s => {
             s.addEventListener('change', () => {
+                // RIPRISTINA PULSANTE E NASCONDE RISULTATI
                 document.getElementById('calcBtn').classList.add('pulsing');
+                document.getElementById('result-box').style.display = 'none';
+                if (animTimer) clearTimeout(animTimer);
             });
         });
     }
