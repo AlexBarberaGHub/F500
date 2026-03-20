@@ -127,6 +127,7 @@
         .field { flex: 1; }
         label { display: block; font-size: 12px; color: #475569; margin-bottom: 4px; font-weight: 700; text-align: center; }
         
+        /* AGGIORNATO: Colore del testo uguale a quello della metratura */
         select { 
             width: 100%; 
             padding: 10px 2px; 
@@ -135,7 +136,7 @@
             font-size: 20px; 
             font-weight: 700; 
             background: #f1f5f9; 
-            color: #334155; 
+            color: var(--fc-blue-dark); /* Stesso colore del metraggio */
             -webkit-appearance: none; 
             outline: none; 
             text-align: center; 
@@ -191,12 +192,11 @@
         .ripple { position: absolute; background: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none; }
         @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
 
-        /* AGGIORNATO: Sfondo del box dei risultati un po' più scuro */
         #result-box { 
             margin-top: 20px; 
             padding: 15px; 
             border-radius: 16px; 
-            background-color: #f1f5f9; /* Grigio un po' più scuro */
+            background-color: #f1f5f9; 
             border: 2px solid #e2e8f0; 
             position: relative; 
             display: none; 
