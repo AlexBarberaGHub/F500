@@ -257,7 +257,7 @@
                 <h1 class="logo-text">F500</h1>
                 <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
-            <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF 144</p>
+            <p class="subtitle">Istruzioni e calcolo bretelle ottiche ODF-144</p>
             <div class="header-separator"></div>
         </div>
         
@@ -329,7 +329,6 @@
         const selects = document.querySelectorAll('select');
         selects.forEach(s => {
             s.addEventListener('change', () => {
-                // RIPRISTINA PULSANTE E NASCONDE RISULTATI
                 document.getElementById('calcBtn').classList.add('pulsing');
                 document.getElementById('result-box').style.display = 'none';
                 if (animTimer) clearTimeout(animTimer);
