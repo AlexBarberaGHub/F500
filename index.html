@@ -17,7 +17,7 @@
         
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
-            background-color: var(--fc-blue-dark); 
+            background-color: #e0f2fe; 
             display: flex; justify-content: center; 
             min-height: 100vh; margin: 0; 
             overflow-x: hidden; 
@@ -84,11 +84,6 @@
         .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -15px; }
         .logo-container-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
         
-        @keyframes neon-single-pulse {
-            0% { opacity: 1; filter: brightness(1.2); }
-            40% { opacity: 0.3; filter: brightness(0.5); box-shadow: none; }
-            100% { opacity: 1; filter: brightness(1.2); box-shadow: 0 0 10px var(--fiber-blue), 0 0 20px var(--fiber-blue); }
-        }
         @keyframes fiber-breath {
             0%, 100% { filter: brightness(1); box-shadow: 0 0 5px var(--fiber-blue); }
             50% { filter: brightness(1.8); box-shadow: 0 0 20px var(--fiber-blue), 0 0 35px var(--fiber-blue); }
@@ -96,7 +91,6 @@
         .fiber-breathing { animation: fiber-breath 5s ease-in-out infinite !important; }
 
         .fiber-illustration-left, .fiber-illustration-right { display: flex; align-items: center; }
-        .neon-click { animation: fiber-breath 5s ease-in-out infinite !important; } 
         .connector { display: flex; align-items: center; }
         .ferrule { width: 25px; height: 12px; background: var(--cassetto-green); border-radius: 2px; position: relative; }
         .ferrule::after { content: ""; position: absolute; top: 3px; width: 8px; height: 6px; background: #f8fafc; border-radius: 1px; }
@@ -143,10 +137,54 @@
             text-align-last: center; 
         }
         
-        .btn-container { position: relative; overflow: hidden; border-radius: 12px; margin-top: 5px; }
-        button { width: 100%; padding: 18px; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; color: white; background-color: var(--fc-blue-light); box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.1s; position: relative; overflow: hidden; }
-        button:active { transform: scale(0.96); }
-        .ripple { position: absolute; background: rgba(255, 255, 255, 0.4); border-radius: 50%; transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none; }
+        .btn-container { position: relative; overflow: hidden; border-radius: 12px; margin-top: 5px; background: #f1f5f9; }
+        
+        /* TASTO EFFETTO VETRO SCURITO */
+        #calcBtn { 
+            width: 100%; 
+            padding: 18px; 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: 800; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            color: white; 
+            background: rgba(0, 45, 114, 0.9); /* Più scuro (basato su fc-blue-dark) */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.3s; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        #calcBtn.pulsing::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                to right, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: glass-shimmer 4s infinite;
+        }
+
+        @keyframes glass-shimmer {
+            0% { left: -150%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
+        }
+
+        #calcBtn:active { transform: scale(0.96); background: #002D72; }
+
+        .ripple { position: absolute; background: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none; }
         @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
 
         #result-box { 
@@ -205,7 +243,7 @@
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
     </style>
 </head>
-<body onload="document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right').forEach(el => el.classList.add('fiber-breathing'))">
+<body onload="initApp()">
 
 <div class="card" id="mainCard">
     <div class="header">
@@ -250,7 +288,7 @@
         </div>
         
         <div class="btn-container">
-            <button onclick="calcolaReale(event)">Calcola Percorso</button>
+            <button id="calcBtn" class="pulsing" onclick="calcolaReale(event)">Calcola Percorso</button>
         </div>
 
         <div id="result-box">
@@ -280,6 +318,17 @@
     let clickCount = 0;
     let apocalypseCount = 0;
     let clickTimer = null;
+
+    function initApp() {
+        document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right').forEach(el => el.classList.add('fiber-breathing'));
+        
+        const selects = document.querySelectorAll('select');
+        selects.forEach(s => {
+            s.addEventListener('change', () => {
+                document.getElementById('calcBtn').classList.add('pulsing');
+            });
+        });
+    }
 
     function getLettera(valore) { return { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" }[valore]; }
     
@@ -352,6 +401,9 @@
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
         if (clickCount >= 5) { triggerDestruction(); return; }
 
+        const btn = document.getElementById('calcBtn');
+        btn.classList.remove('pulsing');
+
         const fibers = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
         fibers.forEach(f => {
             f.style.animation = 'none';
@@ -359,7 +411,6 @@
             f.style.animation = 'fiber-breath 5s ease-in-out infinite';
         });
 
-        const btn = event.currentTarget;
         const circle = document.createElement("span");
         const diameter = Math.max(btn.clientWidth, btn.clientHeight);
         circle.style.width = circle.style.height = `${diameter}px`;
@@ -415,10 +466,10 @@
         let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
         
-        let azioneStart = (pL.tipo === "normale") ? "Esci" : "Entra";
-        let azioneEnd = (pL.tipo === "normale") ? "Entra" : "Esci";
+        let azioneStart = (pL.tipo === "normale") ? "Esci dal" : "Entra nel";
+        let azioneEnd = (pL.tipo === "normale") ? "Entra nel" : "Esci dal";
 
-        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>${azioneStart} dal livello <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>${azioneStart} blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
         
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${iMD > iMO ? icons.turnRight : icons.turnLeft}</div><div class="step-content"><b>VOLTA</b> verso <b>${iMD > iMO ? 'DESTRA' : 'SINISTRA'}</b> al montante <b>${iMD}</b>.</div></div>`;
@@ -429,7 +480,7 @@
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>${azioneEnd} nel livello <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>${azioneEnd} blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
 
