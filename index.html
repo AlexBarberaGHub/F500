@@ -105,7 +105,7 @@
         .boot { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
         .fiber-line-art { width: 50px; height: 4px; background: var(--fiber-blue); }
         .logo-text { font-size: 52px; font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1; }
-        .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; }
+        .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; white-space: nowrap; }
         
         .header-separator { 
             width: 90%; 
@@ -130,10 +130,10 @@
         
         select { 
             width: 100%; 
-            padding: 10px; 
+            padding: 10px 2px; 
             border: 2px solid #bcd7f5; 
             border-radius: 10px; 
-            font-size: 22px; 
+            font-size: 20px; 
             font-weight: 700; 
             background: #f0f7ff; 
             color: var(--fc-blue-dark); 
@@ -215,7 +215,7 @@
                 <h1 class="logo-text">F500</h1>
                 <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
-            <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF</p>
+            <p class="subtitle">Calcolo lunghezza bretelle ottiche ODF 144</p>
             <div class="header-separator"></div>
         </div>
         
@@ -390,11 +390,22 @@
         const totalereale = (Math.abs(mD - mO) * 0.12) + 0.85 + (lO * 0.32) + (lD * 0.32) + 1.60 + offsetO + offsetD;
         document.getElementById('valore').innerText = totalereale.toFixed(2) + " m";
         
+        function getDettaglioCassetto(portaValue) {
+            let index = Math.floor((portaValue - 1) / 2); 
+            let cassettoNum = Math.floor(index / 12) + 1; 
+            let portaRelativa = (index % 12) * 2 + 1; 
+            let coppiaPorte = portaRelativa + "-" + (portaRelativa + 1);
+            return { num: cassettoNum, coppia: coppiaPorte };
+        }
+
+        let dettO = getDettaglioCassetto(valPO);
+        let dettD = getDettaglioCassetto(valPD);
+
         let pL = (lO < lD || (lO === lD && mO <= mD)) ? 
-                 {m1: mO, l1: lO, p1: pOtxt, m2: mD, l2: lD, p2: pDtxt} : 
-                 {m1: mD, l1: lD, p1: pDtxt, m2: mO, l2: lO, p2: pOtxt};
+                 {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD, tipo: "normale"} : 
+                 {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO, tipo: "invertito"};
         
-        let iMO = pL.m1, iVO = pL.l1, iPO = pL.p1, iMD = pL.m2, iVD = pL.l2, iPD = pL.p2;
+        let iMO = pL.m1, iVO = pL.l1, iPO = pL.p1, iDO = pL.d1, iMD = pL.m2, iVD = pL.l2, iPD = pL.p2, iDD = pL.d2;
         
         const snake = document.querySelector('.snake-body');
         snake.style.animation = 'none';
@@ -404,7 +415,10 @@
         let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più basso):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal cassetto <b>${iMO}-${getLettera(iVO)}</b> (Porte <b>${iPO}</b>).</div></div>`;
+        let azioneStart = (pL.tipo === "normale") ? "Esci" : "Entra";
+        let azioneEnd = (pL.tipo === "normale") ? "Entra" : "Esci";
+
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>${azioneStart} dal livello <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
         
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${iMD > iMO ? icons.turnRight : icons.turnLeft}</div><div class="step-content"><b>VOLTA</b> verso <b>${iMD > iMO ? 'DESTRA' : 'SINISTRA'}</b> al montante <b>${iMD}</b>.</div></div>`;
@@ -415,7 +429,7 @@
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel cassetto <b>${iMD}-${getLettera(iVD)}</b> (Porte <b>${iPD}</b>).</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>${azioneEnd} nel livello <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
 
@@ -434,4 +448,3 @@
 </script>
 </body>
 </html>
-
