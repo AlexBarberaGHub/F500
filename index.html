@@ -130,12 +130,12 @@
         select { 
             width: 100%; 
             padding: 10px 2px; 
-            border: 2px solid #bcd7f5; 
+            border: 2px solid #cbd5e1; 
             border-radius: 10px; 
             font-size: 20px; 
             font-weight: 700; 
-            background: #f0f7ff; 
-            color: var(--fc-blue-dark); 
+            background: #f1f5f9; 
+            color: #334155; 
             -webkit-appearance: none; 
             outline: none; 
             text-align: center; 
@@ -191,11 +191,12 @@
         .ripple { position: absolute; background: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: scale(0); animation: ripple-effect 0.6s linear; pointer-events: none; }
         @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
 
+        /* AGGIORNATO: Sfondo del box dei risultati un po' più scuro */
         #result-box { 
             margin-top: 20px; 
             padding: 15px; 
             border-radius: 16px; 
-            background-color: #f8fafc; 
+            background-color: #f1f5f9; /* Grigio un po' più scuro */
             border: 2px solid #e2e8f0; 
             position: relative; 
             display: none; 
@@ -230,7 +231,6 @@
         .pro-tip-box li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
         .pro-tip-title { font-size: 18px; font-weight: 800; color: #166534; margin-bottom: 10px; }
 
-        /* GRAFICA: Contorno verde scuro (stesso del gommino) */
         .cassetto-graphic { 
             width: 32px; 
             height: 32px; 
@@ -325,15 +325,15 @@
             
             <div class="snake-container">
                 <svg class="fiber-snake" viewBox="0 0 280 30">
-                    <rect x="0" y="9" width="20" height="12" rx="2" fill="var(--cassetto-green)" />
-                    <rect x="2" y="12" width="6" height="6" rx="1" fill="#f8fafc" />
+                    <rect x="0" y="12" width="6" height="6" rx="1" fill="#f8fafc" style="stroke: #cbd5e1; stroke-width: 1.5px;" />
+                    <rect x="6" y="9" width="14" height="12" rx="2" fill="var(--cassetto-green)" />
                     <rect x="20" y="11" width="10" height="8" rx="1" fill="var(--sc-boot-green)" />
                     
                     <path class="snake-body" d="M30,15 Q70,0 110,15 T190,15 T250,15" />
                     
                     <rect x="250" y="11" width="10" height="8" rx="1" fill="var(--sc-boot-green)" />
-                    <rect x="260" y="9" width="20" height="12" rx="2" fill="var(--cassetto-green)" />
-                    <rect x="272" y="12" width="6" height="6" rx="1" fill="#f8fafc" />
+                    <rect x="260" y="9" width="14" height="12" rx="2" fill="var(--cassetto-green)" />
+                    <rect x="274" y="12" width="6" height="6" rx="1" fill="#f8fafc" style="stroke: #cbd5e1; stroke-width: 1.5px;" />
                 </svg>
             </div>
 
