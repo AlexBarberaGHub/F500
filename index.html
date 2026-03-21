@@ -274,16 +274,23 @@
         } 
 
         .draw-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
-        .active .draw-path { animation: flowPath 1.2s ease-out forwards; }
-        .arrow-head { fill: var(--fiber-blue); opacity: 0; transform: scale(0); transition: all 0.3s; }
         
-        /* Freccia più sottile per icone ridotte */
+        /* VELOCIZZATE: durate ridotte */
+        .active .draw-path { animation: flowPath 0.8s ease-out forwards; }
+        .icon-reduced.active .draw-path { animation: flowPath 1.2s ease-out forwards; }
+        .loop-verticale-svg.active .draw-path { animation: flowPath 1.8s ease-out forwards; }
+        
+        .arrow-head { fill: var(--fiber-blue); opacity: 0; transform: scale(0); transition: all 0.2s; }
+        
+        /* Freccia icone ridotte (UNIFORMATE) */
         .head-reduced { transform: scale(0.5) !important; }
-        .active .head-reduced { transform: scale(0.5) !important; opacity: 1; transition-delay: 0.7s; }
+        .active .head-reduced { transform: scale(0.5) !important; opacity: 1; transition-delay: 0.9s; }
         
-        /* Freccia standard mantenuta correttamente */
-        .head-standard { opacity: 0; transform: scale(0); transition: all 0.3s; }
-        .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.7s; }
+        /* Freccia scorta */
+        .loop-verticale-svg.active .arrow-head { opacity: 1; transform: scale(0.9) !important; transition-delay: 1.6s; }
+
+        .head-standard { opacity: 0; transform: scale(0); transition: all 0.2s; }
+        .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.5s; }
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
     </style>
@@ -393,6 +400,7 @@
         turnRight: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M10,35 Q10,15 30,15" /><path class="arrow-head" d="M25,5 L37,15 L25,25 Z" style="stroke:none; transform-origin: 30px 15px;"/></svg>`,
         turnLeft: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
         down: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head head-reduced" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
+        /* CORRETTA: transform-origin: 30px 10px; */
         uTurn: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head head-reduced" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`,
         loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 100 250" preserveAspectRatio="xMidYMid meet" style="stroke-linejoin: round; stroke-linecap: round;"><path class="draw-path" d="M15,10 V230 A10,10 0 0,0 35,230 V40 A10,10 0 0,1 55,40 V230 A10,10 0 0,0 75,230 V175 Q75,160 95,160" /><path class="arrow-head head-standard" d="M85,150 L98,160 L85,170 Z" style="stroke:none; transform-origin: 95px 160px;"/></svg>`
     };
@@ -407,10 +415,13 @@
         let delay = 0;
         paths.forEach((path) => {
             setTimeout(() => { path.classList.add('active'); }, delay);
-            delay += 400; 
+            // Ritardi più brevi per un ritmo più serrato
+            if (path.classList.contains('icon-reduced')) delay += 600;
+            else if (path.classList.contains('loop-verticale-svg')) delay += 1000;
+            else delay += 300; 
         });
         loopCounter++;
-        if (loopCounter < 2) { animTimer = setTimeout(runAnimationSequence, delay + 500); }
+        if (loopCounter < 2) { animTimer = setTimeout(runAnimationSequence, delay + 400); }
     }
 
     function triggerDestruction() {
