@@ -290,11 +290,15 @@
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
 
-        /* --- STILE LINK DOWNLOAD RIDOTTO --- */
+        /* --- STILE LINK DOWNLOAD E QR CODE --- */
         .footer-link-container {
             text-align: center;
-            padding: 10px 0 20px 0;
+            padding: 10px 0 25px 0;
             background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
         .app-link {
             color: var(--fc-blue-light);
@@ -303,7 +307,7 @@
             font-size: 11px; 
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            padding: 6px 14px; 
+            padding: 8px 18px; 
             border: 1.5px solid var(--fc-blue-light); 
             border-radius: 20px;
             transition: all 0.3s;
@@ -314,6 +318,17 @@
             background: var(--fc-blue-light);
             color: white;
             opacity: 1;
+        }
+        .qr-wrapper {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        .qr-wrapper img {
+            display: block;
+            width: 100px;
+            height: 100px;
         }
     </style>
 </head>
@@ -390,6 +405,9 @@
 
     <div class="footer-link-container">
         <a href="https://alexbarberaghub.github.io/F500/F500.apk" target="_blank" download="F500.apk" class="app-link">Scarica Android App</a>
+        <div class="qr-wrapper">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://alexbarberaghub.github.io/F500/index.html" alt="QR Code Progetto">
+        </div>
     </div>
 </div>
 
