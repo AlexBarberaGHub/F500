@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F500 - ODF Fiber</title>
 
     <style>
@@ -378,7 +378,6 @@
             <div class="cassetto-row"><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div></div>
         </div>`;
 
-    /* AGGIORNATO: Aggiunte punte freccia a turnRight e turnLeft */
     const icons = {
         cassetto: iconPathCassetto,
         turnRight: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M10,35 Q10,15 30,15" /><path class="arrow-head head-reduced" d="M25,5 L37,15 L25,25 Z" style="stroke:none; transform-origin: 30px 15px;"/></svg>`,
@@ -510,7 +509,7 @@
         }
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
-        html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso convogliala alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
         html += `<div style="padding: 15px; background: #e0f2fe; border-radius: 12px; margin: 10px 0 20px 0; font-weight: 700; color: #0369a1; text-align: center; border: 1px solid #bae6fd;">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
         html += `<div class="pro-tip-box"><div class="pro-tip-title">💡 Suggerimenti tecnici:</div><ul><li>💡 <b>PULIZIA:</b> Prima del collegamento, <b>PULISCI SEMPRE</b> le ferule dei cassetti ottici con la <b>CLEANING PEN</b>. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li><li>💡 <b>ETICHETTE:</b> Etichettare <b>SEMPRE</b> correttamente le due estremità della fibra.</li></ul></div>`;
         
