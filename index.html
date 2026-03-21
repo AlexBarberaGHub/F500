@@ -570,8 +570,8 @@
         void snake.offsetWidth;
         snake.style.animation = 'snake-crawl 2s forwards ease-out';
 
-        let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso<br>(dal cassetto più in alto):";
-        let html = `<b style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</b>`;
+        let titoloMsg = coincidenzaLivelli ? "<b>Indicazioni percorso:</b>" : "<b>Indicazioni percorso:</b><br>(dal cassetto più in alto):";
+        let html = `<span style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</span>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
         if (iMO !== iMD) {
