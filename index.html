@@ -104,7 +104,6 @@
         .boot { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
         .fiber-line-art { width: 50px; height: 4px; background: var(--fiber-blue); }
         
-        /* AGGIORNATO: Titolo più inclinato a destra */
         .logo-text { 
             font-size: 52px; 
             font-weight: 900; 
@@ -259,7 +258,9 @@
         .cassetto-divider { height: 1px; width: 100%; background-color: var(--sc-boot-green); opacity: 0.3; }
         
         .anim-icon { fill: none; stroke: var(--fiber-blue); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+        
         .icon-reduced { width: 40px !important; height: 40px !important; stroke-width: 2.5 !important; }
+        
         .standard-icon { height: 40px; background: white; }
         .loop-verticale-svg { width: 50px; height: 180px !important; margin-top: -5px; margin-bottom: -5px; display: block; } 
         .draw-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
@@ -377,10 +378,11 @@
             <div class="cassetto-row"><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div><div class="cassetto-dot"></div></div>
         </div>`;
 
+    /* AGGIORNATO: Aggiunte punte freccia a turnRight e turnLeft */
     const icons = {
         cassetto: iconPathCassetto,
-        turnRight: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M10,35 Q10,15 30,15" /><path class="arrow-head" d="M25,5 L37,15 L25,25 Z" style="stroke:none; transform-origin: 30px 15px;"/></svg>`,
-        turnLeft: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
+        turnRight: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M10,35 Q10,15 30,15" /><path class="arrow-head head-reduced" d="M25,5 L37,15 L25,25 Z" style="stroke:none; transform-origin: 30px 15px;"/></svg>`,
+        turnLeft: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head head-reduced" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
         down: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head head-reduced" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
         uTurn: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head head-reduced" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`,
         loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 100 250" preserveAspectRatio="xMidYMid meet" style="stroke-linejoin: round; stroke-linecap: round;"><path class="draw-path" d="M15,10 V230 A10,10 0 0,0 35,230 V40 A10,10 0 0,1 55,40 V230 A10,10 0 0,0 75,230 V175 Q75,160 95,160" /><path class="arrow-head head-standard" d="M85,150 L98,160 L85,170 Z" style="stroke:none; transform-origin: 95px 160px;"/></svg>`
