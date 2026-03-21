@@ -354,7 +354,7 @@
                 </div>
                 <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
-            <p class="subtitle">Calcolo e istruzioni bretelle ottiche ODF-144</p>
+            <p class="subtitle">Calcolo e istruzioni permute ottiche ODF-144</p>
             <div class="header-separator"></div>
         </div>
         
@@ -393,7 +393,7 @@
         </div>
 
         <div id="result-box">
-            <span style="font-size:12px; font-weight:800; color:#64748b; text-transform:uppercase; display:block; text-align:center;">Lunghezza Netta Necessaria</span>
+            <span style="font-size:12px; font-weight:800; color:#64748b; text-transform:uppercase; display:block; text-align:center;">LUNGHEZZA NETTA BRETELLA NECESSARIA</span>
             <span class="res-value" id="valore"></span>
             
             <div class="snake-container">
@@ -570,7 +570,7 @@
         void snake.offsetWidth;
         snake.style.animation = 'snake-crawl 2s forwards ease-out';
 
-        let titoloMsg = coincidenzaLivelli ? "<b>Indicazioni percorso:</b>" : "<b>Indicazioni percorso:</b><br>(dal cassetto più in alto):";
+        let titoloMsg = coincidenzaLivelli ? "<b>Indicazioni percorso:</b>" : "<b>Indicazioni percorso:</b><br><b>(dal cassetto più in alto)</b>:";
         let html = `<span style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</span>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
