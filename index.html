@@ -563,7 +563,8 @@
         function getDettaglioCassetto(portaValue) {
             let index = portaValue - 1; 
             let cassettoNum = Math.floor(index / 24) + 1; 
-            return { num: cassettoNum, singola: portaValue };
+            let portaSingola = (index % 24) + 1;
+            return { num: cassettoNum, singola: portaSingola };
         }
 
         let dettO = getDettaglioCassetto(valPO);
