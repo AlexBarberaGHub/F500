@@ -88,7 +88,14 @@
             color: white; padding: 10px 20px; box-sizing: border-box;
         }
         .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -15px; }
-        .logo-container-wrapper { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-bottom: 5px; }
+        
+        .logo-container-wrapper { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-bottom: 5px; 
+        }
         
         @keyframes fiber-breath {
             0%, 100% { filter: brightness(1); box-shadow: 0 0 5px var(--fiber-blue); }
@@ -106,7 +113,7 @@
         .fiber-line-art { width: 45px; height: 4px; background: var(--fiber-blue); }
         
         .logo-text { 
-            font-size: 42px; 
+            font-size: 56px; 
             font-weight: 900; 
             margin: 0; 
             letter-spacing: -2px; 
@@ -116,16 +123,17 @@
         }
 
         .logo-suffix {
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 400;
             letter-spacing: 0.5px;
             text-transform: none; 
             opacity: 0.95;
             transform: none; 
-            margin-left: 5px;
+            margin-left: 8px;
+            display: inline-block;
         }
         
-        .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; white-space: nowrap; }
+        .subtitle { font-size: 18px; font-weight: 400; margin: 8px 0 0; text-align: center; white-space: nowrap; }
         
         .header-separator { 
             width: 90%; 
@@ -139,7 +147,7 @@
         .sig-brand { font-size: 13px; font-weight: 800; letter-spacing: 0.2px; text-align: left; }
         .sig-details { text-align: right; opacity: 0.9; }
 
-        .content { padding: 20px; flex: 1; } 
+        .content { padding: 20px; flex: 0; }
         .section-container { margin-bottom: 20px; }
         .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
@@ -294,21 +302,21 @@
         /* --- STILE LINK DOWNLOAD E QR CODE --- */
         .footer-link-container {
             text-align: center;
-            padding: 10px 0 40px 0;
+            padding: 40px 0 20px 0; /* Padding-top aumentato per allontanare dal tasto calcola */
             background: white;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
         .app-link {
             color: var(--fc-blue-light);
             text-decoration: none;
             font-weight: 700;
-            font-size: 11px; 
+            font-size: 10px; 
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            padding: 8px 18px; 
+            padding: 6px 14px; 
             border: 1.5px solid var(--fc-blue-light); 
             border-radius: 20px;
             transition: all 0.3s;
@@ -322,14 +330,14 @@
         }
         .qr-wrapper {
             background: #f8fafc;
-            padding: 10px;
+            padding: 8px;
             border-radius: 12px;
             border: 1px solid #e2e8f0;
         }
         .qr-wrapper img {
             display: block;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
         }
     </style>
 </head>
@@ -340,7 +348,7 @@
         <div class="header-main-content">
             <div class="logo-container-wrapper">
                 <div class="fiber-illustration-left connector left"><div class="ferrule"></div><div class="boot"></div><div class="fiber-line-art"></div></div>
-                <div style="display: flex; align-items: baseline;">
+                <div style="display: flex; align-items: center;">
                     <h1 class="logo-text">F500</h1>
                     <span class="logo-suffix">ODF Tool</span>
                 </div>
