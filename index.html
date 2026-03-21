@@ -118,9 +118,9 @@
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 0.5px;
-            text-transform: none; /* Ritorna a normale invece di tutto maiuscolo */
+            text-transform: none; 
             opacity: 0.95;
-            transform: none; /* Rimuove l'effetto abbattuto (skew) */
+            transform: none; 
             margin-left: 5px;
         }
         
@@ -266,7 +266,6 @@
             overflow: hidden;
         }
         .cassetto-dot { width: 3.2px; height: 3.2px; background: var(--cassetto-green); border-radius: 50%; }
-        .cassetto-dot { width: 3.2px; height: 3.2px; background: var(--cassetto-green); border-radius: 50%; }
         .cassetto-row { display: flex; justify-content: space-around; align-items: center; flex: 1; }
         .cassetto-divider { height: 1px; width: 100%; background-color: var(--sc-boot-green); opacity: 0.3; }
         
@@ -290,6 +289,32 @@
         .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.5s; }
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
+
+        /* --- STILE LINK DOWNLOAD RIDOTTO --- */
+        .footer-link-container {
+            text-align: center;
+            padding: 10px 0 20px 0;
+            background: white;
+        }
+        .app-link {
+            color: var(--fc-blue-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 11px; 
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 6px 14px; 
+            border: 1.5px solid var(--fc-blue-light); 
+            border-radius: 20px;
+            transition: all 0.3s;
+            display: inline-block;
+            opacity: 0.8;
+        }
+        .app-link:hover {
+            background: var(--fc-blue-light);
+            color: white;
+            opacity: 1;
+        }
     </style>
 </head>
 <body onload="initApp()">
@@ -361,6 +386,10 @@
 
             <div class="res-desc" id="res-desc"></div>
         </div>
+    </div>
+
+    <div class="footer-link-container">
+        <a href="https://alexbarberaghub.github.io/F500/F500.apk" target="_blank" download="F500.apk" class="app-link">Scarica Android App</a>
     </div>
 </div>
 
