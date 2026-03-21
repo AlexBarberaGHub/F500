@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F500 - ODF Fiber</title>
+    <title>F500 ODF tool</title>
 
     <style>
         :root {
@@ -87,7 +87,7 @@
             color: white; padding: 10px 20px; box-sizing: border-box;
         }
         .header-main-content { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: -15px; }
-        .logo-container-wrapper { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
+        .logo-container-wrapper { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-bottom: 5px; }
         
         @keyframes fiber-breath {
             0%, 100% { filter: brightness(1); box-shadow: 0 0 5px var(--fiber-blue); }
@@ -102,16 +102,26 @@
         .connector.left .ferrule::after { left: -6px; }
         .connector.right .ferrule::after { right: -6px; }
         .boot { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
-        .fiber-line-art { width: 50px; height: 4px; background: var(--fiber-blue); }
+        .fiber-line-art { width: 45px; height: 4px; background: var(--fiber-blue); }
         
         .logo-text { 
-            font-size: 52px; 
+            font-size: 42px; 
             font-weight: 900; 
             margin: 0; 
             letter-spacing: -2px; 
             line-height: 1; 
             transform: skewX(-22deg); 
             display: inline-block; 
+        }
+
+        .logo-suffix {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: none; /* Ritorna a normale invece di tutto maiuscolo */
+            opacity: 0.95;
+            transform: none; /* Rimuove l'effetto abbattuto (skew) */
+            margin-left: 5px;
         }
         
         .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; white-space: nowrap; }
@@ -256,6 +266,7 @@
             overflow: hidden;
         }
         .cassetto-dot { width: 3.2px; height: 3.2px; background: var(--cassetto-green); border-radius: 50%; }
+        .cassetto-dot { width: 3.2px; height: 3.2px; background: var(--cassetto-green); border-radius: 50%; }
         .cassetto-row { display: flex; justify-content: space-around; align-items: center; flex: 1; }
         .cassetto-divider { height: 1px; width: 100%; background-color: var(--sc-boot-green); opacity: 0.3; }
         
@@ -288,7 +299,10 @@
         <div class="header-main-content">
             <div class="logo-container-wrapper">
                 <div class="fiber-illustration-left connector left"><div class="ferrule"></div><div class="boot"></div><div class="fiber-line-art"></div></div>
-                <h1 class="logo-text">F500</h1>
+                <div style="display: flex; align-items: baseline;">
+                    <h1 class="logo-text">F500</h1>
+                    <span class="logo-suffix">ODF Tool</span>
+                </div>
                 <div class="fiber-illustration-right connector right"><div class="fiber-line-art"></div><div class="boot"></div><div class="ferrule"></div></div>
             </div>
             <p class="subtitle">Calcolo e istruzioni bretelle ottiche ODF-144</p>
@@ -500,7 +514,6 @@
         void snake.offsetWidth;
         snake.style.animation = 'snake-crawl 2s forwards ease-out';
 
-        // Modifica allineamento titoli
         let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso<br>(dal cassetto più alto):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</b>`;
         
