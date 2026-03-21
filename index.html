@@ -489,7 +489,6 @@
         let dettD = getDettaglioCassetto(valPD);
 
         let pL;
-        // CORRETTA LOGICA DI ASSEGNAZIONE CASSETTI
         if (lO > lD) pL = {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD};
         else if (lD > lO) pL = {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO};
         else pL = (mO <= mD) ? {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD} : {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO};
@@ -501,8 +500,10 @@
         void snake.offsetWidth;
         snake.style.animation = 'snake-crawl 2s forwards ease-out';
 
-        let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più alto):";
-        let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
+        // Modifica allineamento titoli
+        let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso<br>(dal cassetto più alto):";
+        let html = `<b style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</b>`;
+        
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${icons.turnRight}</div><div class="step-content"><b>VOLTA</b> verso <b>DESTRA</b> al montante <b>${iMD}</b>.</div></div>`;
