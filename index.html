@@ -103,7 +103,18 @@
         .connector.right .ferrule::after { right: -6px; }
         .boot { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
         .fiber-line-art { width: 50px; height: 4px; background: var(--fiber-blue); }
-        .logo-text { font-size: 52px; font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1; }
+        
+        /* AGGIORNATO: Titolo inclinato a destra */
+        .logo-text { 
+            font-size: 52px; 
+            font-weight: 900; 
+            margin: 0; 
+            letter-spacing: -2px; 
+            line-height: 1; 
+            transform: skewX(-15deg); 
+            display: inline-block; 
+        }
+        
         .subtitle { font-size: 18px; font-weight: 700; margin: 8px 0 0; text-align: center; white-space: nowrap; }
         
         .header-separator { 
@@ -243,52 +254,24 @@
             background: white; 
             overflow: hidden;
         }
-        .cassetto-row { 
-            display: flex; 
-            justify-content: space-around; 
-            align-items: center;
-            flex: 1;
-        }
-        .cassetto-divider {
-            height: 1px;
-            width: 100%;
-            background-color: var(--sc-boot-green);
-            opacity: 0.3;
-        }
         .cassetto-dot { width: 3.2px; height: 3.2px; background: var(--cassetto-green); border-radius: 50%; }
+        .cassetto-row { display: flex; justify-content: space-around; align-items: center; flex: 1; }
+        .cassetto-divider { height: 1px; width: 100%; background-color: var(--sc-boot-green); opacity: 0.3; }
         
-        /* Stile icone standard */
         .anim-icon { fill: none; stroke: var(--fiber-blue); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-        
-        /* Spessore ridotto per Scendi e Risali (U-Turn) */
         .icon-reduced { width: 40px !important; height: 40px !important; stroke-width: 2.5 !important; }
         .standard-icon { height: 40px; background: white; }
-        
-        /* Disegno Scorta slanciato */
-        .loop-verticale-svg { 
-            width: 50px; 
-            height: 180px !important; 
-            margin-top: -5px; 
-            margin-bottom: -5px; 
-            display: block;
-        } 
-
+        .loop-verticale-svg { width: 50px; height: 180px !important; margin-top: -5px; margin-bottom: -5px; display: block; } 
         .draw-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; }
         
-        /* VELOCIZZATE: durate ridotte */
         .active .draw-path { animation: flowPath 0.8s ease-out forwards; }
         .icon-reduced.active .draw-path { animation: flowPath 1.2s ease-out forwards; }
         .loop-verticale-svg.active .draw-path { animation: flowPath 1.8s ease-out forwards; }
         
         .arrow-head { fill: var(--fiber-blue); opacity: 0; transform: scale(0); transition: all 0.2s; }
-        
-        /* Freccia icone ridotte (UNIFORMATE) */
         .head-reduced { transform: scale(0.5) !important; }
         .active .head-reduced { transform: scale(0.5) !important; opacity: 1; transition-delay: 0.9s; }
-        
-        /* Freccia scorta */
         .loop-verticale-svg.active .arrow-head { opacity: 1; transform: scale(0.9) !important; transition-delay: 1.6s; }
-
         .head-standard { opacity: 0; transform: scale(0); transition: all 0.2s; }
         .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.5s; }
 
@@ -371,7 +354,6 @@
 
     function initApp() {
         document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right').forEach(el => el.classList.add('fiber-breathing'));
-        
         const selects = document.querySelectorAll('select');
         selects.forEach(s => {
             s.addEventListener('change', () => {
@@ -400,7 +382,6 @@
         turnRight: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M10,35 Q10,15 30,15" /><path class="arrow-head" d="M25,5 L37,15 L25,25 Z" style="stroke:none; transform-origin: 30px 15px;"/></svg>`,
         turnLeft: `<svg class="anim-icon standard-icon" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
         down: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head head-reduced" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
-        /* CORRETTA: transform-origin: 30px 10px; */
         uTurn: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head head-reduced" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`,
         loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 100 250" preserveAspectRatio="xMidYMid meet" style="stroke-linejoin: round; stroke-linecap: round;"><path class="draw-path" d="M15,10 V230 A10,10 0 0,0 35,230 V40 A10,10 0 0,1 55,40 V230 A10,10 0 0,0 75,230 V175 Q75,160 95,160" /><path class="arrow-head head-standard" d="M85,150 L98,160 L85,170 Z" style="stroke:none; transform-origin: 95px 160px;"/></svg>`
     };
@@ -415,7 +396,6 @@
         let delay = 0;
         paths.forEach((path) => {
             setTimeout(() => { path.classList.add('active'); }, delay);
-            // Ritardi più brevi per un ritmo più serrato
             if (path.classList.contains('icon-reduced')) delay += 600;
             else if (path.classList.contains('loop-verticale-svg')) delay += 1000;
             else delay += 300; 
@@ -429,9 +409,7 @@
         apocalypseCount++;
         let glitchDuration = apocalypseCount === 1 ? 3500 : 7000;
         let exitDuration = apocalypseCount === 1 ? 1400 : 2500;
-        let effects1 = ['destroyed-bh', 'destroyed-sh', 'destroyed-li'];
-        let effects2 = ['destroyed-vortex', 'destroyed-pixel'];
-        let randomEffect = apocalypseCount === 1 ? effects1[Math.floor(Math.random() * effects1.length)] : effects2[Math.floor(Math.random() * effects2.length)];
+        let randomEffect = apocalypseCount === 1 ? ['destroyed-bh', 'destroyed-sh', 'destroyed-li'][Math.floor(Math.random() * 3)] : ['destroyed-vortex', 'destroyed-pixel'][Math.floor(Math.random() * 2)];
         document.body.classList.add('no-scroll');
         card.classList.add('glitch-active');
         setTimeout(() => {
@@ -468,14 +446,6 @@
 
         const btn = document.getElementById('calcBtn');
         btn.classList.remove('pulsing');
-
-        const fibers = document.querySelectorAll('.fiber-illustration-left, .fiber-illustration-right');
-        fibers.forEach(f => {
-            f.style.animation = 'none';
-            void f.offsetWidth;
-            f.style.animation = 'fiber-breath 5s ease-in-out infinite';
-        });
-
         const circle = document.createElement("span");
         const diameter = Math.max(btn.clientWidth, btn.clientHeight);
         circle.style.width = circle.style.height = `${diameter}px`;
@@ -499,7 +469,6 @@
         let pDtxt = document.getElementById('pD').options[document.getElementById('pD').selectedIndex].text;
 
         const coincidenzaLivelli = (lO === lD);
-        
         let offsetO = calcolaOffsetPorta(valPO);
         let offsetD = calcolaOffsetPorta(valPD);
 
@@ -510,23 +479,16 @@
             let index = Math.floor((portaValue - 1) / 2); 
             let cassettoNum = Math.floor(index / 12) + 1; 
             let portaRelativa = (index % 12) * 2 + 1; 
-            let coppiaPorte = portaRelativa + "-" + (portaRelativa + 1);
-            return { num: cassettoNum, coppia: coppiaPorte };
+            return { num: cassettoNum, coppia: portaRelativa + "-" + (portaRelativa + 1) };
         }
 
         let dettO = getDettaglioCassetto(valPO);
         let dettD = getDettaglioCassetto(valPD);
 
         let pL;
-        if (lO > lD) {
-            pL = {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD, tipo: "normale"};
-        } else if (lD > lO) {
-            pL = {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO, tipo: "invertito"};
-        } else {
-            pL = (mO <= mD) ? 
-                 {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD, tipo: "normale"} : 
-                 {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO, tipo: "invertito"};
-        }
+        if (lO > lD) pL = {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD};
+        else if (lD > lO) pL = {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO};
+        else pL = (mO <= mD) ? {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD} : {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO};
         
         let iMO = pL.m1, iVO = pL.l1, iPO = pL.p1, iDO = pL.d1, iMD = pL.m2, iVD = pL.l2, iPD = pL.p2, iDD = pL.d2;
         
@@ -537,32 +499,22 @@
 
         let titoloMsg = coincidenzaLivelli ? "Indicazioni percorso:" : "Indicazioni percorso (dal cassetto più alto):";
         let html = `<b style="display:block; margin-bottom:15px; color:#334155;">${titoloMsg}</b>`;
-        
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porte <b>${iDO.coppia}</b>)</div></div>`;
-        
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${icons.turnRight}</div><div class="step-content"><b>VOLTA</b> verso <b>DESTRA</b> al montante <b>${iMD}</b>.</div></div>`;
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content"><b>SCENDI</b> in <b>${iMD}</b> alla base.</div></div>`;
         } else {
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content"><b>SCENDI</b> nello stesso montante alla base.</div></div>`;
         }
-        
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
-        
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
-        
         html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso rimasta alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
-
         html += `<div style="padding: 15px; background: #e0f2fe; border-radius: 12px; margin: 10px 0 20px 0; font-weight: 700; color: #0369a1; text-align: center; border: 1px solid #bae6fd;">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
-        
         html += `<div class="pro-tip-box"><div class="pro-tip-title">💡 Suggerimenti tecnici:</div><ul><li>💡 <b>PULIZIA:</b> Prima del collegamento, <b>PULISCI SEMPRE</b> le ferule dei cassetti ottici con la <b>CLEANING PEN</b>. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li><li>💡 <b>ETICHETTE:</b> Etichettare <b>SEMPRE</b> correttamente le due estremità della fibra.</li></ul></div>`;
         
         const resBox = document.getElementById('result-box');
-        resBox.style.display = 'none';
-        void resBox.offsetWidth; 
-        
-        document.getElementById('res-desc').innerHTML = html;
         resBox.style.display = 'block';
+        document.getElementById('res-desc').innerHTML = html;
         setTimeout(runAnimationSequence, 100);
     }
 </script>
