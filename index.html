@@ -230,15 +230,19 @@
         .path-step:last-child::after { display: none; }
 
         .step-icon-container { width: 40px; flex-shrink: 0; z-index: 1; display: flex; justify-content: center; position: relative; }
-        .step-content { padding-left: 15px; font-size: 15px; color: #334155; line-height: 1.4; flex: 1; }
+        .step-content { padding-left: 15px; font-size: 17px; color: #334155; line-height: 1.4; flex: 1; }
         .step-content b { color: var(--fc-blue-dark); background: #f1f5f9; padding: 2px 4px; border-radius: 4px; }
-        .step-label { font-weight: 800; color: var(--fc-blue-light); text-transform: uppercase; font-size: 12px; display: block; margin-bottom: 2px; }
+        .step-label { font-weight: 800; color: var(--fc-blue-light); text-transform: uppercase; font-size: 13px; display: block; margin-bottom: 2px; }
         
+        /* Sezione Suggerimenti Tecnici e Pulizia - Aumentato font-size */
         .pro-tip-box { margin-top: 10px; padding: 15px; background-color: #f0fdf4; border: 1.5px dashed var(--cassetto-green); border-radius: 14px; }
         .pro-tip-box ul { padding-left: 0; list-style: none; margin: 0; }
-        .pro-tip-box li { position: relative; padding-left: 20px; margin-bottom: 15px; font-size: 16px; color: #166534; line-height: 1.6; }
+        .pro-tip-box li { position: relative; padding-left: 20px; margin-bottom: 15px; font-size: 17px; color: #166534; line-height: 1.6; }
         .pro-tip-box li::before { content: "•"; position: absolute; left: 0; font-weight: bold; }
-        .pro-tip-title { font-size: 18px; font-weight: 800; color: #166534; margin-bottom: 10px; }
+        .pro-tip-title { font-size: 19px; font-weight: 800; color: #166534; margin-bottom: 10px; }
+
+        /* Box Lavora a norma - Aumentato font-size */
+        .norma-box { padding: 18px; background: #e0f2fe; border-radius: 12px; margin: 10px 0 20px 0; font-weight: 700; color: #0369a1; text-align: center; border: 1px solid #bae6fd; font-size: 18px; line-height: 1.4; }
 
         .cassetto-graphic { 
             width: 32px; 
@@ -487,7 +491,7 @@
         let dettD = getDettaglioCassetto(valPD);
 
         let pL;
-        if (lO > lD) pL = {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD};
+        if (lO > lD) pL = {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettO};
         else if (lD > lO) pL = {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO};
         else pL = (mO <= mD) ? {m1: mO, l1: lO, p1: pOtxt, d1: dettO, m2: mD, l2: lD, p2: pDtxt, d2: dettD} : {m1: mD, l1: lD, p1: pDtxt, d1: dettD, m2: mO, l2: lO, p2: pOtxt, d2: dettO};
         
@@ -510,7 +514,11 @@
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         html += `<div class="path-step"><div class="step-icon-container">${icons.cassetto}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porte <b>${iDD.coppia}</b>)</div></div>`;
         html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso convogliala alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
-        html += `<div style="padding: 15px; background: #e0f2fe; border-radius: 12px; margin: 10px 0 20px 0; font-weight: 700; color: #0369a1; text-align: center; border: 1px solid #bae6fd;">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
+        
+        // Nuova classe .norma-box per il testo a norma
+        html += `<div class="norma-box">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
+        
+        // Suggerimenti tecnici con font aumentato via CSS
         html += `<div class="pro-tip-box"><div class="pro-tip-title">💡 Suggerimenti tecnici:</div><ul><li>💡 <b>PULIZIA:</b> Prima del collegamento, <b>PULISCI SEMPRE</b> le ferule dei cassetti ottici con la <b>CLEANING PEN</b>. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li><li>💡 <b>ETICHETTE:</b> Etichettare <b>SEMPRE</b> correttamente le due estremità della fibra.</li></ul></div>`;
         
         const resBox = document.getElementById('result-box');
