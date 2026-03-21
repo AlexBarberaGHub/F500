@@ -20,6 +20,7 @@
             background-color: #e0f2fe; 
             display: flex; justify-content: center; 
             min-height: 100vh; margin: 0; 
+            padding: 0;
             overflow-x: hidden; 
         }
 
@@ -29,12 +30,12 @@
             background: white; 
             width: 100%; 
             max-width: 400px; 
-            border-radius: 0; 
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             overflow: hidden; 
             display: flex; 
             flex-direction: column;
             margin: 0; 
+            min-height: 100vh;
             align-self: flex-start;
             position: relative;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -138,7 +139,7 @@
         .sig-brand { font-size: 13px; font-weight: 800; letter-spacing: 0.2px; text-align: left; }
         .sig-details { text-align: right; opacity: 0.9; }
 
-        .content { padding: 20px; } 
+        .content { padding: 20px; flex: 1; } 
         .section-container { margin-bottom: 20px; }
         .label-section { font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .label-section::after { content: ""; flex: 1; height: 1px; background: #eee; }
@@ -293,7 +294,7 @@
         /* --- STILE LINK DOWNLOAD E QR CODE --- */
         .footer-link-container {
             text-align: center;
-            padding: 10px 0 25px 0;
+            padding: 10px 0 40px 0;
             background: white;
             display: flex;
             flex-direction: column;
