@@ -302,7 +302,7 @@
         /* --- STILE LINK DOWNLOAD E QR CODE --- */
         .footer-link-container {
             text-align: center;
-            padding: 40px 0 20px 0; /* Padding-top aumentato per allontanare dal tasto calcola */
+            padding: 40px 0 20px 0; 
             background: white;
             display: flex;
             flex-direction: column;
@@ -551,7 +551,8 @@
         function getDettaglioCassetto(portaValue) {
             let index = portaValue - 1; 
             let cassettoNum = Math.floor(index / 24) + 1; 
-            return { num: cassettoNum, singola: portaValue };
+            let portaRelativa = (index % 24) + 1;
+            return { num: cassettoNum, singola: portaRelativa };
         }
 
         let dettO = getDettaglioCassetto(valPO);
