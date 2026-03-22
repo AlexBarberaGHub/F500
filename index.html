@@ -109,7 +109,7 @@
         .ferrule::after { content: ""; position: absolute; top: 3px; width: 8px; height: 6px; background: #f8fafc; border-radius: 1px; }
         .connector.left .ferrule::after { left: -6px; }
         .connector.right .ferrule::after { right: -6px; }
-        .boot { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
+        .bottom { width: 12px; height: 8px; background: var(--sc-boot-green); border-radius: 1px; }
         .fiber-line-art { width: 35px; height: 4px; background: var(--fiber-blue); }
         
         .logo-text { 
@@ -261,9 +261,18 @@
 
         .step-icon-container { width: 40px; flex-shrink: 0; z-index: 1; display: flex; justify-content: center; position: relative; }
         .step-content { padding-left: 15px; font-size: 17px; color: #334155; line-height: 1.4; flex: 1; }
-        .step-content b { color: #002D72; background: #f1f5f9; padding: 2px 4px; border-radius: 4px; }
+        .step-content b { color: #002D72; background: none; padding: 0; border-radius: 0; }
         .step-label { font-weight: 800; color: var(--fc-blue-light); text-transform: uppercase; font-size: 13px; display: block; margin-bottom: 2px; }
         
+        /* Stile evidenziatore uniforme */
+        .highlighter {
+            background-color: rgba(34, 197, 94, 0.25);
+            border-radius: 4px;
+            padding: 0 4px;
+            display: inline-block;
+            line-height: 1.2;
+        }
+
         .pro-tip-box { margin-top: 10px; padding: 15px; background-color: #f0fdf4; border: 1.5px dashed var(--cassetto-green); border-radius: 14px; }
         .pro-tip-box ul { padding-left: 0; list-style: none; margin: 0; }
         .pro-tip-box li { position: relative; padding-left: 20px; margin-bottom: 15px; font-size: 17px; color: #166534; line-height: 1.6; }
@@ -289,7 +298,6 @@
         .cassetto-row { display: flex; justify-content: space-around; align-items: center; flex: 1; }
         .cassetto-divider { height: 1px; width: 100%; background-color: var(--sc-boot-green); opacity: 0.3; }
         
-        /* Animazione speciale per la riga selezionata */
         @keyframes row-glow {
             0%, 100% { box-shadow: inset 0 0 0px var(--sc-boot-green); filter: brightness(1); }
             50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.5); filter: brightness(1.3); }
@@ -460,12 +468,10 @@
 
     function getLettera(valore) { return { "6": "A", "5": "B", "4": "C", "3": "D", "2": "E", "1": "F" }[valore]; }
     
-    // Genera l'icona con la riga evidenziata in VERDE SCURO e ANIMATA
     function getIconPathCassetto(highlightRow) {
         let rowsHtml = '';
         for (let i = 1; i <= 6; i++) {
             const isSelected = (i === highlightRow);
-            // Colore verde scuro richiesto
             const rowStyle = isSelected ? 'background: var(--sc-boot-green); border-radius: 2px;' : '';
             const rowClass = isSelected ? 'selected-row-anim' : '';
             const dotStyle = isSelected ? 'background: white;' : '';
@@ -606,7 +612,7 @@
         let titoloMsg = coincidenzaLivelli ? "<b>Indicazioni percorso:</b>" : "<b>Indicazioni percorso:</b><br><b>(dal cassetto più in alto)</b>:";
         let html = `<span style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</span>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDO.num)}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br>(Cassetto <b>${iDO.num}</b> porta <b>${iDO.singola}</b>)</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDO.num)}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal blocco <b>${iMO}-${getLettera(iVO)}-${iPO}</b><br><span class="highlighter">(Cassetto <b>${iDO.num}</b> porta <b>${iDO.singola}</b>)</span></div></div>`;
         if (iMO !== iMD) {
             html += `<div class="path-step"><div class="step-icon-container">${icons.turnRight}</div><div class="step-content"><b>VOLTA</b> verso <b>DESTRA</b> al montante <b>${iMD}</b>.</div></div>`;
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content"><b>SCENDI</b> in <b>${iMD}</b> alla base.</div></div>`;
@@ -615,7 +621,7 @@
         }
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         
-        html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDD.num)}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br>(Cassetto <b>${iDD.num}</b> porta <b>${iDD.singola}</b>)</div></div>`;
+        html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDD.num)}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel blocco <b>${iMD}-${getLettera(iVD)}-${iPD}</b><br><span class="highlighter">(Cassetto <b>${iDD.num}</b> porta <b>${iDD.singola}</b>)</span></div></div>`;
         html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span>Eventuale fibra in eccesso convogliala alla base del montante <b>${iMD}</b>, prendila dalla parte <b>mediale</b> e inseriscila dal basso all'interno del <b>canale centrale di raccolta</b> del montante <b>${iMD}</b>, salendo fino agli <b>anelli di parcheggio di colore bianco</b>.</div></div>`;
         
         html += `<div class="norma-box">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
