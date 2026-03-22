@@ -235,8 +235,8 @@
             margin-top: 20px; 
             padding: 15px; 
             border-radius: 16px; 
-            background-color: #f1f5f9; 
-            border: 2px solid #e2e8f0; 
+            background-color: #e2e8f0; /* Sfondo scurito come richiesto */
+            border: 2px solid #cbd5e1; 
             position: relative; 
             display: none; 
             animation: resultFadeIn 0.5s ease-out forwards;
@@ -256,7 +256,7 @@
         @keyframes snake-crawl { 0% { stroke-dashoffset: 400; } 100% { stroke-dashoffset: 0; } }
         
         .path-step { display: flex; position: relative; padding-bottom: 25px; align-items: flex-start; }
-        .path-step::after { content: ""; position: absolute; left: 19px; top: 38px; bottom: 0; width: 2px; background: #e2e8f0; }
+        .path-step::after { content: ""; position: absolute; left: 19px; top: 38px; bottom: 0; width: 2px; background: #cbd5e1; }
         .path-step:last-child::after { display: none; }
 
         .step-icon-container { width: 40px; flex-shrink: 0; z-index: 1; display: flex; justify-content: center; position: relative; }
