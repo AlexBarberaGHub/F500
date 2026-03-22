@@ -235,7 +235,7 @@
             margin-top: 20px; 
             padding: 15px; 
             border-radius: 16px; 
-            background-color: #e2e8f0; /* Sfondo scurito come richiesto */
+            background-color: #e2e8f0; 
             border: 2px solid #cbd5e1; 
             position: relative; 
             display: none; 
@@ -248,7 +248,15 @@
 
         #result-box::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background-color: var(--fc-blue-light); border-radius: 16px 0 0 16px; }
         .res-value { font-size: 48px; font-weight: 900; color: #002D72; display: block; margin: 5px 0; text-align: center; }
-        .res-desc { margin-top: 5px; text-align: left; background: #fff; border-radius: 12px; padding: 15px; }
+        
+        .res-desc { 
+            margin-top: 5px; 
+            text-align: left; 
+            background: #fff; 
+            border-radius: 12px; 
+            padding: 15px; 
+            border: 1px solid #cbd5e1; 
+        }
         
         .snake-container { display: flex; justify-content: center; margin: 0; height: 35px; align-items: center; overflow: visible; }
         .fiber-snake { width: 280px; height: 30px; }
@@ -340,7 +348,6 @@
             text-decoration: none;
             font-weight: 700;
             font-size: 10px; 
-            text-transform: uppercase;
             letter-spacing: 0.8px;
             padding: 6px 14px; 
             border: 1.5px solid var(--fc-blue-light); 
@@ -442,7 +449,7 @@
     </div>
 
     <div class="footer-link-container">
-        <a href="https://alexbarberaghub.github.io/F500/F500.apk" target="_blank" download="F500.apk" class="app-link">DOWNLOAD Android App</a>
+        <a href="https://alexbarberaghub.github.io/F500/F500.apk" target="_blank" download="F500.apk" class="app-link">DOWNLOAD Android APP</a>
         <div class="qr-wrapper">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://alexbarberaghub.github.io/F500/index.html" alt="QR Code Progetto">
         </div>
