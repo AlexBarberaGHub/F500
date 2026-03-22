@@ -44,7 +44,7 @@
         /* --- ANIMAZIONI CATASTROFE --- */
         @keyframes catastrophic-glitch {
             0% { transform: translate(0); clip-path: inset(0 0 0 0); }
-            10% { transform: translate(-20px, 15px); filter: inset(1) contrast(2); }
+            10% { transform: translate(-20px, 15px); filter: invert(1) contrast(2); }
             20% { transform: translate(20px, -15px); clip-path: inset(20% 0 50% 0); }
             30% { transform: translate(-30px, 30px) rotate(5deg); filter: hue-rotate(180deg); }
             50% { transform: scale(1.4) skew(15deg); filter: brightness(3) saturate(10); }
@@ -308,8 +308,14 @@
         
         @keyframes row-glow {
             0%, 100% { box-shadow: inset 0 0 0px var(--sc-boot-green); filter: brightness(1); }
-            50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.5); filter: brightness(1.3); }
+            50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.5); filter: brightness(1.5) saturate(1.5); }
         }
+        
+        @keyframes fiber-glow-blue {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 0px var(--fiber-blue)); }
+            50% { filter: brightness(1.8) drop-shadow(0 0 8px var(--fiber-blue)); }
+        }
+
         .selected-row-anim { animation: row-glow 1.5s infinite ease-in-out; }
 
         .anim-icon { fill: none; stroke: var(--fiber-blue); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
@@ -330,6 +336,19 @@
         .loop-verticale-svg.active .arrow-head { opacity: 1; transform: scale(0.9) !important; transition-delay: 1.6s; }
         .head-standard { opacity: 0; transform: scale(0); transition: all 0.2s; }
         .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.5s; }
+
+        /* Effetto di evidenziazione per il canale interno del loop */
+        .scorta-loop-evidenziato {
+            opacity: 0;
+            stroke-width: 8;
+            transition: opacity 0.5s;
+        }
+
+        .loop-verticale-svg.active .scorta-loop-evidenziato {
+            opacity: 1;
+            animation: fiber-glow-blue 1.5s infinite ease-in-out;
+            animation-delay: 1s;
+        }
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
 
@@ -502,7 +521,7 @@
         turnLeft: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M30,35 Q30,15 10,15" /><path class="arrow-head head-reduced" d="M15,5 L3,15 L15,25 Z" style="stroke:none; transform-origin: 10px 15px;"/></svg>`,
         down: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M20,5 V28" /><path class="arrow-head head-reduced" d="M10,25 L20,38 L30,25 Z" style="stroke:none; transform-origin: 20px 30px;"/></svg>`,
         uTurn: `<svg class="anim-icon icon-reduced" viewBox="0 0 40 40"><path class="draw-path" d="M10,5 V25 A10,10 0 0,0 30,25 V10" /><path class="arrow-head head-reduced" d="M20,15 L30,0 L40,15 Z" style="stroke:none; transform-origin: 30px 10px;"/></svg>`,
-        loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 100 250" preserveAspectRatio="xMidYMid meet" style="stroke-linejoin: round; stroke-linecap: round;"><path class="draw-path" d="M15,10 V230 A10,10 0 0,0 35,230 V40 A10,10 0 0,1 55,40 V230 A10,10 0 0,0 75,230 V175 Q75,160 95,160" /><path class="arrow-head head-standard" d="M85,150 L98,160 L85,170 Z" style="stroke:none; transform-origin: 95px 160px;"/></svg>`
+        loopVerticale: `<svg class="anim-icon loop-verticale-svg" viewBox="0 0 100 250" preserveAspectRatio="xMidYMid meet" style="stroke-linejoin: round; stroke-linecap: round;"><path class="draw-path" d="M15,10 V230 A10,10 0 0,0 35,230 V40 A10,10 0 0,1 55,40 V230 A10,10 0 0,0 75,230 V175 Q75,160 95,160" /><path class="scorta-loop-evidenziato" d="M35,230 V40 A10,10 0 0,1 55,40 V230" style="fill:none; stroke:var(--fiber-blue); stroke-linecap:round;" /><path class="arrow-head head-standard" d="M85,150 L98,160 L85,170 Z" style="stroke:none; transform-origin: 95px 160px;"/></svg>`
     };
 
     let loopCounter = 0;
