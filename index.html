@@ -141,7 +141,8 @@
             padding: 0 6px;
         }
         
-        .red-odf { color: #22c55e; font-weight: 900; text-transform: uppercase; }
+        /* Modificato da verde ad azzurro (fiber-blue) */
+        .red-odf { color: var(--fiber-blue); font-weight: 900; text-transform: uppercase; }
         .white-tool { color: #ffffff; font-weight: 400; }
 
         .subtitle { font-size: 18px; font-weight: 400; margin: 8px 0 0; text-align: center; white-space: nowrap; }
@@ -337,7 +338,6 @@
         .head-standard { opacity: 0; transform: scale(0); transition: all 0.2s; }
         .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.5s; }
 
-        /* Effetto di evidenziazione per il canale interno del loop */
         .scorta-loop-evidenziato {
             opacity: 0;
             stroke-width: 8;
@@ -352,7 +352,6 @@
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
 
-        /* --- STILE LINK DOWNLOAD E QR CODE --- */
         .footer-link-container {
             text-align: center;
             padding: 40px 0 20px 0; 
