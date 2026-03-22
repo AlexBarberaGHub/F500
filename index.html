@@ -307,16 +307,16 @@
         .cassetto-divider { height: 1px; width: 100%; background-color: var(--sc-boot-green); opacity: 0.3; }
         
         @keyframes row-glow {
-            0%, 100% { box-shadow: inset 0 0 0px var(--sc-boot-green); filter: brightness(1); }
-            50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.5); filter: brightness(1.5) saturate(1.5); }
+            0%, 100% { box-shadow: inset 0 0 0px var(--sc-boot-green); filter: brightness(1) saturate(1); }
+            50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.3); filter: brightness(1.15) saturate(1.1); }
         }
         
         @keyframes fiber-glow-blue {
             0%, 100% { filter: brightness(1) drop-shadow(0 0 0px var(--fiber-blue)); }
-            50% { filter: brightness(1.8) drop-shadow(0 0 8px var(--fiber-blue)); }
+            50% { filter: brightness(1.3) drop-shadow(0 0 6px var(--fiber-blue)); }
         }
 
-        .selected-row-anim { animation: row-glow 1.5s infinite ease-in-out; }
+        .selected-row-anim { animation: row-glow 1.8s infinite ease-in-out; }
 
         .anim-icon { fill: none; stroke: var(--fiber-blue); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
         
@@ -346,7 +346,7 @@
 
         .loop-verticale-svg.active .scorta-loop-evidenziato {
             opacity: 1;
-            animation: fiber-glow-blue 1.5s infinite ease-in-out;
+            animation: fiber-glow-blue 1.8s infinite ease-in-out;
             animation-delay: 1s;
         }
 
