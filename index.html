@@ -141,7 +141,6 @@
             padding: 0 6px;
         }
         
-        /* Modificato da verde ad azzurro (fiber-blue) */
         .red-odf { color: var(--fiber-blue); font-weight: 900; text-transform: uppercase; }
         .white-tool { color: #ffffff; font-weight: 400; }
 
@@ -309,12 +308,12 @@
         
         @keyframes row-glow {
             0%, 100% { box-shadow: inset 0 0 0px var(--sc-boot-green); filter: brightness(1) saturate(1); }
-            50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.3); filter: brightness(1.15) saturate(1.1); }
+            50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.3); filter: brightness(1.1) saturate(1.05); }
         }
         
         @keyframes fiber-glow-blue {
-            0%, 100% { filter: brightness(1) drop-shadow(0 0 0px var(--fiber-blue)); }
-            50% { filter: brightness(1.3) drop-shadow(0 0 6px var(--fiber-blue)); }
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 0px var(--fiber-blue)); opacity: 1; }
+            50% { filter: brightness(1.3) drop-shadow(0 0 6px var(--fiber-blue)); opacity: 1; }
         }
 
         .selected-row-anim { animation: row-glow 1.8s infinite ease-in-out; }
@@ -338,16 +337,16 @@
         .head-standard { opacity: 0; transform: scale(0); transition: all 0.2s; }
         .active .head-standard { opacity: 1; transform: scale(0.9) !important; transition-delay: 0.5s; }
 
+        /* CORREZIONE: Sincronizzazione scorta loop */
         .scorta-loop-evidenziato {
             opacity: 0;
             stroke-width: 8;
-            transition: opacity 0.5s;
         }
 
         .loop-verticale-svg.active .scorta-loop-evidenziato {
-            opacity: 1;
+            /* Parte solo dopo 1.8s per attendere il disegno della fibra */
             animation: fiber-glow-blue 1.8s infinite ease-in-out;
-            animation-delay: 1s;
+            animation-delay: 1.8s; 
         }
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
