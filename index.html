@@ -349,9 +349,10 @@
             50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.3); filter: brightness(1.1) saturate(1.05); }
         }
         
-        @keyframes fiber-glow-blue {
-            0%, 100% { filter: brightness(1) drop-shadow(0 0 0px var(--fiber-blue)); opacity: 1; }
-            50% { filter: brightness(1.3) drop-shadow(0 0 6px var(--fiber-blue)); opacity: 1; }
+        /* Modificato in Rosso per il punto scorta */
+        @keyframes fiber-glow-red {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 0px #ff0000); opacity: 1; stroke: #ff0000; }
+            50% { filter: brightness(1.5) drop-shadow(0 0 10px #ff0000); opacity: 1; stroke: #ff0000; }
         }
 
         .selected-row-anim { animation: row-glow 1.8s infinite ease-in-out; }
@@ -380,8 +381,9 @@
             stroke-width: 8;
         }
 
+        /* Applicazione animazione rossa alla scorta */
         .loop-verticale-svg.active .scorta-loop-evidenziato {
-            animation: fiber-glow-blue 1.8s infinite ease-in-out;
+            animation: fiber-glow-red 1.2s infinite ease-in-out;
             animation-delay: 1.8s; 
         }
 
@@ -688,7 +690,6 @@
         html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDO.num)}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal Blocco:<br><span class="highlighter"><b>${iMO}-${getLettera(iVO)}-${iPO}</b> (Vassoio <b>${iDO.num}</b> Porta <b>${iDO.singola}</b>)</span></div></div>`;
         
         if (iMO !== iMD) {
-            // Logica corretta per la direzione del montante
             const direzione = (iMD > iMO) ? "DESTRA" : "SINISTRA";
             const iconaDirezione = (iMD > iMO) ? icons.turnRight : icons.turnLeft;
             
