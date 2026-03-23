@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F500 ODF tool</title>
 
     <style>
@@ -462,7 +462,7 @@
         <div class="section-container">
             <div class="label-section">Partenza</div>
             <div class="input-row">
-                <div class="field"><label>Montante</label><select id="mO"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
+                <div class="field"><label>Montante</label><select id="mO"><script>for(let i=1;i<=31;i++) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
                 <div class="field"><label>Livello</label><select id="lO"><option value="6">A</option><option value="5">B</option><option value="4">C</option><option value="3">D</option><option value="2">E</option><option value="1">F</option></select></div>
                 <div class="field"><label>Porta</label><select id="pO"><script>for(let i=1;i<=144;i++) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
             </div>
@@ -471,7 +471,7 @@
         <div class="section-container">
             <div class="label-section">Arrivo</div>
             <div class="input-row">
-                <div class="field"><label>Montante</label><select id="mD"><script>for(let i=1;i<=31;i+=2) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
+                <div class="field"><label>Montante</label><select id="mD"><script>for(let i=1;i<=31;i++) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
                 <div class="field"><label>Livello</label><select id="lD"><option value="6">A</option><option value="5">B</option><option value="4">C</option><option value="3">D</option><option value="2">E</option><option value="1">F</option></select></div>
                 <div class="field"><label>Porta</label><select id="pD"><script>for(let i=1;i<=144;i++) document.write(`<option value="${i}">${i}</option>`)</script></select></div>
             </div>
