@@ -686,12 +686,18 @@
         let html = `<span style="display:block; margin-bottom:15px; color:#334155; text-align:center;">${titoloMsg}</span>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDO.num)}</div><div class="step-content"><span class="step-label">Partenza:</span>Esci dal Blocco:<br><span class="highlighter"><b>${iMO}-${getLettera(iVO)}-${iPO}</b> (Vassoio <b>${iDO.num}</b> Porta <b>${iDO.singola}</b>)</span></div></div>`;
+        
         if (iMO !== iMD) {
-            html += `<div class="path-step"><div class="step-icon-container">${icons.turnRight}</div><div class="step-content"><b>VOLTA</b> verso <b>DESTRA</b> al montante <b>${iMD}</b>.</div></div>`;
+            // Logica corretta per la direzione del montante
+            const direzione = (iMD > iMO) ? "DESTRA" : "SINISTRA";
+            const iconaDirezione = (iMD > iMO) ? icons.turnRight : icons.turnLeft;
+            
+            html += `<div class="path-step"><div class="step-icon-container">${iconaDirezione}</div><div class="step-content"><b>VOLTA</b> verso <b>${direzione}</b> al montante <b>${iMD}</b>.</div></div>`;
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content"><b>SCENDI</b> in <b>${iMD}</b> alla base.</div></div>`;
         } else {
             html += `<div class="path-step"><div class="step-icon-container">${icons.down}</div><div class="step-content"><b>SCENDI</b> nello stesso montante alla base.</div></div>`;
         }
+        
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDD.num)}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel Blocco:<br><span class="highlighter"><b>${iMD}-${getLettera(iVD)}-${iPD}</b> (Vassoio <b>${iDD.num}</b> Porta <b>${iDD.singola}</b>)</span></div></div>`;
