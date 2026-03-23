@@ -201,7 +201,6 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* --- CORREZIONE LIDO: BLU PERSISTENTE --- */
         .lido-link-btn {
             display: flex;
             align-items: center;
@@ -220,8 +219,8 @@
             transition: background 0.2s, color 0.2s, transform 0.1s;
             box-sizing: border-box;
             outline: none !important;
-            -webkit-tap-highlight-color: transparent; /* Toglie il flash blu dei browser mobile */
-            user-select: none; /* Impedisce di selezionare il testo */
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         .lido-link-btn:hover {
@@ -229,14 +228,12 @@
             color: white;
         }
 
-        /* Stato durante il tocco/click */
         .lido-link-btn:active {
             transform: scale(0.97);
             background: #002D72 !important;
             color: white !important;
         }
 
-        /* Reset totale dello stato focus/cliccato per evitare che rimanga blu */
         .lido-link-btn:focus, .lido-link-btn:visited, .lido-link-btn:focus-visible {
             background: #f8fafc;
             color: #002D72;
@@ -485,6 +482,7 @@
             
             <a href="https://10.119.3.118/fastview/web/ASSURANCE/index.jsp" 
                target="_blank" 
+               rel="noopener noreferrer"
                class="lido-link-btn" 
                onmouseup="this.blur()" 
                ontouchend="this.blur()">
