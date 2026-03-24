@@ -1,6 +1,6 @@
 # F500 ODF Tool 🚀
 
-**F500 ODF Tool** è un'applicazione web-based (ottimizzata per Android) progettata per i tecnici di campo impegnati nella manutenzione e configurazione dei permutatori ottici **F500**. 
+**F500 ODF Tool** è un tool non ufficiale, è un'applicazione web-based (ottimizzata per Android) progettata per i tecnici di campo impegnati nella manutenzione e configurazione dei permutatori ottici **F500**. 
 
 L'app fornisce un calcolo preciso della lunghezza della bretella ottica e guida l'operatore attraverso il percorso corretto all'interno dei montanti, garantendo il rispetto delle norme tecniche FiberCop.
 
@@ -52,7 +52,7 @@ Puoi scaricare il file d'installazione direttamente dalla sezione **Releases** d
 
 ## ✍️ Autore
 
-**Alessandro Barbera** *FiberCop FOL/SIO. Field Force Palermo Ovest*
+**Alessandro Barbera**
 
 ---
 *F500 ODF Tool - Progettato per lavorare a norma e con cura.*
