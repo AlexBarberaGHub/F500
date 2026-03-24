@@ -318,6 +318,16 @@
             line-height: 1.3;
             width: fit-content;
         }
+        
+        /* Nuova classe per evidenziatore giallo specifico per istruzioni scorta */
+        .scorta-highlight {
+            background-color: #fef08a; /* Giallo brillante */
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: block;
+            border-left: 4px solid #facc15;
+            margin-top: 5px;
+        }
 
         .pro-tip-box { margin-top: 10px; padding: 15px; background-color: #f0fdf4; border: 1.5px dashed #22c55e; border-radius: 14px; }
         .pro-tip-box ul { padding-left: 0; list-style: none; margin: 0; }
@@ -702,7 +712,9 @@
         html += `<div class="path-step"><div class="step-icon-container">${icons.uTurn}</div><div class="step-content"><b>RISALI</b> alla base del montante <b>${iMD}</b>, verso la destinazione.</div></div>`;
         
         html += `<div class="path-step"><div class="step-icon-container">${getIconPathCassetto(iDD.num)}</div><div class="step-content"><span class="step-label">Arrivo:</span>Entra nel Blocco:<br><span class="highlighter"><b>${iMD}-${getLettera(iVD)}-${iPD}</b> (Vassoio <b>${iDD.num}</b> Porta <b>${iDD.singola}</b>)</span></div></div>`;
-        html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span><b><u>Per smaltire la fibra in eccesso, procedi come illustrato in figura seguendo questi passaggi:</u></b><br><br><b>1. Convogliamento:</b> Indirizza la fibra in eccesso alla base del montante ${iMD}.<br><b>2. Presa:</b> Afferra la fibra dalla parte mediale.<br><b>3. Inserimento:</b> Inseriscila dal basso all'interno del canale centrale di raccolta del montante ${iMD}.<br><b>4. Posizionamento:</b> Risali lungo il canale centrale fino a raggiungere gli anelli di parcheggio bianchi.</div></div>`;
+        
+        // Sezione aggiornata con l'evidenziatore giallo (scorta-highlight)
+        html += `<div class="path-step"><div class="step-icon-container" style="height: 180px;">${icons.loopVerticale}</div><div class="step-content"><span class="step-label">Scorta:</span><div class="scorta-highlight"><b><u>Per smaltire la fibra in eccesso, procedi come illustrato in figura seguendo questi passaggi:</u></b><br><br><b>1. Convogliamento:</b> Indirizza la fibra in eccesso alla base del montante ${iMD}.<br><b>2. Presa:</b> Afferra la fibra dalla parte mediale.<br><b>3. Inserimento:</b> Inseriscila dal basso all'interno del canale centrale di raccolta del montante ${iMD}.<br><b>4. Posizionamento:</b> Risali lungo il canale centrale fino a raggiungere gli anelli di parcheggio bianchi.</div></div></div>`;
         
         html += `<div class="norma-box">Lavora a norma e con cura: questo permutatore rappresenta la nostra casa tecnologica.</div>`;
         html += `<div class="pro-tip-box"><div class="pro-tip-title">💡 Suggerimenti tecnici:</div><ul><li>💡 <b>PULIZIA:</b> Prima del collegamento, <b>PULISCI SEMPRE</b> le ferule dei vassoi ottici con la <b>CLEANING PEN</b>. Ferule sporche <b>comprometteranno</b> la qualità del segnale e <b>contamineranno</b>, a loro volta, la fibra nuova.</li><li>💡 <b>ETICHETTE:</b> Etichettare <b>SEMPRE</b> correttamente le due estremità della fibra.</li></ul></div>`;
