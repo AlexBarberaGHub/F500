@@ -359,10 +359,10 @@
             50% { box-shadow: inset 0 0 10px rgba(255,255,255,0.3); filter: brightness(1.1) saturate(1.05); }
         }
         
-        /* Modificato in Rosso per il punto scorta */
-        @keyframes fiber-glow-red {
-            0%, 100% { filter: brightness(1) drop-shadow(0 0 0px #ff0000); opacity: 1; stroke: #ff0000; }
-            50% { filter: brightness(1.5) drop-shadow(0 0 10px #ff0000); opacity: 1; stroke: #ff0000; }
+        /* Animazione SCORTA: da BLU a ARANCIONE */
+        @keyframes fiber-glow-blue-orange {
+            0%, 100% { stroke: #007FFF; filter: brightness(1) drop-shadow(0 0 0px #007FFF); opacity: 1; }
+            50% { stroke: #f97316; filter: brightness(1.4) drop-shadow(0 0 10px #fb923c); opacity: 1; }
         }
 
         .selected-row-anim { animation: row-glow 1.8s infinite ease-in-out; }
@@ -391,10 +391,11 @@
             stroke-width: 8;
         }
 
-        /* Applicazione animazione rossa alla scorta */
+        /* Applicazione animazione DA BLU A ARANCIONE alla scorta */
         .loop-verticale-svg.active .scorta-loop-evidenziato {
-            animation: fiber-glow-red 1.2s infinite ease-in-out;
+            animation: fiber-glow-blue-orange 1.5s infinite ease-in-out;
             animation-delay: 1.8s; 
+            opacity: 1;
         }
 
         @keyframes flowPath { to { stroke-dashoffset: 0; } }
@@ -674,10 +675,8 @@
         
         function getDettagliOdf(portaValue) {
             let index = portaValue - 1; 
-            // Calcolo per 24 porte (6 cassetti)
             let c24Num = Math.floor(index / 24) + 1;
             let c24Porta = (index % 24) + 1;
-            // Calcolo per 12 porte (12 cassetti)
             let c12Num = Math.floor(index / 12) + 1;
             let c12Porta = (index % 12) + 1;
             return { c24: c24Num, p24: c24Porta, c12: c12Num, p12: c12Porta };
