@@ -52,7 +52,7 @@ Puoi scaricare il file d'installazione direttamente dalla sezione **Releases** d
 
 ## ✍️ Autore
 
-**Alessandro Barbera** *FOL/SIO. Field Force Palermo Ovest*
+**Alessandro Barbera** *FiberCop FOL/SIO. Field Force Palermo Ovest*
 
 ---
 *F500 ODF Tool - Progettato per lavorare a norma e con cura.*
